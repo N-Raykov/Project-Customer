@@ -129,4 +129,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pivot: {fileID: 0}
   speed: 40
-  number: 0
+  damage: 50
