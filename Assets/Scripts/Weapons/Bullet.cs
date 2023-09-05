@@ -8,10 +8,9 @@ public class Bullet : MonoBehaviour
     Rigidbody rb;
     [SerializeField] Transform pivot;
     [SerializeField] float speed;
+    [SerializeField] float damage;
     Vector3 startPosition;
     int range = 200;
-
-    public int number;
 
     void Awake(){
         rb = GetComponent<Rigidbody>();
@@ -26,11 +25,11 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision){
-        if (collision.gameObject.tag == "Target") {
-            //collision.gameObject.GetComponent<TargetBehavior>().HitBehavior();
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        if (enemy != null) {
+            enemy.TakeDamage(damage);
         }
         Destroy(this.gameObject);
-        
     }
 
     public void AddSpeed(Vector3 direction) {
