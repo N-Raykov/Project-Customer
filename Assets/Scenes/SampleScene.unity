@@ -756,6 +756,7 @@ GameObject:
   - component: {fileID: 865916844}
   - component: {fileID: 865916849}
   - component: {fileID: 865916850}
+  - component: {fileID: 865916851}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -896,6 +897,19 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &865916851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865916843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0303234d2e951764c9117a0d186f8008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1049908572}
 --- !u!1001 &1049908571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -965,6 +979,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a0d4e1dae3c7c14c91144230535aa50, type: 3}
+--- !u!1 &1049908572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1001639994704590389, guid: 8a0d4e1dae3c7c14c91144230535aa50,
+    type: 3}
+  m_PrefabInstance: {fileID: 1049908571}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1558237778
 GameObject:
   m_ObjectHideFlags: 0
