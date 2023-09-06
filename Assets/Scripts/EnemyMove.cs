@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyMove : MonoBehaviour
 {
 
-    public GameObject player;
+    [SerializeField] GameObject player;
     NavMeshAgent agent;
 
     void Start()
@@ -17,5 +17,6 @@ public class EnemyMove : MonoBehaviour
     private void Update()
     {
         agent.destination = player.transform.position;
+        transform.LookAt(player.transform);
     }
 }

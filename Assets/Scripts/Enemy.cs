@@ -9,8 +9,8 @@ public class Enemy : MonoBehaviour{
     float currentHP;
 
     [Header("References")]
-    [SerializeField]GameObject hpBar;
-    [SerializeField]RectTransform hpBarTransform;
+    [SerializeField] GameObject hpBar;
+    [SerializeField] RectTransform hpBarTransform;
 
     [Header("BarLifeline")]
     [SerializeField]float timeBeforeHidingBar;
