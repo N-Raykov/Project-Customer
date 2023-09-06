@@ -5,16 +5,19 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] Gun gun;
+    [SerializeField] EnemyGun gun;
     [SerializeField] float range;
     [SerializeField] float shotCD;
+    float timeSinceLastShot;
 
     private void Update()
     {
         float distanceToPlayer = Vector3.Distance(this.transform.position, player.transform.position);
-        if (distanceToPlayer < range)
+        timeSinceLastShot -= Time.deltaTime;
+        if (distanceToPlayer < range && timeSinceLastShot < 0.0f)
         {
             gun.Shoot();
+            timeSinceLastShot = shotCD;
         }
     }
 }

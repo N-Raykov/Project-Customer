@@ -125,7 +125,7 @@ public abstract class Gun : MonoBehaviour {
         }
     }
 
-    public void Shoot() {
+    protected void Shoot() {
         AddRecoil();
         StartShotAnimation();
         lastShotTime = Time.time;
