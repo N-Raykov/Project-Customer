@@ -579,13 +579,68 @@ PrefabInstance:
     - target: {fileID: 7735614593587831616, guid: 4ca7a29a521505c4aac07df2cec11f2e,
         type: 3}
       propertyPath: m_StoppingDistance
-      value: 5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1049908572}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: minRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: aggroRange
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: strafeSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: moonWalkSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: preferredRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: maxStrafeDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: minStrafeDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: maxMovementInterval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735614593587831617, guid: 4ca7a29a521505c4aac07df2cec11f2e,
+        type: 3}
+      propertyPath: minMovementInterval
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7735614593587831618, guid: 4ca7a29a521505c4aac07df2cec11f2e,
         type: 3}
       propertyPath: m_RootOrder
@@ -604,7 +659,7 @@ PrefabInstance:
     - target: {fileID: 7735614593587831618, guid: 4ca7a29a521505c4aac07df2cec11f2e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.8543205
+      value: -6.52
       objectReference: {fileID: 0}
     - target: {fileID: 7735614593587831618, guid: 4ca7a29a521505c4aac07df2cec11f2e,
         type: 3}
@@ -644,7 +699,7 @@ PrefabInstance:
     - target: {fileID: 7735614593587831622, guid: 4ca7a29a521505c4aac07df2cec11f2e,
         type: 3}
       propertyPath: range
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7735614593587831622, guid: 4ca7a29a521505c4aac07df2cec11f2e,
         type: 3}
