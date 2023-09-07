@@ -22,6 +22,12 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float rotationSpeed;
     NavMeshAgent agent;
 
+    [Header("Attacks")]
+    [SerializeField] EnemyGun gun;
+    [SerializeField] float range;
+    [SerializeField] float shotCD;
+    float timeSinceLastShot;
+
     private enum EnemyState
     {
         Aggro,
@@ -36,6 +42,7 @@ public class EnemyMove : MonoBehaviourWithPause
     }
 
     private EnemyState currentState = EnemyState.Aggro;
+    private float stunDuration;
     private float movementTimer;
 
     protected override void UpdateWithPause()
@@ -86,12 +93,36 @@ public class EnemyMove : MonoBehaviourWithPause
                 break;
 
             case EnemyState.Stunned:
-                //do nothing
+                if(Time.time >= stunDuration)
+                {
+                    currentState = EnemyState.Aggro;
+                }
+                else
+                {
+                    return;
+                }
                 break;
         }
+
+        //Attacking
+        float distanceToPlayer = Vector3.Distance(this.transform.position, player.transform.position);
+        timeSinceLastShot -= Time.deltaTime;
+        if (distanceToPlayer < range && timeSinceLastShot < 0.0f)
+        {
+            gun.Shoot();
+            timeSinceLastShot = shotCD;
+        }
+
+        //Rotation
         Vector3 direction = player.transform.position - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    public void GetStunned(float pDuration)
+    {
+        stunDuration = Time.time + pDuration;
+        currentState = EnemyState.Stunned;
     }
 
     private void RandomlySwitchDirection()

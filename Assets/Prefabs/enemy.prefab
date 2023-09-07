@@ -358,7 +358,6 @@ GameObject:
   - component: {fileID: 7735614593587831619}
   - component: {fileID: 7735614593587831616}
   - component: {fileID: 7735614593587831617}
-  - component: {fileID: 7735614593587831622}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -522,22 +521,9 @@ MonoBehaviour:
   strafeSpeed: 0
   moonWalkSpeed: 0
   rotationSpeed: 0
---- !u!114 &7735614593587831622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7735614593587831641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86085feccfdbff84984d3cd2ade0d203, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  gun: {fileID: 7722959991173549733}
-  range: 15
-  shotCD: 2
+  gun: {fileID: 0}
+  range: 0
+  shotCD: 0
 --- !u!1 &7735614593983735686
 GameObject:
   m_ObjectHideFlags: 0
