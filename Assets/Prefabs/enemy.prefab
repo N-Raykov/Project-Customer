@@ -513,6 +513,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  minStrafeDuration: 0
+  maxStrafeDuration: 0
+  aggroRange: 0
+  preferredRange: 0
+  minRange: 0
+  speed: 0
+  strafeSpeed: 0
+  moonWalkSpeed: 0
+  rotationSpeed: 0
 --- !u!114 &7735614593587831622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,7 +919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: e9018b19a21160a4cb8cf112a4f211fb, type: 2}
   animator: {fileID: 7735614592076210338}
-  bullet: {fileID: 664451063858303514, guid: 6de9af2161fd93b4db6a0efeedea3bb4, type: 3}
+  bullet: {fileID: 3994556913236842264, guid: 511fbda12bac818479d16a9214155630, type: 3}
   muzzle: {fileID: 7735614592122211993}
   pivot: {fileID: 7735614593464394251}
   pistolRotationPivot: {fileID: 7735614593064923424}

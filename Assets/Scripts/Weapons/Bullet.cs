@@ -26,11 +26,16 @@ public class Bullet : MonoBehaviourWithPause{
     private void OnCollisionEnter(Collision collision){
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         Tree tree = collision.gameObject.GetComponent<Tree>();
+        PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
         if (enemy != null) {
             enemy.TakeDamage(damage);
         }
         if (tree != null) {
             tree.TakeDamage(collision.contacts[0].normal);
+        }
+        if (player != null)
+        {
+            player.TakeDamage(damage);
         }
         Destroy(this.gameObject);
     }
