@@ -5,7 +5,7 @@ using TMPro;
 using System;
 using UnityEngine.UI;
 
-public class PlayerUI : MonoBehaviour{
+public class PlayerUI : MonoBehaviourWithPause{
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] GameObject crosshair;
     [SerializeField] RectTransform crosshairSidesHolder;
