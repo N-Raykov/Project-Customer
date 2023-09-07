@@ -6,7 +6,8 @@ using UnityEngine;
 public class ShopButtonData : ScriptableObject{
     [Header("Info")]
     public string item;//name
-    public string type;//weapon/supplies/ability
+    public string type;//weapons/supplies/abilities
     public int cost;
     public int stock;
+    public int amount;
 }
