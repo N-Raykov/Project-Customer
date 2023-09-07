@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Audio;
 
-public class GameSettings : MonoBehaviour {
+public class GameSettings : MonoBehaviourWithPause {
 
     [SerializeField] TextMeshProUGUI grapple;
     [SerializeField] AudioMixer audioMixer;
@@ -41,7 +41,7 @@ public class GameSettings : MonoBehaviour {
         reloadKey = key;
     }
 
-    private void Update(){
+    protected override void UpdateWithPause(){
         if (canCheckForInputGrapple) {
             for (int i = 0; i < 400; i++){
                 if (Input.GetKeyDown((KeyCode)i)){

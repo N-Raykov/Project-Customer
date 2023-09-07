@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour{
+public class Enemy : MonoBehaviourWithPause{
 
     [Header("Hp")]
     [SerializeField]float enemyMaxHp;
@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour{
     [SerializeField]GameObject hpBar;
     [SerializeField]RectTransform hpBarTransform;
 
-    [Header("BarLifeline")]
+    [Header("BarDuration")]
     [SerializeField]float timeBeforeHidingBar;
     float lastHitTime=-100000;
 
@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour{
         currentHP = enemyMaxHp;
     }
 
-    void Update(){
+    protected override void UpdateWithPause(){
         if (Time.time - lastHitTime > timeBeforeHidingBar) {
             hpBar.SetActive(false);
         }

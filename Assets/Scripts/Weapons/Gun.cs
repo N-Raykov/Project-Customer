@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using DG.Tweening;
 
-public abstract class Gun : MonoBehaviour {
+public abstract class Gun : MonoBehaviourWithPause{
 
     public static event Action<int, int> OnAmmoChange;
     public static event Action<float> OnSpreadChange;
@@ -52,12 +52,12 @@ public abstract class Gun : MonoBehaviour {
         originalFOV = mainCamera.fieldOfView;
     }
 
-    protected virtual void Update() {
+    protected override void UpdateWithPause() {
         DecreaseRecoilRotation();
         CheckForActions();
     }
 
-    protected virtual void FixedUpdate() {
+    protected override void FixedUpdateWithPause() {
         DecreaseSpreadMultiplier();
     }
 
@@ -68,12 +68,12 @@ public abstract class Gun : MonoBehaviour {
     }
 
     protected void CheckForShots() {
-        if (input.CheckPistol1Input() && state == States.Idle && currentAmmo > 0)
+        if (input.shootInput && state == States.Idle && currentAmmo > 0)
             Shoot();
     }
 
     protected void CheckForReload() {
-        if (input.CheckReloadInput() && state == States.Idle && currentAmmo < gunData.ammoCapacity && extraAmmo > 0) {
+        if (input.reloadInput && state == States.Idle && currentAmmo < gunData.ammoCapacity && extraAmmo > 0) {
             if (!isAiming)
                 Reload();
             else {//quikly move back to the normal position and start reload
@@ -84,7 +84,7 @@ public abstract class Gun : MonoBehaviour {
     }
 
     protected void CheckForAim(){
-        if (input.CheckAimInput())
+        if (input.aimInput)
             Aim();
         else {
             if (pistolRotationPivot.localPosition != pistolRotationPivotStartPosition&&isAiming) {

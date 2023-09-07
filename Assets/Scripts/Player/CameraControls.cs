@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class CameraControls : MonoBehaviour{
+public class CameraControls : MonoBehaviourWithPause{
     GoodPlayerControls controls;
 
     [SerializeField] Transform pistolPivot;
@@ -28,7 +28,7 @@ public class CameraControls : MonoBehaviour{
         pistolPivotStartPosition = pistolPivot.localPosition;
     }
 
-    void Update() {
+    protected override void UpdateWithPause() {
         float inputX = Input.GetAxisRaw("Mouse X");
         float inputY = Input.GetAxisRaw("Mouse Y");
 
@@ -62,8 +62,7 @@ public class CameraControls : MonoBehaviour{
 
     void Sway(float inputX,float inputY) {
         
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
+        if (Input.GetKey(KeyCode.LeftControl)){
             // sway:
             swayTime += Time.deltaTime;
 
