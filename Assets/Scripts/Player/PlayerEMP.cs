@@ -15,6 +15,8 @@ public class PlayerEMP : PlayerAbility
         sphere.GetComponent<Renderer>().enabled = false; 
         sphere.transform.position = transform.position;
 
+        abilityAnimation.Play();
+
         Collider sphereCollider = sphere.GetComponent<Collider>();
         if (sphereCollider != null)
         {
@@ -22,8 +24,6 @@ public class PlayerEMP : PlayerAbility
         }
         sphere.AddComponent<CollisionDetection>();
         sphere.GetComponent<CollisionDetection>().stunDuration = stunDuration;
-
-        abilityAnimation.Play();
 
         StartCoroutine(ExpandAndDestroy(sphere));
     }

@@ -19,5 +19,4 @@ public class Shotgun : Gun{
         Debug.Log("shoot");
         //throw new System.NotImplementedException();
     }
-
 }

@@ -12,7 +12,8 @@ public class CustomButton : MonoBehaviour
 
     void Awake()
     {
-        SOData = ScriptableObject.Instantiate(buttonSO);
+        SOData = ScriptableObject.CreateInstance<ShopButtonData>();
+        SOData.CopyFrom(buttonSO);
         button.onClick.AddListener(CustomButton_onClick); 
     }
 

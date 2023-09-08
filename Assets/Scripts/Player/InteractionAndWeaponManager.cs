@@ -118,6 +118,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         if (input.interactionInput && hitInfo.collider.gameObject.tag == "Interactable"){
             string item = hitInfo.collider.GetComponent<DropPod>().item;
             int amount = hitInfo.collider.GetComponent<DropPod>().amount;
+            Debug.Log(item);
             switch (item){
                 case "PistolAmmo":
                     gunList[(int)Weapons.Pistol].extraAmmo += amount;
@@ -127,6 +128,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
                     break;
                 case "Shotgun":
                     gunList[(int)Weapons.Shotgun].canBeAccessed = true;
+                    Debug.Log("pog");
                     break;
             }
             Destroy(hitInfo.collider.gameObject);

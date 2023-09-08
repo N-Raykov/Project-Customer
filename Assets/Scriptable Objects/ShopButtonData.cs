@@ -13,4 +13,13 @@ public class ShopButtonData : ScriptableObject{
     public int stock;
     public int amount;
 
+    public void CopyFrom(ShopButtonData other)
+    {
+        this.name = other.name;
+        this.item = other.item;
+        this.type = other.type;
+        this.cost = other.cost;
+        this.stock = other.stock;
+        this.amount = other.amount;
+    }
 }
