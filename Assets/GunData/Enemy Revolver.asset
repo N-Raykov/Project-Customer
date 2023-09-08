@@ -15,7 +15,7 @@ MonoBehaviour:
   gunName: Revolver
   damage: 10
   range: 200
-  ammoCapacity: 9999
+  ammoCapacity: -1
   shotCooldown: 2
   reloadTime: 1.6
   spreadFactorX: 0
