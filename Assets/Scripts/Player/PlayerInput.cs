@@ -43,7 +43,7 @@ public class PlayerInput : MonoBehaviourWithPause
         aimInput = Input.GetKey(KeyCode.Mouse1);
         shopInput = Input.GetKeyDown(KeyCode.H);
         interactionInput = Input.GetKeyDown(KeyCode.E);
-        skillInput = Input.GetKeyDown(KeyCode.E);
+        skillInput = Input.GetKeyDown(KeyCode.Q);
     }
 
 }
