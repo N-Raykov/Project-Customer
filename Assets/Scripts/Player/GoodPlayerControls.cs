@@ -52,8 +52,7 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
         speedMultiplier = normalSpeedMultiplier;
         lastPosition = transform.position;
     }
-    protected override void FixedUpdateWithPause()
-    {
+    protected override void FixedUpdateWithPause(){
         lastPosition = transform.position;
         StateMachine();
     }

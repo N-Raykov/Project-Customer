@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviourWithPause
     public bool reloadInput { get; private set; }
     public bool aimInput { get; private set; }
     public bool shopInput { get; private set; }
+    public bool interactionInput { get; private set; }
     public bool skillInput { get; private set; }
 
     public KeyCode shootKey { get; private set; }
@@ -41,6 +42,7 @@ public class PlayerInput : MonoBehaviourWithPause
         reloadInput = Input.GetKeyDown(reloadKey);
         aimInput = Input.GetKey(KeyCode.Mouse1);
         shopInput = Input.GetKeyDown(KeyCode.H);
+        interactionInput = Input.GetKeyDown(KeyCode.E);
         skillInput = Input.GetKeyDown(KeyCode.E);
     }
 

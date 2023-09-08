@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7efacdf28eb93b2419f28cff89d22fbf, type: 3}
-  m_Name: PistolAmmo
+  m_Name: Shotgun
   m_EditorClassIdentifier: 
-  item: PistolAmmo
-  type: supplies
-  cost: 10
-  stock: -1
-  amount: 40
+  item: Shotgun
+  type: weapons
+  cost: 50
+  stock: 0
+  amount: -1
