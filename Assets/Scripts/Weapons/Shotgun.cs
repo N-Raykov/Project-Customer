@@ -6,7 +6,8 @@ public class Shotgun : Gun{
 
 
     private void Awake(){
-        //canBeAccessed = false;
+        canBeAccessed = false;
+        gameObject.SetActive(false);
     }
 
     protected override void StartReloadAnimation(){
