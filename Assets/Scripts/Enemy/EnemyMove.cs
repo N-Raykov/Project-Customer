@@ -99,6 +99,7 @@ public class EnemyMove : MonoBehaviourWithPause
                 }
                 else
                 {
+                    agent.destination = this.transform.position;
                     return;
                 }
                 break;

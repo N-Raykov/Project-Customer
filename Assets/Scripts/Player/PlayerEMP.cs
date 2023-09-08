@@ -7,11 +7,12 @@ public class PlayerEMP : PlayerAbility
     [SerializeField] float expandSpeed;
     [SerializeField] float maxScale;
     [SerializeField] float stunDuration;
+    [SerializeField] ParticleSystem abilityAnimation;
 
     protected override void UseAbility()
     {
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.GetComponent<Renderer>().enabled = true; 
+        sphere.GetComponent<Renderer>().enabled = false; 
         sphere.transform.position = transform.position;
 
         Collider sphereCollider = sphere.GetComponent<Collider>();
@@ -21,6 +22,8 @@ public class PlayerEMP : PlayerAbility
         }
         sphere.AddComponent<CollisionDetection>();
         sphere.GetComponent<CollisionDetection>().stunDuration = stunDuration;
+
+        abilityAnimation.Play();
 
         StartCoroutine(ExpandAndDestroy(sphere));
     }
