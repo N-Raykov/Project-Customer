@@ -16,6 +16,7 @@ public class Revolver : Gun{
 
     private void Awake(){
         canBeAccessed = true;
+        gameObject.SetActive(false);
     }
 
     protected override void StartShotAnimation(){

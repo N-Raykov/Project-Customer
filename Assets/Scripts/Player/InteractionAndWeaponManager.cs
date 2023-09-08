@@ -86,6 +86,8 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
     protected override void UpdateWithPause(){
 
+        //Debug.Log(gunList[(int)Weapons.Shotgun].canBeAccessed);
+
         foreach (Weapons weapon in Enum.GetValues(typeof(Weapons))) {
 
             if ((int)weapon >= gunList.Count)

@@ -46,7 +46,6 @@ public abstract class Gun : MonoBehaviourWithPause{
     public bool canBeAccessed { get; set; }//must be set for each weapon
 
     protected virtual void Start() {
-
         state = States.Idle;
         currentAmmo = gunData.ammoCapacity;
         cameraControls = pivot.GetComponent<CameraControls>();
@@ -65,7 +64,7 @@ public abstract class Gun : MonoBehaviourWithPause{
         DecreaseSpreadMultiplier();
     }
 
-    protected void CheckForActions() {
+    protected virtual void CheckForActions() {
         CheckForShots();
         CheckForReload();
         CheckForAim();
@@ -129,7 +128,7 @@ public abstract class Gun : MonoBehaviourWithPause{
         }
     }
 
-    protected void Shoot() {
+    protected virtual void Shoot() {
         AddRecoil();
         StartShotAnimation();
         lastShotTime = Time.time;
