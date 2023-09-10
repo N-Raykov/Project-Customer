@@ -37,7 +37,8 @@ public class PlayerInput : MonoBehaviourWithPause
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
         //moveDirection = Quaternion.Euler(new Vector3(0, controls.GetOrientation().y, 0)) * moveDirection;
-        moveDirection = Quaternion.Euler(new Vector3(0, controls.transform.localEulerAngles.y, 0)) * moveDirection;
+        //moveDirection = Quaternion.Euler(new Vector3(0, controls.transform.localEulerAngles.y, 0)) * moveDirection;
+        moveDirection = controls.transform.right * moveDirection.x + transform.forward * moveDirection.z;
         jumpInput = Input.GetAxisRaw("Jump") == 1;
         shootInput = Input.GetKey(shootKey);
         reloadInput = Input.GetKeyDown(reloadKey);

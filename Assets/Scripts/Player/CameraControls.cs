@@ -10,8 +10,8 @@ public class CameraControls : MonoBehaviourWithPause{
     [SerializeField] Transform player;
     [SerializeField] float rotationSpeed;
     [SerializeField] float maxAngle;
-    public float cameraVerticalRotation { get; set; }
-    public float cameraHorizontalRotation { get; set; }
+    public float mouseY { get; private set; }
+    public float mouseX { get; private set; }
     float cameraXRotation = 0;
 
 
@@ -32,13 +32,17 @@ public class CameraControls : MonoBehaviourWithPause{
         //cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -maxAngle, maxAngle);
         //transform.localEulerAngles = Vector3.right * cameraVerticalRotation + Vector3.up * cameraHorizontalRotation + Vector3.forward * cameraXRotation;
 
+        //mouseX += inputX * rotationSpeed;
+        //mouseY -= inputY * rotationSpeed;
 
-        cameraVerticalRotation -= inputY * rotationSpeed;
-        cameraHorizontalRotation += inputX * rotationSpeed;
+        mouseX = inputX * rotationSpeed;
+        mouseY = inputY * rotationSpeed;
 
-        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -maxAngle, maxAngle);
-        transform.localEulerAngles = Vector3.right * cameraVerticalRotation;
-        player.localEulerAngles = Vector3.up * cameraHorizontalRotation + Vector3.forward * cameraXRotation;
+        cameraXRotation -= mouseY;
+        cameraXRotation = Mathf.Clamp(cameraXRotation, -maxAngle, maxAngle);
+
+        transform.localRotation = Quaternion.Euler(cameraXRotation, 0, 0);
+        player.Rotate(Vector3.up * mouseX);
 
     }
 

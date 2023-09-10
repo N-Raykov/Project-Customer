@@ -38,7 +38,6 @@ public abstract class Gun : MonoBehaviourWithPause{
     [Header("Objects")]
     [SerializeField] protected GameObject bullet;
     [SerializeField] protected Transform muzzle;
-    [SerializeField] protected Transform pivot;
     [SerializeField] protected Transform pistolRotationPivot;
     [SerializeField] protected Transform recoilPivot;
     [SerializeField] protected GameObject muzzleFlash;
@@ -48,7 +47,7 @@ public abstract class Gun : MonoBehaviourWithPause{
     protected virtual void Start() {
         state = States.Idle;
         currentAmmo = gunData.ammoCapacity;
-        cameraControls = pivot.GetComponent<CameraControls>();
+        cameraControls = mainCamera.GetComponent<CameraControls>();
         animator = transform.GetComponent<Animator>();
         OnAmmoChange?.Invoke(currentAmmo, extraAmmo);
         pistolRotationPivotStartPosition = pistolRotationPivot.localPosition;
@@ -135,10 +134,10 @@ public abstract class Gun : MonoBehaviourWithPause{
         StartShotAnimation();
         lastShotTime = Time.time;
         AddSpread();
-        GameObject b = Instantiate(bullet, muzzle.position, pivot.rotation);
+        GameObject b = Instantiate(bullet, muzzle.position, mainCamera.transform.rotation);
         b.GetComponent<Bullet>().AddSpeed(AimAtTarget());
         b.GetComponent<Bullet>().damage = gunData.damage;
-        Instantiate(muzzleFlash, muzzle.position, pivot.rotation, muzzle);
+        Instantiate(muzzleFlash, muzzle.position, mainCamera.transform.rotation, muzzle);
         state = States.Shoot;
         currentAmmo--;
         OnAmmoChange?.Invoke(currentAmmo, extraAmmo);
@@ -186,10 +185,10 @@ public abstract class Gun : MonoBehaviourWithPause{
         RaycastHit info;
         Vector3 targetPosition;
 
-        if (Physics.Raycast(pivot.position, pivot.forward, out info, gunData.range)) 
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out info, gunData.range)) 
             targetPosition = info.point;
         else
-            targetPosition = pivot.position + pivot.forward * gunData.range;
+            targetPosition = mainCamera.transform.position + mainCamera.transform.forward * gunData.range;
 
         float spreadPercentage = 1 + spreadMultiplier / 100;
         targetPosition += new Vector3(UnityEngine.Random.Range(-gunData.spreadFactorX*spreadPercentage, gunData.spreadFactorX * spreadPercentage), UnityEngine.Random.Range(-gunData.spreadFactorY * spreadPercentage, gunData.spreadFactorY * spreadPercentage),0);
