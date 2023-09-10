@@ -7,13 +7,12 @@ public class Bullet : MonoBehaviourWithPause{
     Rigidbody rb;
     [SerializeField] Transform pivot;
     [SerializeField] float speed;
-    [SerializeField] float damage;
+    public float damage { get; set; }
     Vector3 startPosition;
     int range = 200;
 
     void Awake(){
         rb = GetComponent<Rigidbody>();
-        //rb.AddForce(transform.forward * speed, ForceMode.Impulse);
         startPosition = transform.position;
     }
 
@@ -33,8 +32,7 @@ public class Bullet : MonoBehaviourWithPause{
         if (tree != null) {
             tree.TakeDamage(collision.contacts[0].normal);
         }
-        if (player != null)
-        {
+        if (player != null){
             player.TakeDamage(damage);
         }
         Destroy(this.gameObject);

@@ -6,7 +6,7 @@ public class Shotgun : Gun{
 
 
     private void Awake(){
-        canBeAccessed = false;
+        canBeAccessed = true;
         gameObject.SetActive(false);
     }
 

@@ -3635,7 +3635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   extraAmmo: 100
-  gunData: {fileID: 11400000, guid: cbea0b237a93e6b4aaf9afd58e9c3109, type: 2}
+  gunData: {fileID: 11400000, guid: ec334ff5caaf89b43806f46401a48a3b, type: 2}
   animator: {fileID: 2036626781}
   input: {fileID: 6599779931964029087}
   mainCamera: {fileID: 1001639993959326202}
@@ -4093,6 +4093,8 @@ GameObject:
   - component: {fileID: 6599779931964029087}
   - component: {fileID: 233961048}
   - component: {fileID: 233961056}
+  - component: {fileID: 8852772988171748887}
+  - component: {fileID: 9184005020548936512}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -4280,6 +4282,36 @@ MonoBehaviour:
   - {fileID: 1732932106}
   - {fileID: 2036626782}
   UI: {fileID: 8879620353411809799}
+--- !u!114 &8852772988171748887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001639994704590389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdae10b703485774393c33d8ee333982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityCD: 3
+  expandSpeed: 12
+  maxScale: 25
+  stunDuration: 2
+  abilityAnimation: {fileID: 0}
+--- !u!114 &9184005020548936512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001639994704590389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0256655a9a350347bc9a18d12c49a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 1000
 --- !u!1 &1001639994911549480
 GameObject:
   m_ObjectHideFlags: 0

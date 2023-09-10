@@ -36,9 +36,10 @@ public class PlayerInput : MonoBehaviourWithPause
     protected override void UpdateWithPause(){
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
-        moveDirection = Quaternion.Euler(new Vector3(0, controls.GetOrientation().y, 0)) * moveDirection;
+        //moveDirection = Quaternion.Euler(new Vector3(0, controls.GetOrientation().y, 0)) * moveDirection;
+        moveDirection = Quaternion.Euler(new Vector3(0, controls.transform.localEulerAngles.y, 0)) * moveDirection;
         jumpInput = Input.GetAxisRaw("Jump") == 1;
-        shootInput = Input.GetKeyDown(shootKey);
+        shootInput = Input.GetKey(shootKey);
         reloadInput = Input.GetKeyDown(reloadKey);
         aimInput = Input.GetKey(KeyCode.Mouse1);
         shopInput = Input.GetKeyDown(KeyCode.H);
