@@ -26,12 +26,14 @@ public abstract class EnemyGun : MonoBehaviour
     [SerializeField] protected Transform pistolRotationPivot;
     [SerializeField] protected GameObject muzzleFlash;
 
+    [NonSerialized] public float projectileSpeed;
 
     public void Shoot()
     {
         StartShotAnimation();
         lastShotTime = Time.time;
         GameObject b = Instantiate(bullet, muzzle.position, pivot.rotation);
+        projectileSpeed = b.GetComponent<Bullet>().speed;
         b.GetComponent<Bullet>().AddSpeed(AimAtTarget());
         Instantiate(muzzleFlash, muzzle.position, pivot.rotation, muzzle);
         state = States.Shoot;

@@ -6,8 +6,8 @@ public class Bullet : MonoBehaviourWithPause{
 
     Rigidbody rb;
     [SerializeField] Transform pivot;
-    [SerializeField] float speed;
     [SerializeField] float damage;
+    public float speed;
     Vector3 startPosition;
     int range = 200;
 

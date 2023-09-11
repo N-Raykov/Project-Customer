@@ -33,12 +33,14 @@ public class EnemyMove : MonoBehaviourWithPause
         Aggro,
         PreferredRange,
         MinRange,
-        Stunned
+        Stunned,
+        Paused
     }
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        ignorePausedState = true;
     }
 
     private EnemyState currentState = EnemyState.Aggro;
@@ -47,6 +49,11 @@ public class EnemyMove : MonoBehaviourWithPause
 
     protected override void UpdateWithPause()
     {
+        if (GameManager.gameIsPaused == true)
+        {
+            currentState = EnemyState.Paused;
+        }
+
         switch (currentState)
         {
             case EnemyState.Aggro:
@@ -103,21 +110,37 @@ public class EnemyMove : MonoBehaviourWithPause
                     return;
                 }
                 break;
-        }
 
-        //Attacking
+            case EnemyState.Paused:
+                
+                agent.destination = this.transform.position;
+
+                if (GameManager.gameIsPaused == false)
+                {
+                    currentState = EnemyState.Aggro;
+                }
+                return;
+        }
+        // Attacking
         float distanceToPlayer = Vector3.Distance(this.transform.position, player.transform.position);
         timeSinceLastShot -= Time.deltaTime;
+
+        // Calculate the predicted position of the player based on their current velocity
+        Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
+        Vector3 predictedPlayerPosition = player.transform.position + playerVelocity * (distanceToPlayer / gun.projectileSpeed) * 2.3f;
+
+        // Calculate the direction to the predicted player position
+        Vector3 direction = predictedPlayerPosition - transform.position;
+
+        // Rotate towards the predicted position
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
         if (distanceToPlayer < range && timeSinceLastShot < 0.0f)
         {
             gun.Shoot();
             timeSinceLastShot = shotCD;
-        }
-
-        //Rotation
-        Vector3 direction = player.transform.position - transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }        
     }
 
     public void GetStunned(float pDuration)
