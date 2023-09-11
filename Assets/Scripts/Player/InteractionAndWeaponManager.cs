@@ -11,6 +11,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     [SerializeField] PlayerUI UI;
 
     PlayerInput input;
+    ShopManager shop;
 
     enum Weapons{
         Axe,
@@ -22,6 +23,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     Weapons activeWeapon=Weapons.None;
 
     void Start(){
+        shop=GetComponent<ShopManager>();
         input=GetComponent<PlayerInput>();
         ChangeActiveWeapon(Weapons.Pistol);
     }
@@ -86,8 +88,6 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
     protected override void UpdateWithPause(){
 
-        //Debug.Log(gunList[(int)Weapons.Shotgun].canBeAccessed);
-
         foreach (Weapons weapon in Enum.GetValues(typeof(Weapons))) {
 
             if ((int)weapon >= gunList.Count)
@@ -104,43 +104,51 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
             if (Input.GetKeyDown((KeyCode)number)){
                 ChangeActiveWeapon((Weapons)(number-49));
             }
-
         }
 
+        CheckForInteractions();
 
+    }
 
-
+    void CheckForInteractions() {
 
         RaycastHit hitInfo;
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hitInfo, range);
         if (hitInfo.collider == null)
             return;
-        if (input.interactionInput && hitInfo.collider.gameObject.tag == "Interactable"){
-            string item = hitInfo.collider.GetComponent<DropPod>().item;
-            int amount = hitInfo.collider.GetComponent<DropPod>().amount;
-            Debug.Log(item);
-            switch (item){
-                case "PistolAmmo":
-                    gunList[(int)Weapons.Pistol].extraAmmo += amount;
-                    if (activeWeapon == Weapons.Pistol){
-                        DisplayAmmo(gunList[(int)activeWeapon].currentAmmo, gunList[(int)activeWeapon].extraAmmo);
-                    }
+        if (input.interactionInput){
+
+            switch (hitInfo.collider.gameObject.tag) {
+                case "Interactable":
+                    PickUpDrops(hitInfo);
                     break;
-                case "Shotgun":
-                    gunList[(int)Weapons.Shotgun].canBeAccessed = true;
-                    Debug.Log("pog");
+                case "Log":
+                    PickUpLog(hitInfo);
                     break;
             }
-            Destroy(hitInfo.collider.gameObject);
-
-            //Debug.Log(item);
         }
-
-
-
-
-
     }
 
+    void PickUpDrops(RaycastHit pHitInfo) {
+        string item = pHitInfo.collider.GetComponent<DropPod>().item;
+        int amount = pHitInfo.collider.GetComponent<DropPod>().amount;
+        switch (item){
+            case "PistolAmmo":
+                gunList[(int)Weapons.Pistol].extraAmmo += amount;
+                if (activeWeapon == Weapons.Pistol){
+                    DisplayAmmo(gunList[(int)activeWeapon].currentAmmo, gunList[(int)activeWeapon].extraAmmo);
+                }
+                break;
+            case "Shotgun":
+                gunList[(int)Weapons.Shotgun].canBeAccessed = true;
+                break;
+        }
+        Destroy(pHitInfo.collider.gameObject);
+    }
+
+    void PickUpLog(RaycastHit pHitInfo) {
+        shop.AddMoney(pHitInfo.collider.gameObject.GetComponent<Tree>()._value);
+        Destroy(pHitInfo.collider.gameObject);
+    }
 
 }

@@ -157,5 +157,8 @@ public class ShopManager : MonoBehaviourWithPause{
         
     }
 
-
+    public void AddMoney(int pMoney) {
+        money += pMoney;
+        UI.DisplayCash(money);
+    }
 }
