@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviourWithPause
     void Die()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.fallenTrees = 0;
     }
 }
 

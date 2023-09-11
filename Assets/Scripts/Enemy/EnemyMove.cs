@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyMove : MonoBehaviourWithPause
 {
 
-    [SerializeField] GameObject player;
+    GameObject player;
     [SerializeField] float minStrafeDuration;
     [SerializeField] float maxStrafeDuration;
 
@@ -28,6 +28,14 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float shotCD;
     float timeSinceLastShot;
 
+    [Header("Spawn")]
+    [SerializeField] float stunAfterFall;
+    [SerializeField] float heightOfFall;
+    [SerializeField] int treesRequired;
+    bool isActive;
+    bool hasSpawned;
+    Rigidbody rb;
+
     private enum EnemyState
     {
         Aggro,
@@ -41,6 +49,10 @@ public class EnemyMove : MonoBehaviourWithPause
     {
         agent = GetComponent<NavMeshAgent>();
         ignorePausedState = true;
+        agent.enabled = false;
+        rb = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
+        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
     }
 
     private EnemyState currentState = EnemyState.Aggro;
@@ -49,6 +61,16 @@ public class EnemyMove : MonoBehaviourWithPause
 
     protected override void UpdateWithPause()
     {
+        if (GameManager.fallenTrees == treesRequired && hasSpawned == false)
+        {
+            hasSpawned = true;
+            rb.velocity *= 0;
+        } 
+        else if (hasSpawned == false)
+        {
+            WaitForSpawn();
+        }
+
         if (GameManager.gameIsPaused == true)
         {
             currentState = EnemyState.Paused;
@@ -106,7 +128,10 @@ public class EnemyMove : MonoBehaviourWithPause
                 }
                 else
                 {
-                    agent.destination = this.transform.position;
+                    if (agent.enabled == true)
+                    {
+                        agent.destination = this.transform.position;
+                    }
                     return;
                 }
                 break;
@@ -121,18 +146,15 @@ public class EnemyMove : MonoBehaviourWithPause
                 }
                 return;
         }
-        // Attacking
-        float distanceToPlayer = Vector3.Distance(this.transform.position, player.transform.position);
+
+        float distanceToPlayer = Vector3.Distance(gun.transform.position, player.transform.position);
         timeSinceLastShot -= Time.deltaTime;
 
-        // Calculate the predicted position of the player based on their current velocity
         Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
-        Vector3 predictedPlayerPosition = player.transform.position + playerVelocity * (distanceToPlayer / gun.projectileSpeed) * 2.3f;
+        Vector3 predictedPlayerPosition = player.transform.position + playerVelocity * (distanceToPlayer / gun.projectileSpeed) * 2.4f;
 
-        // Calculate the direction to the predicted player position
-        Vector3 direction = predictedPlayerPosition - transform.position;
+        Vector3 direction = predictedPlayerPosition - gun.transform.position;
 
-        // Rotate towards the predicted position
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
@@ -140,7 +162,25 @@ public class EnemyMove : MonoBehaviourWithPause
         {
             gun.Shoot();
             timeSinceLastShot = shotCD;
-        }        
+        }
+    }
+
+    void WaitForSpawn()
+    {
+        agent.enabled = false;
+        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
+
+        GetStunned(999);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground" && isActive == false)
+        {
+            agent.enabled = true;
+            GetStunned(stunAfterFall);
+            isActive = true;
+        }
     }
 
     public void GetStunned(float pDuration)

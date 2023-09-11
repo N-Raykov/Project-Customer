@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour{
 
     public static bool gameIsPaused { get; set; }
 
+    public static int fallenTrees { get; set; }
+
     private void Awake(){
         if (gameManager != null)
             Destroy(gameObject);

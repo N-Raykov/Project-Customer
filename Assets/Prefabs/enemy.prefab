@@ -945,7 +945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0303234d2e951764c9117a0d186f8008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   minStrafeDuration: 1
   maxStrafeDuration: 3
   aggroRange: 15
@@ -958,6 +957,9 @@ MonoBehaviour:
   gun: {fileID: 3417777374964521392}
   range: 15
   shotCD: 2
+  stunAfterFall: 1.5
+  heightOfFall: 110
+  treesRequired: 0
 --- !u!1 &3393877004331873567
 GameObject:
   m_ObjectHideFlags: 0
