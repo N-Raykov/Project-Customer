@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEMP : PlayerAbility
+public class GravityWave : PlayerAbility
 {
     [SerializeField] float expandSpeed;
     [SerializeField] float maxScale;
     [SerializeField] float stunDuration;
+    [SerializeField] float floatingHeight;
     [SerializeField] ParticleSystem abilityAnimation;
 
     protected override void UseAbility()
@@ -22,8 +23,9 @@ public class PlayerEMP : PlayerAbility
         {
             sphereCollider.isTrigger = true;
         }
-        sphere.AddComponent<CollisionDetection>();
-        sphere.GetComponent<CollisionDetection>().stunDuration = stunDuration;
+        sphere.AddComponent<GravityWaveEffect>();
+        sphere.GetComponent<GravityWaveEffect>().stunDuration = stunDuration;
+        sphere.GetComponent<GravityWaveEffect>().floatHeight = floatingHeight;
 
         StartCoroutine(ExpandAndDestroy(sphere));
     }

@@ -20,7 +20,7 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float strafeSpeed;
     [SerializeField] float moonWalkSpeed;
     [SerializeField] float rotationSpeed;
-    NavMeshAgent agent;
+    [System.NonSerialized] public NavMeshAgent agent;
 
     [Header("Attacks")]
     [SerializeField] EnemyGun gun;
@@ -163,6 +163,13 @@ public class EnemyMove : MonoBehaviourWithPause
             gun.Shoot();
             timeSinceLastShot = shotCD;
         }
+    }
+
+    public void GetGravityGloved(float pDuration, float pHeight)
+    {
+        agent.baseOffset = Mathf.Lerp(0.5f, pHeight, pDuration);
+
+        GetStunned(pDuration);
     }
 
     void WaitForSpawn()

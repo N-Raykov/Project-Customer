@@ -299,6 +299,7 @@ MonoBehaviour:
   expandSpeed: 12
   maxScale: 25
   stunDuration: 2
+  floatingHeight: 3
   abilityAnimation: {fileID: 1757498880}
 --- !u!114 &233961060
 MonoBehaviour:
