@@ -6,8 +6,8 @@ public class Sway : MonoBehaviourWithPause
 {
 
     [SerializeField] float intensity;
+    [SerializeField] float intensityZ;
     [SerializeField] float returnTime;
-    //[SerializeField] Transform playerTransform;
 
     Quaternion startRotation;
 
@@ -23,7 +23,8 @@ public class Sway : MonoBehaviourWithPause
 
         Quaternion rotationX = Quaternion.AngleAxis(-intensity * mouseX,Vector3.up);
         Quaternion rotationY = Quaternion.AngleAxis(intensity * mouseY, Vector3.right);
-        Quaternion targetRotation = startRotation * rotationX * rotationY;
+        Quaternion rotationZ = Quaternion.AngleAxis(intensityZ*mouseX,Vector3.forward);
+        Quaternion targetRotation = startRotation * rotationX * rotationY * rotationZ;
 
         transform.localRotation = Quaternion.Lerp(transform.localRotation,targetRotation,Time.deltaTime*returnTime);
 

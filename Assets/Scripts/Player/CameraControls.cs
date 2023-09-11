@@ -41,7 +41,7 @@ public class CameraControls : MonoBehaviourWithPause{
         cameraXRotation -= mouseY;
         cameraXRotation = Mathf.Clamp(cameraXRotation, -maxAngle, maxAngle);
 
-        transform.localRotation = Quaternion.Euler(cameraXRotation, 0, 0);
+        //transform.localRotation = Quaternion.Euler(cameraXRotation, 0, 0);
         player.Rotate(Vector3.up * mouseX);
 
     }
