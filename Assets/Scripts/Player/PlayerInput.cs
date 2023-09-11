@@ -2,28 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : MonoBehaviourWithPause
 {
     GoodPlayerControls controls;
-    Vector3 moveDirection;
-    bool canJump;
-    bool slowDownTime;
-    bool canDash;
-    bool canGrapple;
-    bool canShootPistol1;
-    bool canReload;
-    bool canAim;
-    public KeyCode grappleKey { get; private set; }
+    public Vector3 moveDirection { get; private set; }
+    public bool jumpInput { get; private set; }
+    public bool shootInput { get; private set; }
+    public bool reloadInput { get; private set; }
+    public bool aimInput { get; private set; }
+    public bool shopInput { get; private set; }
+    public bool interactionInput { get; private set; }
+    public bool skillInput { get; private set; }
+
     public KeyCode shootKey { get; private set; }
     public KeyCode reloadKey { get; private set; }
+
     private void Awake(){
+        ignorePausedState = true;
         if (GameSettings.grappleKey != KeyCode.None){
-            grappleKey = GameSettings.grappleKey;
             shootKey = GameSettings.shootKey;
             reloadKey = GameSettings.reloadKey;
         }
         else {
-            grappleKey = KeyCode.E;
             shootKey = KeyCode.Mouse0;
             reloadKey = KeyCode.R;
         }
@@ -33,45 +33,17 @@ public class PlayerInput : MonoBehaviour
         controls = GetComponent<GoodPlayerControls>();
     }
 
-    void Update(){
+    protected override void UpdateWithPause(){
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
         moveDirection = Quaternion.Euler(new Vector3(0, controls.GetOrientation().y, 0)) * moveDirection;
-        canJump = Input.GetAxisRaw("Jump") == 1;
-        slowDownTime = Input.GetButtonDown("Fire3");
-        canDash = Input.GetButtonUp("Fire3");
-        canGrapple = Input.GetKeyDown(grappleKey);
-        canShootPistol1 = Input.GetKeyDown(shootKey);
-        canReload = Input.GetKeyDown(reloadKey);
-        canAim = Input.GetKey(KeyCode.Mouse1);
+        jumpInput = Input.GetAxisRaw("Jump") == 1;
+        shootInput = Input.GetKeyDown(shootKey);
+        reloadInput = Input.GetKeyDown(reloadKey);
+        aimInput = Input.GetKey(KeyCode.Mouse1);
+        shopInput = Input.GetKeyDown(KeyCode.H);
+        interactionInput = Input.GetKeyDown(KeyCode.E);
+        skillInput = Input.GetKeyDown(KeyCode.Q);
     }
 
-    public Vector3 GetMoveDirection() {
-        return moveDirection;
-    }
-
-    public bool CheckJumpInput() {
-        return canJump;
-    }
-    public bool CheckTimeSlowInput() {
-        return slowDownTime;
-    }
-    public bool CheckDashInput() {
-        return canDash;
-    }
-    public bool CheckGrappleInput() {
-        return canGrapple;
-    }
-
-    public bool CheckPistol1Input() {
-        return canShootPistol1;
-    }
-
-    public bool CheckReloadInput() {
-        return canReload;
-    }
-
-    public bool CheckAimInput() {
-        return canAim;
-    }
 }

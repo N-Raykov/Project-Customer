@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
-{
+public class Bullet : MonoBehaviourWithPause{
 
     Rigidbody rb;
     [SerializeField] Transform pivot;
-    [SerializeField] float speed;
     [SerializeField] float damage;
+    public float speed;
     Vector3 startPosition;
     int range = 200;
 
@@ -18,7 +17,7 @@ public class Bullet : MonoBehaviour
         startPosition = transform.position;
     }
 
-    private void Update(){
+    protected override void UpdateWithPause(){
         if ((transform.position - startPosition).magnitude > range) {
             Destroy(this.gameObject);
         }
@@ -26,8 +25,17 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision){
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        Tree tree = collision.gameObject.GetComponent<Tree>();
+        PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
         if (enemy != null) {
             enemy.TakeDamage(damage);
+        }
+        if (tree != null) {
+            tree.TakeDamage(collision.contacts[0].normal);
+        }
+        if (player != null)
+        {
+            player.TakeDamage(damage);
         }
         Destroy(this.gameObject);
     }

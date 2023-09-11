@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GoodPlayerControls : MonoBehaviour{
+public class GoodPlayerControls : MonoBehaviourWithPause{
     Rigidbody rb;
 
     public enum State { 
         Walk,
         Jump,
-        WallRun,
-        Dash,
-        SlowDownTime,
-        Grapple
     }
     public State state;
     public State lastState;
@@ -56,20 +52,19 @@ public class GoodPlayerControls : MonoBehaviour{
         speedMultiplier = normalSpeedMultiplier;
         lastPosition = transform.position;
     }
-    void FixedUpdate()
-    {
+    protected override void FixedUpdateWithPause(){
         lastPosition = transform.position;
         StateMachine();
     }
 
-    private void Update(){
+    protected override void UpdateWithPause(){
         isGrounded = Physics.SphereCast(new Ray( transform.position, Vector3.down ), 0.5f, playerHeight * 0.5f, ground);
         HandleState();
         LimitSpeed();
     }
 
     void MovePlayer() {
-        rb.AddForce(input.GetMoveDirection() * moveSpeed*10*speedMultiplier,ForceMode.Force);
+        rb.AddForce(input.moveDirection * moveSpeed*10*speedMultiplier,ForceMode.Force);
         LimitSpeed();
     }
 
@@ -80,7 +75,7 @@ public class GoodPlayerControls : MonoBehaviour{
     void LimitSpeed() {
         Vector3 flatVelocity = new Vector3(rb.velocity.x,0,rb.velocity.z);
 
-        if (flatVelocity.magnitude > maxSpeed* maxSpeedMultiplier&&state!=State.Grapple) {
+        if (flatVelocity.magnitude > maxSpeed* maxSpeedMultiplier) {
             Vector3 limitedSpeed = flatVelocity.normalized * maxSpeed* maxSpeedMultiplier;
             rb.velocity = new Vector3(limitedSpeed.x,rb.velocity.y,limitedSpeed.z);
         }
@@ -88,7 +83,7 @@ public class GoodPlayerControls : MonoBehaviour{
     }
 
     void Jump() {
-        if (input.CheckJumpInput()&&isGrounded){
+        if (input.jumpInput&&isGrounded){
             lastState = state;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -114,16 +109,6 @@ public class GoodPlayerControls : MonoBehaviour{
                 speedMultiplier = airSpeedMultiplier;
                 MovePlayer();
                 ChangeStateToWalk();
-                break;
-            case State.WallRun:
-
-                break;
-            case State.Dash:
-                break;
-            case State.SlowDownTime:
-                MovePlayer();
-                break;
-            case State.Grapple:
                 break;
         }
     

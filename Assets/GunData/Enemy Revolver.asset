@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815de4f95265bac45a343bc461822c9c, type: 3}
+  m_Name: Enemy Revolver
+  m_EditorClassIdentifier: 
+  gunName: Revolver
+  damage: 10
+  range: 200
+  ammoCapacity: -1
+  shotCooldown: 2
+  reloadTime: 1.6
+  spreadFactorX: 0
+  spreadFactorY: 0
+  spreadPercentageMultiplier: 0
+  timeBeforeSpreadDecrease: 0
+  spreadDecreaseRate: 0
+  recoilHipFire: {x: -8.5, y: 2, z: 0.5}
+  recoilAim: {x: 0, y: 0, z: 0}
+  returnSpeed: 0.25
+  targetPosition: {x: 0, y: -0.3410001, z: 0.6820004}
+  zoomInDuration: 0
+  zoomInFactor: 0

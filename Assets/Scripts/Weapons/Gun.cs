@@ -4,31 +4,31 @@ using UnityEngine;
 using System;
 using DG.Tweening;
 
-public abstract class Gun : MonoBehaviour {
+public abstract class Gun : MonoBehaviourWithPause{
 
-    public static event Action<int, int> OnAmmoChange;
-    public static event Action<float> OnSpreadChange;
-    public static event Action<float> OnReload;
-    public static event Action<bool> OnZoomChange;
+    public event Action<int, int> OnAmmoChange;
+    public event Action<float> OnSpreadChange;
+    public event Action<float> OnReload;
+    public event Action<bool> OnZoomChange;
     protected event Action OnStateChange;
 
-    protected enum States {
+    public enum States {
         Idle,
         Shoot,
         Reload
     }
-    protected States state = States.Idle;
+    public States state { get; protected set; }
     protected float lastShotTime = 0;
     protected float spreadMultiplier;
 
     [Header("Data")]
-    [SerializeField] protected int extraAmmo;
+    [SerializeField] public int extraAmmo;//i know i know
     [SerializeField] protected GunData gunData;
     [SerializeField] protected Animator animator;
     [SerializeField] protected PlayerInput input;
     [SerializeField] protected Camera mainCamera;
     protected CameraControls cameraControls;
-    protected int currentAmmo;
+    public int currentAmmo { get; set; }
     protected Vector3 recoilTargetRotation = Vector3.zero;
     protected Vector3 pistolRotationPivotStartPosition;
     protected bool isAiming;
@@ -43,7 +43,10 @@ public abstract class Gun : MonoBehaviour {
     [SerializeField] protected Transform recoilPivot;
     [SerializeField] protected GameObject muzzleFlash;
 
+    public bool canBeAccessed { get; set; }//must be set for each weapon
+
     protected virtual void Start() {
+        state = States.Idle;
         currentAmmo = gunData.ammoCapacity;
         cameraControls = pivot.GetComponent<CameraControls>();
         animator = transform.GetComponent<Animator>();
@@ -52,28 +55,28 @@ public abstract class Gun : MonoBehaviour {
         originalFOV = mainCamera.fieldOfView;
     }
 
-    protected virtual void Update() {
+    protected override void UpdateWithPause() {
         DecreaseRecoilRotation();
         CheckForActions();
     }
 
-    protected virtual void FixedUpdate() {
+    protected override void FixedUpdateWithPause() {
         DecreaseSpreadMultiplier();
     }
 
-    protected void CheckForActions() {
+    protected virtual void CheckForActions() {
         CheckForShots();
         CheckForReload();
         CheckForAim();
     }
 
     protected void CheckForShots() {
-        if (input.CheckPistol1Input() && state == States.Idle && currentAmmo > 0)
+        if (input.shootInput && state == States.Idle && currentAmmo > 0)
             Shoot();
     }
 
     protected void CheckForReload() {
-        if (input.CheckReloadInput() && state == States.Idle && currentAmmo < gunData.ammoCapacity && extraAmmo > 0) {
+        if (input.reloadInput && state == States.Idle && currentAmmo < gunData.ammoCapacity && extraAmmo > 0) {
             if (!isAiming)
                 Reload();
             else {//quikly move back to the normal position and start reload
@@ -84,7 +87,7 @@ public abstract class Gun : MonoBehaviour {
     }
 
     protected void CheckForAim(){
-        if (input.CheckAimInput())
+        if (input.aimInput)
             Aim();
         else {
             if (pistolRotationPivot.localPosition != pistolRotationPivotStartPosition&&isAiming) {
@@ -125,7 +128,7 @@ public abstract class Gun : MonoBehaviour {
         }
     }
 
-    protected void Shoot() {
+    protected virtual void Shoot() {
         AddRecoil();
         StartShotAnimation();
         lastShotTime = Time.time;

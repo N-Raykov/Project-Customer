@@ -14,6 +14,11 @@ public class Revolver : Gun{
     [SerializeField] AudioClip cylinderSoundEnd;
     [SerializeField] AudioClip bulletFallingSound;
 
+    private void Awake(){
+        canBeAccessed = true;
+        gameObject.SetActive(false);
+    }
+
     protected override void StartShotAnimation(){
         animator.SetTrigger("Shoot");
         StartCoroutine(SpinMag());
@@ -33,8 +38,7 @@ public class Revolver : Gun{
         }
     }
 
-    void PlayCylinderStart()
-    {
+    void PlayCylinderStart(){
         gunshot.PlayOneShot(cylinderSoundStart);
     }
 
