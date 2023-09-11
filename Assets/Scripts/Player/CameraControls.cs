@@ -19,6 +19,9 @@ public class CameraControls : MonoBehaviourWithPause{
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         controls = player.GetComponent<GoodPlayerControls>();
+        Application.targetFrameRate = 60;
+        Time.fixedDeltaTime = 1 / 60f;
+
     }
 
     protected override void UpdateWithPause() {
