@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class MusicHandler : MonoBehaviour
 {
-    [SerializeField]
-    [Range(0.0f, 1.0f)]
-    private float musicProgress;
+    [SerializeField] [Range(0.0f, 1.0f)] private float musicTransitionProgress;
 
-    [SerializeField]
-    private AudioClip[] musicTracks;
-
-    [SerializeField]
-    private float transitionTimeSpeed = 1.0f;
+    [SerializeField] private AudioClip[] musicTracks;
+    [SerializeField] private float transitionTimeSpeed = 1.0f;
 
     private List<AudioSource> audioSources;
 
@@ -59,7 +54,7 @@ public class MusicHandler : MonoBehaviour
             float startFactor = (float)(i) / audioSources.Count;
             float endFactor = (float)(i + 1) / audioSources.Count;
 
-            if (musicProgress >= startFactor && musicProgress <= endFactor) 
+            if (musicTransitionProgress >= startFactor && musicTransitionProgress <= endFactor) 
             {
                 currentAudioSource.volume = Mathf.Lerp(currentAudioSource.volume, 1.0f, Time.deltaTime * transitionTimeSpeed);
             } else

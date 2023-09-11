@@ -152,14 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4578d93ed505d1a4bb978ca78d70451f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicProgress: 0
+  musicTransitionProgress: 0
   musicTracks:
   - {fileID: 8300000, guid: 375e2f1c2ff8c314d96abbe571b4c40a, type: 3}
   - {fileID: 8300000, guid: bdd62af219c99b045bfb14ee3fad9469, type: 3}
   - {fileID: 8300000, guid: 9f6a6672e2e2c4e4ebbb661de5390c8f, type: 3}
   - {fileID: 8300000, guid: ca5226ab8aa1f8e499c17c89f0f1365c, type: 3}
   - {fileID: 8300000, guid: f909ded53e115bb40b983e67066ac211, type: 3}
-  transitionTimeSpeed: 0.25
+  transitionTimeSpeed: 0.4
 --- !u!4 &648836977
 Transform:
   m_ObjectHideFlags: 0
