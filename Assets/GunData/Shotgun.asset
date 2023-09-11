@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   gunName: Shotgun
-  damage: 25
-  range: 50
+  damage: 10
+  range: 15
+  bulletSpeed: 40
   ammoCapacity: 6
   shotCooldown: 1
   reloadTime: 2
-  spreadFactorX: 0.5
-  spreadFactorY: 0.5
+  spreadFactorX: 0.3
+  spreadFactorY: 0.3
   spreadPercentageMultiplier: 10
-  timeBeforeSpreadDecrease: 1.5
+  spreadPercentageMultiplierAim: 0
   spreadDecreaseRate: 30
   recoilHipFire: {x: -12, y: 6, z: 0}
   recoilAim: {x: -6, y: 3, z: 0}

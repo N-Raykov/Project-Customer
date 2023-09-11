@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3416385659607015040}
   m_Layer: 0
   m_Name: Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: Log
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3416385659607015096}
   m_LocalRotation: {x: 0.00017455219, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.2289999, z: 0}
-  m_LocalScale: {x: 1, y: 1.0999998, z: 1}
+  m_LocalPosition: {x: 0, y: 2.229, z: 0}
+  m_LocalScale: {x: 1, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2595271693523325594}
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 3
+  value: 50
 --- !u!64 &3416385659607015041
 MeshCollider:
   m_ObjectHideFlags: 0

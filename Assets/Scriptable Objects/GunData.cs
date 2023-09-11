@@ -9,6 +9,7 @@ public class GunData : ScriptableObject{
     [Header("Shooting")]
     public float damage;
     public float range;
+    public float bulletSpeed;
     [Header("Reloading")]
     public int ammoCapacity;
     public float shotCooldown;

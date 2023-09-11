@@ -35,10 +35,6 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
 
     bool isGrounded = false;
 
-
-    [Header("Camera")]
-    [SerializeField] float fov;
-
     PlayerInput input;
 
     void Start(){

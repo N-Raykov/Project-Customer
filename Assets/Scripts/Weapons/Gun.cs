@@ -27,13 +27,12 @@ public abstract class Gun : MonoBehaviourWithPause{
     [SerializeField] protected Animator animator;
     [SerializeField] protected PlayerInput input;
     [SerializeField] protected Camera mainCamera;
-    protected CameraControls cameraControls;
     public int currentAmmo { get; set; }
     protected Vector3 recoilTargetRotation = Vector3.zero;
     protected Vector3 pistolRotationPivotStartPosition;
     protected bool isAiming;
     protected float originalFOV;
-    bool isAimingAllowed = true;
+    protected bool isAimingAllowed = true;
 
     [Header("Objects")]
     [SerializeField] protected GameObject bullet;
@@ -47,7 +46,6 @@ public abstract class Gun : MonoBehaviourWithPause{
     protected virtual void Start() {
         state = States.Idle;
         currentAmmo = gunData.ammoCapacity;
-        cameraControls = mainCamera.GetComponent<CameraControls>();
         animator = transform.GetComponent<Animator>();
         OnAmmoChange?.Invoke(currentAmmo, extraAmmo);
         pistolRotationPivotStartPosition = pistolRotationPivot.localPosition;
@@ -58,11 +56,6 @@ public abstract class Gun : MonoBehaviourWithPause{
         CheckForActions();
         DecreaseSpreadMultiplier();
         DecreaseRecoilRotation();
-        //Debug.Log(recoilTargetRotation);
-    }
-
-    protected override void FixedUpdateWithPause() {
-
     }
 
     protected virtual void CheckForActions() {
@@ -134,14 +127,21 @@ public abstract class Gun : MonoBehaviourWithPause{
         StartShotAnimation();
         lastShotTime = Time.time;
         AddSpread();
-        GameObject b = Instantiate(bullet, muzzle.position, mainCamera.transform.rotation);
-        b.GetComponent<Bullet>().AddSpeed(AimAtTarget());
-        b.GetComponent<Bullet>().damage = gunData.damage;
-        Instantiate(muzzleFlash, muzzle.position, mainCamera.transform.rotation, muzzle);
+        CreateBullet();
         state = States.Shoot;
         currentAmmo--;
         OnAmmoChange?.Invoke(currentAmmo, extraAmmo);
         StartCoroutine(ChangeStateAfterTime(gunData.shotCooldown,States.Idle));
+    }
+
+    protected virtual void CreateBullet() {
+        GameObject b = Instantiate(bullet, muzzle.position, mainCamera.transform.rotation);
+        Bullet bt = b.GetComponent<Bullet>();
+        bt.damage = gunData.damage;
+        bt.speed = gunData.bulletSpeed;
+        bt.range = gunData.range;
+        bt.AddSpeed(AimAtTarget());
+        Instantiate(muzzleFlash, muzzle.position, mainCamera.transform.rotation, muzzle);
     }
 
     protected abstract void StartShotAnimation();

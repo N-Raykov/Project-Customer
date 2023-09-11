@@ -5,11 +5,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviourWithPause{
 
     Rigidbody rb;
-    [SerializeField] Transform pivot;
-    [SerializeField] float speed;
     public float damage { get; set; }
+    public float range { get; set; }
+    public float speed { get; set; }
     Vector3 startPosition;
-    int range = 200;
 
     void Awake(){
         rb = GetComponent<Rigidbody>();

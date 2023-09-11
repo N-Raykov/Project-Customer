@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Revolver
   m_EditorClassIdentifier: 
   gunName: Revolver
-  damage: 10
-  range: 200
+  damage: 25
+  range: 100
+  bulletSpeed: 40
   ammoCapacity: 6
   shotCooldown: 0.4
   reloadTime: 1.6
