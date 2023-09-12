@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviourWithPause
 {
-    [SerializeField] Camera mainCamera;
+    [SerializeField] Transform rotationPivot;
 
     GoodPlayerControls controls;
     public Vector3 moveDirection { get; private set; }
@@ -38,10 +38,7 @@ public class PlayerInput : MonoBehaviourWithPause
     protected override void UpdateWithPause(){
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
-        //moveDirection = Quaternion.Euler(new Vector3(0, controls.GetOrientation().y, 0)) * moveDirection;
-        //moveDirection = Quaternion.Euler(new Vector3(0, controls.transform.localEulerAngles.y, 0)) * moveDirection;
-        moveDirection = mainCamera.transform.right * moveDirection.x + mainCamera.transform.forward * moveDirection.z;
-        //moveDirection = controls.transform.right * moveDirection.x + transform.forward * moveDirection.z;
+        moveDirection = Quaternion.Euler(new Vector3(0, rotationPivot.transform.localEulerAngles.y, 0)) * moveDirection;
         jumpInput = Input.GetAxisRaw("Jump") == 1;
         shootInput = Input.GetKey(shootKey);
         reloadInput = Input.GetKeyDown(reloadKey);

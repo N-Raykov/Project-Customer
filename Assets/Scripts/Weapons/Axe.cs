@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Axe : Gun {
 
+    [SerializeField] Rigidbody rb;
+
     private void Awake(){
         canBeAccessed = true;
         gameObject.SetActive(false);
@@ -14,6 +16,7 @@ public class Axe : Gun {
     }
 
     protected override void Shoot() {
+        rb.constraints = RigidbodyConstraints.FreezeAll ;
         StartShotAnimation();
         lastShotTime = Time.time;
         state = States.Shoot;
