@@ -35,6 +35,7 @@ public class GravityWaveEffect : MonoBehaviourWithPause
             if (Time.time > enemy.stunDuration - 999)
             {
                 enemy.GetComponent<Rigidbody>().useGravity = true;
+                enemiesHit.Remove(enemy);
             }
             else
             {
