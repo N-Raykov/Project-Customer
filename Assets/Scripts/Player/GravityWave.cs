@@ -8,6 +8,7 @@ public class GravityWave : PlayerAbility
     [SerializeField] float maxScale;
     [SerializeField] float stunDuration;
     [SerializeField] float floatingHeight;
+    [SerializeField] float floatSpeed;
     [SerializeField] ParticleSystem abilityAnimation;
 
     protected override void UseAbility()
@@ -26,6 +27,7 @@ public class GravityWave : PlayerAbility
         sphere.AddComponent<GravityWaveEffect>();
         sphere.GetComponent<GravityWaveEffect>().stunDuration = stunDuration;
         sphere.GetComponent<GravityWaveEffect>().floatHeight = floatingHeight;
+        sphere.GetComponent<GravityWaveEffect>().floatSpeed = floatSpeed;
 
         StartCoroutine(ExpandAndDestroy(sphere));
     }
@@ -40,8 +42,14 @@ public class GravityWave : PlayerAbility
             currentScale += expandSpeed * Time.deltaTime;
             sphere.transform.localScale = originalScale * currentScale;
             yield return null;
+
         }
 
-        Destroy(sphere);
+        if (currentScale >= maxScale)
+        {
+            sphere.GetComponent<GravityWaveEffect>().isActive = false;
+            yield return new WaitForSeconds(5);
+            Destroy(sphere);
+        }
     }
 }

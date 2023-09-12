@@ -22,7 +22,7 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float minRotationSpeed;
     [SerializeField] float maxRotationSpeed;
     [SerializeField] float maxRotationTime;
-
+    
     [System.NonSerialized] public NavMeshAgent agent;
 
     [Header("Attacks")]
@@ -35,7 +35,7 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float stunAfterFall;
     [SerializeField] float heightOfFall;
     [SerializeField] int treesRequired;
-    bool isActive;
+    [System.NonSerialized] public bool isActive;
     bool hasSpawned;
     Rigidbody rb;
 
@@ -59,49 +59,14 @@ public class EnemyMove : MonoBehaviourWithPause
     }
 
     private EnemyState currentState = EnemyState.Aggro;
-    private float stunDuration;
-    private float movementTimer;
+    [System.NonSerialized] public float stunDuration;
+    private float strafeTimer;
 
     protected override void UpdateWithPause()
     {
         ExtraStuff();
 
         HandleStates();
-    }
-
-    void RotateAndShoot()
-    {
-        float distanceToPlayer = Vector3.Distance(gun.transform.position, player.transform.position);
-        timeSinceLastShot -= Time.deltaTime;
-
-        float minDistance = 3.0f;
-        float maxDistance = 15.0f;
-        float minValue = 2.2f;
-        float maxValue = 2.4f;
-
-        float t = Mathf.Clamp01((distanceToPlayer - minDistance) / (maxDistance - minDistance));
-        float marginOfError = Mathf.Lerp(minValue, maxValue, t);
-
-        Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
-        Vector3 predictedPlayerPosition = player.transform.position + playerVelocity * (distanceToPlayer / gun.projectileSpeed) * marginOfError;
-
-        Vector3 direction = predictedPlayerPosition - gun.transform.position;
-
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-
-        float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
-
-        float rotationSpeed = Mathf.Clamp(angleDifference / maxRotationTime, minRotationSpeed, maxRotationSpeed);
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-        Debug.Log(direction);
-
-        if (distanceToPlayer < range && timeSinceLastShot < 0.0f)
-        {
-            gun.Shoot();
-            timeSinceLastShot = shotCD;
-        }
     }
 
     void HandleStates()
@@ -117,7 +82,7 @@ public class EnemyMove : MonoBehaviourWithPause
                 else
                 {
                     currentState = EnemyState.PreferredRange;
-                    movementTimer = Time.time;
+                    strafeTimer = Time.time;
                 }
                 break;
 
@@ -125,10 +90,10 @@ public class EnemyMove : MonoBehaviourWithPause
                 if (Vector3.Distance(player.transform.position, transform.position) < preferredRange && Vector3.Distance(player.transform.position, transform.position) > minRange)
                 {
                     agent.speed = strafeSpeed;
-                    if (Time.time >= movementTimer)
+                    if (Time.time >= strafeTimer)
                     {
                         RandomlySwitchDirection();
-                        ResetMovementTimer();
+                        ResetstrafeTimer();
                     }
                 }
                 else
@@ -162,6 +127,7 @@ public class EnemyMove : MonoBehaviourWithPause
                     {
                         agent.destination = this.transform.position;
                     }
+                    
                     return;
                 }
                 break;
@@ -180,6 +146,39 @@ public class EnemyMove : MonoBehaviourWithPause
         RotateAndShoot();
     }
 
+    void RotateAndShoot()
+    {
+        float distanceToPlayer = Vector3.Distance(gun.transform.position, player.transform.position);
+        timeSinceLastShot -= Time.deltaTime;
+
+        float minDistance = 3.0f;
+        float maxDistance = 15.0f;
+        float minValue = 2.2f;
+        float maxValue = 2.4f;
+
+        float t = Mathf.Clamp01((distanceToPlayer - minDistance) / (maxDistance - minDistance));
+        float marginOfError = Mathf.Lerp(minValue, maxValue, t);
+
+        Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
+        Vector3 predictedPlayerPosition = player.transform.position + playerVelocity * (distanceToPlayer / gun.projectileSpeed) * marginOfError;
+
+        Vector3 direction = predictedPlayerPosition - gun.transform.position;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
+
+        float rotationSpeed = Mathf.Clamp(angleDifference / maxRotationTime, minRotationSpeed, maxRotationSpeed);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        if (distanceToPlayer < range && timeSinceLastShot < 0.0f)
+        {
+            gun.Shoot();
+            timeSinceLastShot = shotCD;
+        }
+    }
+
     void ExtraStuff()
     {
         if (GameManager.fallenTrees == treesRequired && hasSpawned == false)
@@ -196,13 +195,6 @@ public class EnemyMove : MonoBehaviourWithPause
         {
             currentState = EnemyState.Paused;
         }
-    }
-
-    public void GetGravityGloved(float pDuration, float pHeight)
-    {
-        agent.baseOffset = Mathf.Lerp(0.5f, pHeight, pDuration);
-
-        GetStunned(pDuration);
     }
 
     void WaitForSpawn()
@@ -244,8 +236,8 @@ public class EnemyMove : MonoBehaviourWithPause
         }
     }
 
-    private void ResetMovementTimer()
+    private void ResetstrafeTimer()
     {
-        movementTimer = Time.time + Random.Range(minStrafeDuration, maxStrafeDuration);
+        strafeTimer = Time.time + Random.Range(minStrafeDuration, maxStrafeDuration);
     }
 }
