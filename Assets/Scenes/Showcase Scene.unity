@@ -592,6 +592,11 @@ PrefabInstance:
       propertyPath: abilityAnimation
       value: 
       objectReference: {fileID: 227627436}
+    - target: {fileID: 9184005020548936512, guid: 8a0d4e1dae3c7c14c91144230535aa50,
+        type: 3}
+      propertyPath: maxHp
+      value: 10000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a0d4e1dae3c7c14c91144230535aa50, type: 3}
 --- !u!1 &1484752546 stripped
@@ -1054,6 +1059,11 @@ PrefabInstance:
     - target: {fileID: 1762181672652821769, guid: f28e56558c4a2b7409514d54bfef5052,
         type: 3}
       propertyPath: treesRequired
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762181672652821771, guid: f28e56558c4a2b7409514d54bfef5052,
+        type: 3}
+      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3994129654328848409, guid: f28e56558c4a2b7409514d54bfef5052,

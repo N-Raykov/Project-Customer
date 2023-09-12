@@ -132,6 +132,8 @@ public class EnemyMove : MonoBehaviourWithPause
 
                     agent.destination = this.transform.position;
 
+                    timeSinceLastShot = shotCD;
+
                     return;
                 }
                 break;
@@ -209,6 +211,10 @@ public class EnemyMove : MonoBehaviourWithPause
         else if (hasSpawned == false)
         {
             WaitForSpawn();
+        }
+        else if (rb.velocity.y > 40) 
+        {
+            rb.velocity *= 0.9f;
         }
 
         if (GameManager.gameIsPaused == true)
