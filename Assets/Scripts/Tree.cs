@@ -25,8 +25,10 @@ public class Tree : MonoBehaviourWithPause {
     }
 
     private void OnCollisionStay(Collision collision){
-        if (collision.gameObject.CompareTag("Ground")) {
+        if (collision.gameObject.CompareTag("Ground") && hasFallen == false) {
             hasFallen = true;
+            GameManager.fallenTrees++;
+            Debug.Log("tree has fallen");
             //normal = collision.contacts[0].normal;
             //Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point+10*normal);
         }

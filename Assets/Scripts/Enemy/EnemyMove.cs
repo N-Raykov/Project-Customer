@@ -19,7 +19,10 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float speed;
     [SerializeField] float strafeSpeed;
     [SerializeField] float moonWalkSpeed;
-    [SerializeField] float rotationSpeed;
+    [SerializeField] float minRotationSpeed;
+    [SerializeField] float maxRotationSpeed;
+    [SerializeField] float maxRotationTime;
+
     [System.NonSerialized] public NavMeshAgent agent;
 
     [Header("Attacks")]
@@ -47,7 +50,7 @@ public class EnemyMove : MonoBehaviourWithPause
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponentInParent<NavMeshAgent>();
         ignorePausedState = true;
         agent.enabled = false;
         rb = GetComponent<Rigidbody>();
@@ -61,21 +64,48 @@ public class EnemyMove : MonoBehaviourWithPause
 
     protected override void UpdateWithPause()
     {
-        if (GameManager.fallenTrees == treesRequired && hasSpawned == false)
-        {
-            hasSpawned = true;
-            rb.velocity *= 0;
-        } 
-        else if (hasSpawned == false)
-        {
-            WaitForSpawn();
-        }
+        ExtraStuff();
 
-        if (GameManager.gameIsPaused == true)
-        {
-            currentState = EnemyState.Paused;
-        }
+        HandleStates();
+    }
 
+    void RotateAndShoot()
+    {
+        float distanceToPlayer = Vector3.Distance(gun.transform.position, player.transform.position);
+        timeSinceLastShot -= Time.deltaTime;
+
+        float minDistance = 3.0f;
+        float maxDistance = 15.0f;
+        float minValue = 2.2f;
+        float maxValue = 2.4f;
+
+        float t = Mathf.Clamp01((distanceToPlayer - minDistance) / (maxDistance - minDistance));
+        float marginOfError = Mathf.Lerp(minValue, maxValue, t);
+
+        Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
+        Vector3 predictedPlayerPosition = player.transform.position + playerVelocity * (distanceToPlayer / gun.projectileSpeed) * marginOfError;
+
+        Vector3 direction = predictedPlayerPosition - gun.transform.position;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
+
+        float rotationSpeed = Mathf.Clamp(angleDifference / maxRotationTime, minRotationSpeed, maxRotationSpeed);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        Debug.Log(direction);
+
+        if (distanceToPlayer < range && timeSinceLastShot < 0.0f)
+        {
+            gun.Shoot();
+            timeSinceLastShot = shotCD;
+        }
+    }
+
+    void HandleStates()
+    {
         switch (currentState)
         {
             case EnemyState.Aggro:
@@ -122,7 +152,7 @@ public class EnemyMove : MonoBehaviourWithPause
                 break;
 
             case EnemyState.Stunned:
-                if(Time.time >= stunDuration)
+                if (Time.time >= stunDuration)
                 {
                     currentState = EnemyState.Aggro;
                 }
@@ -137,7 +167,7 @@ public class EnemyMove : MonoBehaviourWithPause
                 break;
 
             case EnemyState.Paused:
-                
+
                 agent.destination = this.transform.position;
 
                 if (GameManager.gameIsPaused == false)
@@ -147,21 +177,24 @@ public class EnemyMove : MonoBehaviourWithPause
                 return;
         }
 
-        float distanceToPlayer = Vector3.Distance(gun.transform.position, player.transform.position);
-        timeSinceLastShot -= Time.deltaTime;
+        RotateAndShoot();
+    }
 
-        Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
-        Vector3 predictedPlayerPosition = player.transform.position + playerVelocity * (distanceToPlayer / gun.projectileSpeed) * 2.4f;
-
-        Vector3 direction = predictedPlayerPosition - gun.transform.position;
-
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-        if (distanceToPlayer < range && timeSinceLastShot < 0.0f)
+    void ExtraStuff()
+    {
+        if (GameManager.fallenTrees == treesRequired && hasSpawned == false)
         {
-            gun.Shoot();
-            timeSinceLastShot = shotCD;
+            hasSpawned = true;
+            rb.velocity *= 0;
+        }
+        else if (hasSpawned == false)
+        {
+            WaitForSpawn();
+        }
+
+        if (GameManager.gameIsPaused == true)
+        {
+            currentState = EnemyState.Paused;
         }
     }
 
