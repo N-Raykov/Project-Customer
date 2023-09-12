@@ -948,7 +948,7 @@ MonoBehaviour:
   player: {fileID: 0}
   minStrafeDuration: 1
   maxStrafeDuration: 3
-  aggroRange: 15
+  aggroRange: 30
   preferredRange: 10
   minRange: 5
   speed: 3
