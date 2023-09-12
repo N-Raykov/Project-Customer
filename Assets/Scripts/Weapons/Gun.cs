@@ -30,7 +30,7 @@ public abstract class Gun : MonoBehaviourWithPause{
     public int currentAmmo { get; set; }
     protected Vector3 recoilTargetRotation = Vector3.zero;
     protected Vector3 pistolRotationPivotStartPosition;
-    protected bool isAiming;
+    public bool isAiming { get; protected set; }
     protected float originalFOV;
     protected bool isAimingAllowed = true;
 
@@ -190,8 +190,10 @@ public abstract class Gun : MonoBehaviourWithPause{
         else
             targetPosition = mainCamera.transform.position + mainCamera.transform.forward * gunData.range;
 
-        float spreadPercentage = 1 + spreadMultiplier / 100;
-        targetPosition += new Vector3(UnityEngine.Random.Range(-gunData.spreadFactorX*spreadPercentage, gunData.spreadFactorX * spreadPercentage), UnityEngine.Random.Range(-gunData.spreadFactorY * spreadPercentage, gunData.spreadFactorY * spreadPercentage),0);
+        float spreadPercentage = 1 + spreadMultiplier / 100.0f;
+        //change this
+        var spread = new Vector3(UnityEngine.Random.Range(-gunData.spreadFactorX * spreadPercentage, gunData.spreadFactorX * spreadPercentage), UnityEngine.Random.Range(-gunData.spreadFactorY * spreadPercentage, gunData.spreadFactorY * spreadPercentage), 0);
+        targetPosition += spread;
 
         return (targetPosition - muzzle.position).normalized;
     }

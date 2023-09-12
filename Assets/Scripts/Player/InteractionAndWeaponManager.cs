@@ -151,4 +151,8 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         Destroy(pHitInfo.collider.gameObject);
     }
 
+
+    public bool CheckActiveGunisAiming() {
+        return gunList[(int)activeWeapon].isAiming;
+    }
 }
