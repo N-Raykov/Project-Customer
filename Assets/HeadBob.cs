@@ -44,7 +44,7 @@ public class HeadBob : MonoBehaviourWithPause{
             activeSpeed = idleBobSpeed;
             activeAmount = idleBobAmount;
         }
-        Debug.Log(manager.CheckActiveGunisAiming());
+        //Debug.Log(manager.CheckActiveGunisAiming());
         if (manager.CheckActiveGunisAiming()) {
             //activeSpeed *= aimMultiplier;
             activeAmount *= aimMultiplier;

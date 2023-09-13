@@ -774,7 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c91b6702efd374aa33e14ffad22c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHp: 100
+  enemyMaxHp: 50
   hpBar: {fileID: 1762181673799011553}
   hpBarTransform: {fileID: 1762181673147677022}
   timeBeforeHidingBar: 5
@@ -802,11 +802,11 @@ MonoBehaviour:
   maxRotationSpeed: 10
   maxRotationTime: 1.5
   gun: {fileID: 1730400028305504493}
-  range: 15
+  range: 25
   shotCD: 2
   stunAfterFall: 1.5
   heightOfFall: 110
-  treesRequired: 1
+  treesRequired: 0
 --- !u!1 &1762181673147677017
 GameObject:
   m_ObjectHideFlags: 0
