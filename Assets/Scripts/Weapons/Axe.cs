@@ -16,7 +16,7 @@ public class Axe : Gun {
     }
 
     protected override void Shoot() {
-        rb.constraints = RigidbodyConstraints.FreezeAll ;
+        //rb.constraints = RigidbodyConstraints.FreezeAll ;
         StartShotAnimation();
         lastShotTime = Time.time;
         state = States.Shoot;

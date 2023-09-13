@@ -7,30 +7,36 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
     [SerializeField] Animator animator;
     bool isIdle = true;
     float timeBecameNonIdle;
-    float timeSpeedChanged;
-    float swingDuration;
+    float timeReverseTime;
+    //float swingDuration;
+    float timePassed;
     
 
     protected override void UpdateWithPause() {
         AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
 
 
-        if (!state.IsName("Idle"))
-        {
-            if (isIdle)
-            {
+        if (!state.IsName("Idle")){
+            if (isIdle){
                 isIdle = false;
                 timeBecameNonIdle = Time.time;
             }
-            swingDuration = state.length;
+            //swingDuration = state.length;
             //Debug.Log(swingDuration);
 
         }
         else {
             isIdle = true;
-        
+            animator.SetFloat("speed", 1);
         }
 
+
+        if (!isIdle && timePassed != 0 && Time.time - timeReverseTime > timePassed) {
+            Debug.Log("working");
+            timePassed = 0;
+            animator.SetTrigger("Reverse");
+
+        }
 
         //Debug.Log(state.normalizedTime);
 
@@ -64,14 +70,15 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
 
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("Log") && !isIdle) {
-            //animator.SetFloat("speed", -1);
+            animator.SetFloat("speed", -1);
             //timeSpeedChanged = Time.time;
-            float timeAnimation = swingDuration - (Time.time - timeBecameNonIdle);
-            animator.SetFloat("offset", timeAnimation); // (Time.time - timeBecameNonIdle)); // swingDuration - 
-            Debug.Log(timeAnimation);
-            animator.SetTrigger("Reverse");
+            timePassed = (Time.time - timeBecameNonIdle);
+            timeReverseTime = Time.time;
+            //animator.SetFloat("offset", timeAnimation); // (Time.time - timeBecameNonIdle)); // swingDuration - 
+            //Debug.Log(timeAnimation);
+            //animator.SetTrigger("Reverse");
 
-            Debug.LogError("q");
+            //Debug.LogError("q");
 
         }
 
