@@ -41,7 +41,6 @@ public class GravityWaveEffect : MonoBehaviourWithPause
             {
                 enemy.GetComponent<Rigidbody>().useGravity = false;
                 enemy.agent.enabled = false;
-                enemy.isActive = false;
                 enemy.transform.position = Vector3.Lerp(enemy.transform.position, new Vector3(enemy.agent.transform.position.x, enemy.agent.transform.position.y + floatHeight, enemy.agent.transform.position.z), floatSpeed * Time.deltaTime);
             }
         }
