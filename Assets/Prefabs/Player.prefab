@@ -1676,7 +1676,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872601979}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 14, z: 1}
@@ -1722,7 +1722,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925639654}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1739,6 +1739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce1c5058dcfaa747b5877c3ffadef9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraPivot: {fileID: 0}
   animator: {fileID: 369046176}
 --- !u!1 &977011954
 GameObject:
@@ -3476,8 +3477,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useHeadBob: 1
-  idleBobSpeed: 0
-  idleBobAmount: 0
+  idleBobSpeed: 5
+  idleBobAmount: 0.0015
   walkBobSpeed: 10
   walkBobAmount: 0.03
   input: {fileID: 6599779931964029087}
@@ -4080,8 +4081,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useHeadBob: 1
-  idleBobSpeed: 5
-  idleBobAmount: 0.008
+  idleBobSpeed: 4.25
+  idleBobAmount: 0.01
   walkBobSpeed: 14
   walkBobAmount: 0.1
   input: {fileID: 6599779931964029087}
@@ -4808,7 +4809,9 @@ MonoBehaviour:
   intensityZ: 7
   returnTime: 10
   moveIntensity: 0.04
+  aimingMultiplier: 0.25
   input: {fileID: 6599779931964029087}
+  manager: {fileID: 233961056}
 --- !u!1 &7009270743278717487
 GameObject:
   m_ObjectHideFlags: 0
