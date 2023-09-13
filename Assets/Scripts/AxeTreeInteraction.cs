@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AxeTreeInteraction : MonoBehaviourWithPause{
 
+    [SerializeField] Transform cameraPivot;
     [SerializeField] Animator animator;
     bool isIdle = true;
     float timeBecameNonIdle;
     float timeReverseTime;
-    //float swingDuration;
     float timePassed;
     
 
@@ -21,8 +21,6 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
                 isIdle = false;
                 timeBecameNonIdle = Time.time;
             }
-            //swingDuration = state.length;
-            //Debug.Log(swingDuration);
 
         }
         else {
@@ -38,50 +36,16 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
 
         }
 
-        //Debug.Log(state.normalizedTime);
-
-        //Debug.Log(state.length);
-        //if (state.IsName("Idle"))
-        //{
-        //    //animator.SetFloat("speed", 1);
-        //    //Debug.Log(1);
-        //}
-        //else
-        //{
-        //    if (isIdle)
-        //    {
-        //        isIdle = false;
-        //        timeBecameNonIdle = Time.time;
-        //    }
-
-        //    if (Time.time - timeSpeedChanged > timeSpeedChanged - timeBecameNonIdle)
-        //    {
-
-        //        //animator.
-        //        isIdle = true;
-
-
-        //    }
-        //}
-
-
     }
 
 
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("Log") && !isIdle) {
+            other.GetComponent<Tree>().TakeDamage(transform.right);
             animator.SetFloat("speed", -1);
-            //timeSpeedChanged = Time.time;
             timePassed = (Time.time - timeBecameNonIdle);
             timeReverseTime = Time.time;
-            //animator.SetFloat("offset", timeAnimation); // (Time.time - timeBecameNonIdle)); // swingDuration - 
-            //Debug.Log(timeAnimation);
-            //animator.SetTrigger("Reverse");
-
-            //Debug.LogError("q");
-
         }
-
     }
     
 }

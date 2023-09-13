@@ -28,9 +28,9 @@ public class Bullet : MonoBehaviourWithPause{
         if (enemy != null) {
             enemy.TakeDamage(damage);
         }
-        if (tree != null) {
-            tree.TakeDamage(collision.contacts[0].normal);
-        }
+        //if (tree != null) {
+        //    tree.TakeDamage(collision.contacts[0].normal);
+        //}
         if (player != null){
             player.TakeDamage(damage);
         }
