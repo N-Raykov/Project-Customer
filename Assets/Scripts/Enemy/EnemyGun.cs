@@ -27,6 +27,12 @@ public abstract class EnemyGun : MonoBehaviour
     [SerializeField] protected GameObject muzzleFlash;
 
     [System.NonSerialized] public float projectileSpeed;
+
+    private void Start()
+    {
+        projectileSpeed = gunData.bulletSpeed;
+    }
+
     public void Shoot()
     {
         StartShotAnimation();

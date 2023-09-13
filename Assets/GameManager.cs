@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviourWithPause{
 
     public static int fallenTrees { get; set; }
 
+    public static GameObject robot{ get; set; }
+
     private void Awake(){
         if (gameManager != null)
             Destroy(gameObject);
