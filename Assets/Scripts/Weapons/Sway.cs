@@ -9,9 +9,11 @@ public class Sway : MonoBehaviourWithPause{
     [SerializeField] float intensityZ;
     [SerializeField] float returnTime;
     [SerializeField] float moveIntensity;
+    [SerializeField] float aimingMultiplier;
 
     [Header("Data")]
     [SerializeField] PlayerInput input;
+    [SerializeField] InteractionAndWeaponManager manager;
 
     Vector3 startPosition;
 
@@ -27,18 +29,22 @@ public class Sway : MonoBehaviourWithPause{
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        //if (mouseX == 0 || mouseY == 0)
-        //    return;
+        float multiplier;
+
+        if (manager.CheckActiveGunisAiming())
+            multiplier = aimingMultiplier;
+        else
+            multiplier = 1f;
 
         Vector3 moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
-        Quaternion rotationX = Quaternion.AngleAxis(-intensity * mouseX,Vector3.up);
-        Quaternion rotationY = Quaternion.AngleAxis(intensity * mouseY, Vector3.right);
-        Quaternion rotationZ = Quaternion.AngleAxis(-intensityZ * mouseX, Vector3.forward) * Quaternion.AngleAxis(-intensityZ * moveDirection.x, Vector3.forward);
+        Quaternion rotationX = Quaternion.AngleAxis(-intensity * mouseX * multiplier,Vector3.up);
+        Quaternion rotationY = Quaternion.AngleAxis(intensity * mouseY * multiplier, Vector3.right);
+        Quaternion rotationZ = Quaternion.AngleAxis(-intensityZ * mouseX * multiplier, Vector3.forward) * Quaternion.AngleAxis(-intensityZ * moveDirection.x, Vector3.forward);
         Quaternion targetRotation = startRotation * rotationX * rotationY * rotationZ;
 
 
-        Vector3 targetPosition = startPosition + new Vector3(-moveDirection.x, 0, -moveDirection.z)*moveIntensity;
+        Vector3 targetPosition = startPosition + new Vector3(-moveDirection.x, 0, -moveDirection.z)* moveIntensity * multiplier;
         transform.localRotation = Quaternion.Lerp(transform.localRotation,targetRotation,Time.deltaTime*returnTime);
         transform.localPosition = Vector3.Lerp(transform.localPosition,targetPosition,Time.deltaTime*returnTime);
 
