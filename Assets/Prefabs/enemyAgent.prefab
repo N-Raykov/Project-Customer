@@ -391,7 +391,7 @@ MonoBehaviour:
   animator: {fileID: 1762181674428946154}
   bullet: {fileID: 3994556913236842264, guid: 511fbda12bac818479d16a9214155630, type: 3}
   muzzle: {fileID: 1762181674407852241}
-  pivot: {fileID: 0}
+  pivot: {fileID: 1762181673203255144}
   pistolRotationPivot: {fileID: 1762181673203255144}
   muzzleFlash: {fileID: 6064421988791351108, guid: 1ff9a66a753c6be48a3e0f1698a65824,
     type: 3}
