@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyMove : MonoBehaviourWithPause
 {
 
-    [SerializeField] GameObject player;
+    GameObject player;
     [SerializeField] float minStrafeDuration;
     [SerializeField] float maxStrafeDuration;
 
@@ -19,14 +19,26 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float speed;
     [SerializeField] float strafeSpeed;
     [SerializeField] float moonWalkSpeed;
-    [SerializeField] float rotationSpeed;
-    NavMeshAgent agent;
+    [SerializeField] float minRotationSpeed;
+    [SerializeField] float maxRotationSpeed;
+    [SerializeField] float maxRotationTime;
+    
+    [System.NonSerialized] public NavMeshAgent agent;
 
     [Header("Attacks")]
     [SerializeField] EnemyGun gun;
     [SerializeField] float range;
     [SerializeField] float shotCD;
     float timeSinceLastShot;
+
+    [Header("Spawn")]
+    [SerializeField] float stunAfterFall;
+    [SerializeField] float heightOfFall;
+    [SerializeField] int treesRequired;
+    [System.NonSerialized] public bool isActive;
+    bool hasSpawned;
+    Rigidbody rb;
+    Transform gunPivot;
 
     private enum EnemyState
     {
@@ -39,21 +51,32 @@ public class EnemyMove : MonoBehaviourWithPause
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponentInParent<NavMeshAgent>();
         ignorePausedState = true;
+        agent.enabled = false;
+        rb = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
+        gunPivot = gun.transform.parent.transform;
+        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
     }
 
     private EnemyState currentState = EnemyState.Aggro;
-    private float stunDuration;
-    private float movementTimer;
+    [System.NonSerialized] public float stunDuration;
+    private float strafeTimer;
 
     protected override void UpdateWithPause()
     {
-        if (GameManager.gameIsPaused == true)
-        {
-            currentState = EnemyState.Paused;
-        }
+        ExtraStuff();
 
+
+        if(agent.enabled == true)
+        {
+            HandleStates();
+        }
+    }
+
+    void HandleStates()
+    {
         switch (currentState)
         {
             case EnemyState.Aggro:
@@ -65,7 +88,7 @@ public class EnemyMove : MonoBehaviourWithPause
                 else
                 {
                     currentState = EnemyState.PreferredRange;
-                    movementTimer = Time.time;
+                    strafeTimer = Time.time;
                 }
                 break;
 
@@ -73,10 +96,10 @@ public class EnemyMove : MonoBehaviourWithPause
                 if (Vector3.Distance(player.transform.position, transform.position) < preferredRange && Vector3.Distance(player.transform.position, transform.position) > minRange)
                 {
                     agent.speed = strafeSpeed;
-                    if (Time.time >= movementTimer)
+                    if (Time.time >= strafeTimer)
                     {
                         RandomlySwitchDirection();
-                        ResetMovementTimer();
+                        ResetstrafeTimer();
                     }
                 }
                 else
@@ -100,19 +123,23 @@ public class EnemyMove : MonoBehaviourWithPause
                 break;
 
             case EnemyState.Stunned:
-                if(Time.time >= stunDuration)
+                if (Time.time >= stunDuration)
                 {
                     currentState = EnemyState.Aggro;
                 }
                 else
                 {
+
                     agent.destination = this.transform.position;
+
+                    timeSinceLastShot = shotCD;
+
                     return;
                 }
                 break;
 
             case EnemyState.Paused:
-                
+
                 agent.destination = this.transform.position;
 
                 if (GameManager.gameIsPaused == false)
@@ -121,26 +148,97 @@ public class EnemyMove : MonoBehaviourWithPause
                 }
                 return;
         }
-        // Attacking
-        float distanceToPlayer = Vector3.Distance(this.transform.position, player.transform.position);
+
+        RotateAndShoot();
+    }
+
+    void RotateAndShoot()
+    {
+        float distanceToPlayer = Vector3.Distance(gun.transform.position, player.transform.position);
         timeSinceLastShot -= Time.deltaTime;
 
-        // Calculate the predicted position of the player based on their current velocity
+        float minDistance = 3.0f;
+        float maxDistance = 15.0f;
+        float minValue = 2.2f;
+        float maxValue = 1.6f;
+
+        float t = Mathf.Clamp01((distanceToPlayer - minDistance) / (maxDistance - minDistance));
+        float marginOfError = Mathf.Lerp(minValue, maxValue, t);
+
         Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
-        Vector3 predictedPlayerPosition = player.transform.position + playerVelocity * (distanceToPlayer / gun.projectileSpeed) * 2.3f;
+        Vector3 predictedPlayerPosition = player.transform.position + playerVelocity * (distanceToPlayer / gun.projectileSpeed) * marginOfError;
 
-        // Calculate the direction to the predicted player position
-        Vector3 direction = predictedPlayerPosition - transform.position;
+        Vector3 direction = predictedPlayerPosition - gun.transform.position;
 
-        // Rotate towards the predicted position
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
+
+        float rotationSpeed = Mathf.Clamp(angleDifference / maxRotationTime, minRotationSpeed, maxRotationSpeed);
+
+        float currentToTargetRotation = compare(targetRotation, transform.rotation);
+
+
+        if(currentToTargetRotation < 50)
+        {
+            gunPivot.transform.rotation = Quaternion.Slerp(gunPivot.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * 0.2f * Time.deltaTime);
+        }
 
         if (distanceToPlayer < range && timeSinceLastShot < 0.0f)
         {
             gun.Shoot();
             timeSinceLastShot = shotCD;
-        }        
+        }
+    }
+
+    private float compare(Quaternion quatA, Quaternion quatB)
+    {
+        return Quaternion.Angle(quatA, quatB);
+    }
+
+
+    void ExtraStuff()
+    {
+        if (GameManager.fallenTrees == treesRequired && hasSpawned == false)
+        {
+            hasSpawned = true;
+            rb.velocity *= 0;
+        }
+        else if (hasSpawned == false)
+        {
+            WaitForSpawn();
+        }
+        else if (rb.velocity.y > 40) 
+        {
+            rb.velocity *= 0.9f;
+        }
+
+        if (GameManager.gameIsPaused == true)
+        {
+            currentState = EnemyState.Paused;
+        }
+    }
+
+    void WaitForSpawn()
+    {
+        agent.enabled = false;
+        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
+
+        GetStunned(999);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground" && isActive == false)
+        {
+            agent.enabled = true;
+            GetStunned(stunAfterFall);
+            isActive = true;
+        }
     }
 
     public void GetStunned(float pDuration)
@@ -164,8 +262,8 @@ public class EnemyMove : MonoBehaviourWithPause
         }
     }
 
-    private void ResetMovementTimer()
+    private void ResetstrafeTimer()
     {
-        movementTimer = Time.time + Random.Range(minStrafeDuration, maxStrafeDuration);
+        strafeTimer = Time.time + Random.Range(minStrafeDuration, maxStrafeDuration);
     }
 }

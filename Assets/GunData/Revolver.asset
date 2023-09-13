@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: Revolver
   m_EditorClassIdentifier: 
   gunName: Revolver
-  damage: 10
-  range: 200
+  damage: 25
+  range: 100
+  bulletSpeed: 40
   ammoCapacity: 6
-  shotCooldown: 0.25
+  shotCooldown: 0.4
   reloadTime: 1.6
   spreadFactorX: 0.2
   spreadFactorY: 0.1
   spreadPercentageMultiplier: 7.5
-  timeBeforeSpreadDecrease: 0.4
-  spreadDecreaseRate: 30
-  recoilHipFire: {x: -8.5, y: 2, z: 0.5}
-  recoilAim: {x: -4, y: 1, z: 0.25}
+  spreadPercentageMultiplierAim: 4
+  spreadDecreaseRate: 15
+  recoilHipFire: {x: -8.5, y: 0, z: 0}
+  recoilAim: {x: -4, y: 0, z: 0}
   returnSpeed: 4
   targetPosition: {x: 0, y: -0.3410001, z: 0.6820004}
   zoomInDuration: 0.5

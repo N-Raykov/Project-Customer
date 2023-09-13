@@ -10,50 +10,42 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
         Walk,
         Jump,
     }
-    public State state;
-    public State lastState;
+    State state;
+    State lastState;
 
 
     [Header("Movement")]
-    public float moveSpeed;
-    public float maxSpeed;
-    public float groundDrag;
+    [SerializeField] float moveSpeed;
+    [SerializeField] float maxSpeed;
+    [SerializeField] float groundDrag;
 
-    Vector3 orientation;
-    [System.NonSerialized] public float speedMultiplier; // use get; set; instead
-    [System.NonSerialized] public float maxSpeedMultiplier;
-    [System.NonSerialized] public readonly float normalMaxSpeedMultiplier = 1;
-    [System.NonSerialized] public readonly float normalSpeedMultiplier=1;
-
+    public float speedMultiplier { get; set; }
+    public float maxSpeedMultiplier { get; set; }
+    public float normalMaxSpeedMultiplier { get; set; }
+    public float normalSpeedMultiplier{ get; set; }
 
     [Header("Jump")]
-    public float jumpForce;
-    public float airSpeedMultiplier;
+    [SerializeField] float jumpForce;
+    [SerializeField] float airSpeedMultiplier;
 
 
     [Header("Ground Check")]
-    public float playerHeight;
-    public LayerMask ground;
+    [SerializeField] float playerHeight;
+    [SerializeField] LayerMask ground;
 
     bool isGrounded = false;
 
-
-    [Header("Camera")]
-    public float fov;
-    public Vector3 lastPosition { get; private set; }
-
     PlayerInput input;
-    public GameObject lastTriggerEntered { get; private set; }
 
     void Start(){
         rb = GetComponent<Rigidbody>();
         input = GetComponent<PlayerInput>();
+        normalMaxSpeedMultiplier = 1;
+        normalSpeedMultiplier = 1;
         maxSpeedMultiplier = normalMaxSpeedMultiplier;
         speedMultiplier = normalSpeedMultiplier;
-        lastPosition = transform.position;
     }
     protected override void FixedUpdateWithPause(){
-        lastPosition = transform.position;
         StateMachine();
     }
 
@@ -66,10 +58,6 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
     void MovePlayer() {
         rb.AddForce(input.moveDirection * moveSpeed*10*speedMultiplier,ForceMode.Force);
         LimitSpeed();
-    }
-
-    public void SetOrientation(Vector3 pOrientation) {
-        orientation = pOrientation;
     }
 
     void LimitSpeed() {
@@ -114,11 +102,6 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
     
     }
 
-
-    public Vector3 GetOrientation() {
-        return orientation;
-    }
-
     void ChangeStateToWalk() {
         if (isGrounded){
             lastState = state;
@@ -135,21 +118,5 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
         }
     }
 
-    public bool CheckIsGrounded() {
-        return isGrounded;
-    }
-
-    private void OnTriggerEnter(Collider other){
-        lastTriggerEntered = other.gameObject;
-        if (other.gameObject.tag == "Death") {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
-        if (other.gameObject.tag == "WinTrigger") {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene("End Screen");
-        }
-    }
 
 }

@@ -27,18 +27,16 @@ public abstract class Gun : MonoBehaviourWithPause{
     [SerializeField] protected Animator animator;
     [SerializeField] protected PlayerInput input;
     [SerializeField] protected Camera mainCamera;
-    protected CameraControls cameraControls;
     public int currentAmmo { get; set; }
     protected Vector3 recoilTargetRotation = Vector3.zero;
     protected Vector3 pistolRotationPivotStartPosition;
-    protected bool isAiming;
+    public bool isAiming { get; protected set; }
     protected float originalFOV;
-    bool isAimingAllowed = true;
+    protected bool isAimingAllowed = true;
 
     [Header("Objects")]
     [SerializeField] protected GameObject bullet;
     [SerializeField] protected Transform muzzle;
-    [SerializeField] protected Transform pivot;
     [SerializeField] protected Transform pistolRotationPivot;
     [SerializeField] protected Transform recoilPivot;
     [SerializeField] protected GameObject muzzleFlash;
@@ -48,7 +46,6 @@ public abstract class Gun : MonoBehaviourWithPause{
     protected virtual void Start() {
         state = States.Idle;
         currentAmmo = gunData.ammoCapacity;
-        cameraControls = pivot.GetComponent<CameraControls>();
         animator = transform.GetComponent<Animator>();
         OnAmmoChange?.Invoke(currentAmmo, extraAmmo);
         pistolRotationPivotStartPosition = pistolRotationPivot.localPosition;
@@ -56,12 +53,9 @@ public abstract class Gun : MonoBehaviourWithPause{
     }
 
     protected override void UpdateWithPause() {
-        DecreaseRecoilRotation();
         CheckForActions();
-    }
-
-    protected override void FixedUpdateWithPause() {
         DecreaseSpreadMultiplier();
+        DecreaseRecoilRotation();
     }
 
     protected virtual void CheckForActions() {
@@ -132,15 +126,22 @@ public abstract class Gun : MonoBehaviourWithPause{
         AddRecoil();
         StartShotAnimation();
         lastShotTime = Time.time;
-        spreadMultiplier += gunData.spreadPercentageMultiplier;
-        OnSpreadChange?.Invoke(1 + spreadMultiplier / 100);
-        GameObject b = Instantiate(bullet, muzzle.position, pivot.rotation);
-        b.GetComponent<Bullet>().AddSpeed(AimAtTarget());
-        Instantiate(muzzleFlash, muzzle.position, pivot.rotation, muzzle);
+        AddSpread();
+        CreateBullet();
         state = States.Shoot;
         currentAmmo--;
         OnAmmoChange?.Invoke(currentAmmo, extraAmmo);
         StartCoroutine(ChangeStateAfterTime(gunData.shotCooldown,States.Idle));
+    }
+
+    protected virtual void CreateBullet() {
+        GameObject b = Instantiate(bullet, muzzle.position, mainCamera.transform.rotation);
+        Bullet bt = b.GetComponent<Bullet>();
+        bt.damage = gunData.damage;
+        bt.speed = gunData.bulletSpeed;
+        bt.range = gunData.range;
+        bt.AddSpeed(AimAtTarget());
+        Instantiate(muzzleFlash, muzzle.position, mainCamera.transform.rotation, muzzle);
     }
 
     protected abstract void StartShotAnimation();
@@ -180,31 +181,49 @@ public abstract class Gun : MonoBehaviourWithPause{
         OnStateChange = null;
     }
 
-    protected Vector3 AimAtTarget() {
+    protected Vector3 AimAtTarget() {//cast from the camera
         RaycastHit info;
         Vector3 targetPosition;
 
-        if (Physics.Raycast(pivot.position, pivot.forward, out info, gunData.range)) 
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out info, gunData.range)) 
             targetPosition = info.point;
         else
-            targetPosition = pivot.position + pivot.forward * gunData.range;
+            targetPosition = mainCamera.transform.position + mainCamera.transform.forward * gunData.range;
 
-        float spreadPercentage = 1 + spreadMultiplier / 100;
-        targetPosition += new Vector3(UnityEngine.Random.Range(-gunData.spreadFactorX*spreadPercentage, gunData.spreadFactorX * spreadPercentage), UnityEngine.Random.Range(-gunData.spreadFactorY * spreadPercentage, gunData.spreadFactorY * spreadPercentage),0);
+        float spreadPercentage = 1 + spreadMultiplier / 100.0f;
+        //change this
+        var spread = new Vector3(UnityEngine.Random.Range(-gunData.spreadFactorX * spreadPercentage, gunData.spreadFactorX * spreadPercentage), UnityEngine.Random.Range(-gunData.spreadFactorY * spreadPercentage, gunData.spreadFactorY * spreadPercentage), 0);
+        targetPosition += spread;
 
         return (targetPosition - muzzle.position).normalized;
     }
 
     protected void DecreaseSpreadMultiplier() { //depending on how big the spread multiplier is increase the time it takes to start the decrease
-        if (Time.time - lastShotTime > gunData.timeBeforeSpreadDecrease* (1 + 2 * spreadMultiplier / 100)){//still needs more polish
-            spreadMultiplier = Mathf.Max(spreadMultiplier - gunData.spreadDecreaseRate * Time.fixedDeltaTime, 0);
-            OnSpreadChange?.Invoke(1 + spreadMultiplier / 100);
-        }
+        spreadMultiplier = Mathf.Max(spreadMultiplier - gunData.spreadDecreaseRate * Time.deltaTime, 0);
+        OnSpreadChange?.Invoke(1 + spreadMultiplier / 100);
     
     }
 
-    protected void AddRecoil() {
-        recoilTargetRotation += new Vector3(gunData.recoilHipFire.x,UnityEngine.Random.Range(-gunData.recoilHipFire.y,gunData.recoilHipFire.y), UnityEngine.Random.Range(-gunData.recoilHipFire.z, gunData.recoilHipFire.z));
+    protected void AddSpread() {
+        if (!isAiming)
+            spreadMultiplier += gunData.spreadPercentageMultiplier;
+        else
+            spreadMultiplier += gunData.spreadPercentageMultiplierAim;
+        OnSpreadChange?.Invoke(1 + spreadMultiplier / 100);
+    }
+
+    protected void AddRecoil(){
+        //Debug.Log("working");
+        //if (!isAiming)
+        //    recoilTargetRotation += new Vector3(gunData.recoilHipFire.x, UnityEngine.Random.Range(-gunData.recoilHipFire.y, gunData.recoilHipFire.y), UnityEngine.Random.Range(-gunData.recoilHipFire.z, gunData.recoilHipFire.z));
+        //else
+        //   recoilTargetRotation += new Vector3(gunData.recoilAim.x, UnityEngine.Random.Range(-gunData.recoilAim.y, gunData.recoilAim.y), UnityEngine.Random.Range(-gunData.recoilAim.z, gunData.recoilAim.z));
+
+        if (!isAiming)
+            recoilTargetRotation += new Vector3(gunData.recoilHipFire.x, 0, 0);
+        else
+            recoilTargetRotation += new Vector3(gunData.recoilAim.x, 0, 0);
+
     }
 
     protected void DecreaseRecoilRotation() {//could add a similar system to the spread; dont move towards the center while shooting and start after you stop

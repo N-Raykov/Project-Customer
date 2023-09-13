@@ -9,6 +9,7 @@ public class GunData : ScriptableObject{
     [Header("Shooting")]
     public float damage;
     public float range;
+    public float bulletSpeed;
     [Header("Reloading")]
     public int ammoCapacity;
     public float shotCooldown;
@@ -17,7 +18,7 @@ public class GunData : ScriptableObject{
     public float spreadFactorX;
     public float spreadFactorY;
     public float spreadPercentageMultiplier;
-    public float timeBeforeSpreadDecrease;
+    public float spreadPercentageMultiplierAim;
     public float spreadDecreaseRate;
     [Header("Recoil")]
     public Vector3 recoilHipFire;

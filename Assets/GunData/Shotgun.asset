@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815de4f95265bac45a343bc461822c9c, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: 
+  gunName: Shotgun
+  damage: 10
+  range: 15
+  bulletSpeed: 40
+  ammoCapacity: 6
+  shotCooldown: 1
+  reloadTime: 2
+  spreadFactorX: 0.3
+  spreadFactorY: 0.3
+  spreadPercentageMultiplier: 10
+  spreadPercentageMultiplierAim: 0
+  spreadDecreaseRate: 30
+  recoilHipFire: {x: -12, y: 6, z: 0}
+  recoilAim: {x: -6, y: 3, z: 0}
+  returnSpeed: 4
+  targetPosition: {x: 0, y: -0.3410001, z: 0.6820004}
+  zoomInDuration: 0.5
+  zoomInFactor: 1.25
