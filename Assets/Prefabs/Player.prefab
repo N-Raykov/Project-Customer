@@ -3476,7 +3476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f1f891728d1654093e647546e37f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useHeadBob: 1
+  useHeadBob: 0
   idleBobSpeed: 5
   idleBobAmount: 0.0015
   walkBobSpeed: 10
@@ -4080,7 +4080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f1f891728d1654093e647546e37f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useHeadBob: 1
+  useHeadBob: 0
   idleBobSpeed: 4.25
   idleBobAmount: 0.01
   walkBobSpeed: 14
@@ -4808,7 +4808,7 @@ MonoBehaviour:
   intensity: 6
   intensityZ: 7
   returnTime: 10
-  moveIntensity: 0.04
+  moveIntensity: 0.06
   aimingMultiplier: 0.25
   input: {fileID: 6599779931964029087}
   manager: {fileID: 233961056}
