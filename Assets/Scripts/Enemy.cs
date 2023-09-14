@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviourWithPause{
     [SerializeField]float enemyMaxHp;
     float currentHP;
 
+    [System.NonSerialized] public float missingHealth;
+
     [Header("References")]
     [SerializeField] GameObject hpBar;
     [SerializeField] RectTransform hpBarTransform;
@@ -29,6 +31,8 @@ public class Enemy : MonoBehaviourWithPause{
 
     public void TakeDamage(float pDamage) {
         currentHP = Mathf.Max(0,currentHP-pDamage);
+        float percentCurrentHP = (currentHP / enemyMaxHp) * 100;
+        missingHealth = 100 - percentCurrentHP;
         lastHitTime = Time.time;
         hpBarTransform.localScale=new Vector3(currentHP/enemyMaxHp,1,1);
         hpBar.SetActive(true);

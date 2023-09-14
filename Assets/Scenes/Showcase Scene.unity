@@ -334,7 +334,7 @@ PrefabInstance:
     - target: {fileID: 152251325176173542, guid: 258102deb0fdf014db7d8552c8977caf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.22
+      value: -30.2
       objectReference: {fileID: 0}
     - target: {fileID: 152251325176173542, guid: 258102deb0fdf014db7d8552c8977caf,
         type: 3}
@@ -646,7 +646,6 @@ MonoBehaviour:
   gun: {fileID: 103311967}
   range: 25
   shotCD: 2
-  enemy: {fileID: 0}
 --- !u!1 &1924265200
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,6 +702,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robot
       objectReference: {fileID: 0}
+    - target: {fileID: 2752344671248881259, guid: aef309c706b55094dab6bbe93d6dcaf4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2752344671248881264, guid: aef309c706b55094dab6bbe93d6dcaf4,
         type: 3}
       propertyPath: m_RootOrder
@@ -711,7 +715,7 @@ PrefabInstance:
     - target: {fileID: 2752344671248881264, guid: aef309c706b55094dab6bbe93d6dcaf4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.83
+      value: 30.9
       objectReference: {fileID: 0}
     - target: {fileID: 2752344671248881264, guid: aef309c706b55094dab6bbe93d6dcaf4,
         type: 3}
@@ -721,7 +725,7 @@ PrefabInstance:
     - target: {fileID: 2752344671248881264, guid: aef309c706b55094dab6bbe93d6dcaf4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.258609
+      value: -31.8
       objectReference: {fileID: 0}
     - target: {fileID: 2752344671248881264, guid: aef309c706b55094dab6bbe93d6dcaf4,
         type: 3}
@@ -840,6 +844,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1762181672652821769, guid: f28e56558c4a2b7409514d54bfef5052,
         type: 3}
+      propertyPath: aggroRange
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762181672652821769, guid: f28e56558c4a2b7409514d54bfef5052,
+        type: 3}
       propertyPath: strafeSpeed
       value: 2
       objectReference: {fileID: 0}
@@ -851,6 +860,16 @@ PrefabInstance:
     - target: {fileID: 1762181672652821769, guid: f28e56558c4a2b7409514d54bfef5052,
         type: 3}
       propertyPath: treesRequired
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762181672652821770, guid: f28e56558c4a2b7409514d54bfef5052,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762181672652821770, guid: f28e56558c4a2b7409514d54bfef5052,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1762181672652821771, guid: f28e56558c4a2b7409514d54bfef5052,
@@ -877,6 +896,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762181672652821782, guid: f28e56558c4a2b7409514d54bfef5052,
+        type: 3}
+      propertyPath: enemyMaxHp
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1762181673147677017, guid: f28e56558c4a2b7409514d54bfef5052,
         type: 3}

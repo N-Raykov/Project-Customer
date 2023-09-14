@@ -16,16 +16,30 @@ public class EnemyAim : MonoBehaviourWithPause
     float timeSinceLastShot;
     Transform gunPivot;
 
+    [Header("PlayerAggro")]
+    [SerializeField] float minDistance;
+    [SerializeField] float maxDistance;
+    [SerializeField] float aggroAtMinDistance;
+    [SerializeField] float aggroAtMaxDistance;
+    [SerializeField] float aggroOffset;
+    [SerializeField] float aggroThreshold;
+
     GameObject player;
 
-    [SerializeField] EnemyMove enemy;
+    EnemyMove enemy;
+
+    Enemy enemyHealth;
 
     float playerAggro;
+
+    [System.NonSerialized] public GameObject target;
 
     private void Start()
     {
         gunPivot = gun.transform.parent.transform;
         player = GameObject.Find("Player");
+        enemy = GetComponent<EnemyMove>();
+        enemyHealth = GetComponent<Enemy>();
     }
 
     protected override void UpdateWithPause()
@@ -35,17 +49,23 @@ public class EnemyAim : MonoBehaviourWithPause
 
     void RotateAndShoot()
     {
-        GameObject target = Targeting();
+        target = Targeting();
 
-        Aim(target);
+        if (enemy.currentState != enemy.stunnedState)
+        {
+            Aim(target);
+        }
     }
 
 
     GameObject Targeting()
     {
-        GameObject target;
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        if (GameManager.robot != null && playerAggro < 100)
+        float t = Mathf.Clamp01((distanceToPlayer - minDistance) / (maxDistance - minDistance));
+        playerAggro = Mathf.Lerp(aggroAtMinDistance, aggroAtMaxDistance, t);
+
+        if (GameManager.robot != null && playerAggro + enemyHealth.missingHealth + aggroOffset < aggroThreshold)
         {
             target = GameManager.robot;
         }
@@ -65,7 +85,7 @@ public class EnemyAim : MonoBehaviourWithPause
         float minDistance = 3.0f;
         float maxDistance = 15.0f;
         float minValue = 1.8f;
-        float maxValue = 1f;
+        float maxValue = 1.2f;
 
         float t = Mathf.Clamp01((distanceToTarget - minDistance) / (maxDistance - minDistance));
         float marginOfError = Mathf.Lerp(minValue, maxValue, t);
@@ -74,9 +94,6 @@ public class EnemyAim : MonoBehaviourWithPause
         Vector3 predictedTargetPosition = target.transform.position + targetVelocity * (distanceToTarget / gun.projectileSpeed) * marginOfError;
 
         Vector3 direction = predictedTargetPosition - gun.transform.position;
-
-        Debug.Log(targetVelocity);
-
 
         if (direction.magnitude > Mathf.Epsilon && direction.magnitude < Mathf.Infinity)
         {
