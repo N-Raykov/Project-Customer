@@ -17,6 +17,7 @@ public class Robot : MonoBehaviourWithPause
     float timeStartedCutting;
 
     GameObject closestTree;
+    Vector3 treeDirection;
 
     private enum RobotState 
     { 
@@ -35,7 +36,7 @@ public class Robot : MonoBehaviourWithPause
         rb = GetComponent<Rigidbody>();
         closestTree = FindClosestBigTree();
         bigTree = closestTree.GetComponent<Tree>();
-
+        GameManager.robot = gameObject;
     }
 
     GameObject FindClosestBigTree()
@@ -70,8 +71,6 @@ public class Robot : MonoBehaviourWithPause
 
     void HandleStates()
     {
-        Debug.Log(currentState);
-        Debug.Log(Vector3.Distance(closestTree.transform.position, transform.position));
         switch (currentState)
         {
             case RobotState.Walking:
@@ -79,7 +78,16 @@ public class Robot : MonoBehaviourWithPause
                 agent.SetDestination(closestTree.transform.position);
                 agent.speed = speed;
 
-                if (Vector3.Distance(closestTree.transform.position, transform.position) < 2.1f)
+                treeDirection = closestTree.transform.position - transform.position;
+
+                if (treeDirection.magnitude > Mathf.Epsilon && treeDirection.magnitude < Mathf.Infinity)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(treeDirection);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1f * Time.deltaTime);
+                    transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+                }
+
+                if (Vector3.Distance(closestTree.transform.position, transform.position) < 2.5f)
                 {
                     currentState = RobotState.Cutting;
                     agent.SetDestination(transform.position);
@@ -89,9 +97,19 @@ public class Robot : MonoBehaviourWithPause
                 break;
 
             case RobotState.Cutting:
-                if (Time.time - timeStartedCutting > timeToCut) {
+
+                if (treeDirection.magnitude > Mathf.Epsilon && treeDirection.magnitude < Mathf.Infinity)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(treeDirection);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1f * Time.deltaTime);
+                    transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+                }
+
+                if (Time.time - timeStartedCutting > timeToCut) 
+                {
                     bigTree.TakeDamage(-transform.forward);
-                    //game end the robot
+                    agent.enabled = false;
+                    GameManager.robot = null;
                 }
                 break;
 
@@ -122,10 +140,14 @@ public class Robot : MonoBehaviourWithPause
 
     void ExtraStuff()
     {
+        /*
         if (rb.velocity.y > 40)
         {
             rb.velocity *= 0.9f;
         }
+        */
+
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         if (GameManager.gameIsPaused == true)
         {
@@ -137,5 +159,14 @@ public class Robot : MonoBehaviourWithPause
     {
         stunDuration = Time.time + pDuration;
         currentState = RobotState.Stunned;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "BigTree")
+        {
+            Debug.Log("L");
+            Destroy(this.gameObject);
+        }
     }
 }
