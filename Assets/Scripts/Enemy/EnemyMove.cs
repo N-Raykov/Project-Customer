@@ -26,7 +26,7 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float stunAfterFall;
     [SerializeField] float heightOfFall;
     [SerializeField] int treesRequired;
-    bool isActive;
+    [System.NonSerialized] public bool isActive;
     bool hasSpawned;
     MeshRenderer meshRenderer;
     Rigidbody rb;

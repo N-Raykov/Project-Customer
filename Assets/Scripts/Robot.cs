@@ -37,7 +37,6 @@ public class Robot : MonoBehaviourWithPause
         closestTree = FindClosestBigTree();
         bigTree = closestTree.GetComponent<Tree>();
         GameManager.robot = gameObject;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     GameObject FindClosestBigTree()

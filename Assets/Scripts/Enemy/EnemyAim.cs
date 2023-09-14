@@ -8,13 +8,17 @@ public class EnemyAim : MonoBehaviourWithPause
     [SerializeField] float minRotationSpeed;
     [SerializeField] float maxRotationSpeed;
     [SerializeField] float maxRotationTime;
+    [SerializeField] float minDistanceAim;
+    [SerializeField] float maxDistanceAim;
+    [SerializeField] float minValue;
+    [SerializeField] float maxValue;
 
     [Header("Attacks")]
-    [SerializeField] EnemyGun gun;
     [SerializeField] float range;
-    [SerializeField] float shotCD;
-    float timeSinceLastShot;
-    Transform gunPivot;
+    [SerializeField] EnemyGun gun;
+    [SerializeField] float normalShotCD;
+    [SerializeField] EnemyBazooka bazooka;
+    [SerializeField] float bazookaShotCD;
 
     [Header("PlayerAggro")]
     [SerializeField] float minDistance;
@@ -36,10 +40,24 @@ public class EnemyAim : MonoBehaviourWithPause
 
     private void Start()
     {
-        gunPivot = gun.transform.parent.transform;
+        GetComponents();
+
+        SetValues();
+    }
+
+    void GetComponents()
+    {
         player = GameObject.Find("Player");
         enemy = GetComponent<EnemyMove>();
         enemyHealth = GetComponent<Enemy>();
+    }
+
+    void SetValues()
+    {
+        bazooka.weaponPivot = bazooka.transform.parent.transform;
+        gun.weaponPivot = gun.transform.parent.transform;
+        gun.shotCD = normalShotCD;
+        bazooka.shotCD = bazookaShotCD;
     }
 
     protected override void UpdateWithPause()
@@ -53,10 +71,11 @@ public class EnemyAim : MonoBehaviourWithPause
 
         if (enemy.currentState != enemy.stunnedState)
         {
-            Aim(target);
+            Aim(target, gun);
+
+            Aim(target, bazooka);
         }
     }
-
 
     GameObject Targeting()
     {
@@ -77,23 +96,18 @@ public class EnemyAim : MonoBehaviourWithPause
         return target;
     }
 
-    void Aim(GameObject target)
+    void Aim(GameObject target, EnemyWeapon weapon)
     {
-        float distanceToTarget = Vector3.Distance(gun.transform.position, target.transform.position);
-        timeSinceLastShot -= Time.deltaTime;
+        float distanceToTarget = Vector3.Distance(weapon.transform.position, target.transform.position);
+        weapon.timeSinceLastShot -= Time.deltaTime;
 
-        float minDistance = 3.0f;
-        float maxDistance = 15.0f;
-        float minValue = 1.8f;
-        float maxValue = 1.2f;
-
-        float t = Mathf.Clamp01((distanceToTarget - minDistance) / (maxDistance - minDistance));
+        float t = Mathf.Clamp01((distanceToTarget - minDistanceAim) / (maxDistanceAim - minDistanceAim));
         float marginOfError = Mathf.Lerp(minValue, maxValue, t);
 
         Vector3 targetVelocity = target.GetComponent<Rigidbody>().velocity;
-        Vector3 predictedTargetPosition = target.transform.position + targetVelocity * (distanceToTarget / gun.projectileSpeed) * marginOfError;
+        Vector3 predictedTargetPosition = target.transform.position + targetVelocity * (distanceToTarget / weapon.projectileSpeed) * marginOfError;
 
-        Vector3 direction = predictedTargetPosition - gun.transform.position;
+        Vector3 direction = predictedTargetPosition - weapon.transform.position;
 
         if (direction.magnitude > Mathf.Epsilon && direction.magnitude < Mathf.Infinity)
         {
@@ -107,17 +121,17 @@ public class EnemyAim : MonoBehaviourWithPause
 
             if (currentToTargetRotation < 50)
             {
-                gunPivot.transform.rotation = Quaternion.Slerp(gunPivot.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                weapon.weaponPivot.transform.rotation = Quaternion.Slerp(weapon.weaponPivot.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * 0.2f * Time.deltaTime);
 
             transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 
-            if (distanceToTarget < range && timeSinceLastShot < 0.0f)
+            if (distanceToTarget < range && weapon.timeSinceLastShot < 0.0f)
             {
-                gun.Shoot();
-                timeSinceLastShot = shotCD;
+                weapon.Shoot();
+                weapon.timeSinceLastShot = weapon.shotCD;
             }
         }
     }
