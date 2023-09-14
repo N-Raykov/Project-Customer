@@ -22,6 +22,7 @@ public class ShopManager : MonoBehaviourWithPause{
     [SerializeField] float dropPodRangeMin;
     [SerializeField] float dropPodSize;
     [SerializeField] LayerMask mask;
+    [SerializeField] LayerMask ground;
 
     [Header("Purchases")]
     [SerializeField] int maxPurchases;
@@ -81,6 +82,9 @@ public class ShopManager : MonoBehaviourWithPause{
             DropPod dp=(Instantiate(dropPod, spawnPoint, Quaternion.identity)).GetComponent<DropPod>();
             dp.item = pData.name;
             dp.amount = pData.amount;
+            RaycastHit groundCheck;
+            Physics.Raycast(spawnPoint,Vector3.down,out groundCheck, 10000, ground);
+            dp.distanceToGround = groundCheck.distance;
             purchases++;
             UpdatePurchasePanel();
         }
@@ -90,6 +94,9 @@ public class ShopManager : MonoBehaviourWithPause{
                 DropPod dp = (Instantiate(dropPod, spawnPoint+new Vector3(0,5,0), Quaternion.identity)).GetComponent<DropPod>();
                 dp.item = pData.name;
                 dp.amount = pData.amount;
+                RaycastHit groundCheck;
+                Physics.Raycast(spawnPoint + new Vector3(0, 5, 0), Vector3.down, out groundCheck, 10000, ground);
+                dp.distanceToGround = groundCheck.distance;
                 purchases++;
                 UpdatePurchasePanel();
             }

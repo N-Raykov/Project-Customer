@@ -29,6 +29,6 @@ MonoBehaviour:
   recoilHipFire: {x: -8.5, y: 0, z: 0}
   recoilAim: {x: 4, y: 0, z: 0}
   returnSpeed: 4
-  targetPosition: {x: 0, y: -0.3410001, z: 0.6820004}
+  targetPosition: {x: 0, y: -0.3310001, z: 0.6820004}
   zoomInDuration: 0.5
   zoomInFactor: 1.25
