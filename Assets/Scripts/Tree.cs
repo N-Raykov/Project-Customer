@@ -20,9 +20,15 @@ public class Tree : MonoBehaviourWithPause {
         hp--;
         if (hp == 0) {
             rb.constraints = RigidbodyConstraints.None;
-            rb.AddForce(pNormal*250,ForceMode.Force);//was 35
-            StartCoroutine(Move(pNormal));
+            //rb.AddForce(pNormal*250,ForceMode.Force);//was 35
+            //StartCoroutine(Move(pNormal));
+            Debug.LogError("error");
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log($"collision {collision.gameObject.name}");
     }
 
     private void OnCollisionStay(Collision collision){
@@ -41,7 +47,6 @@ public class Tree : MonoBehaviourWithPause {
         while (i < 10) {
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.AddForce(pNormal/3f, ForceMode.VelocityChange);
-            Debug.Log("guatafac amigos");
             rb.constraints = RigidbodyConstraints.None;
             i++;
             yield return new WaitForSeconds(0.125f);
