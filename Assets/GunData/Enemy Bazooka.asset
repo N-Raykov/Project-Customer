@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 815de4f95265bac45a343bc461822c9c, type: 3}
-  m_Name: Enemy Revolver
+  m_Name: Enemy Bazooka
   m_EditorClassIdentifier: 
-  gunName: Revolver
-  damage: 10
+  gunName: Bazooka
+  damage: 50
   range: 100
-  bulletSpeed: 40
+  bulletSpeed: 20
   ammoCapacity: -1
   shotCooldown: 2
   reloadTime: 1.6
