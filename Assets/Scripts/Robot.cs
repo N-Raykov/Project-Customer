@@ -35,7 +35,14 @@ public class Robot : MonoBehaviourWithPause
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         closestTree = FindClosestBigTree();
-        bigTree = closestTree.GetComponent<Tree>();
+        if (closestTree == null)
+        {
+            closestTree = this.gameObject;
+        }
+        else
+        {
+            bigTree = closestTree.GetComponent<Tree>();
+        }
         GameManager.robot = gameObject;
     }
 
