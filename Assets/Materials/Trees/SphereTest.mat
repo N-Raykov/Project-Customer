@@ -63,6 +63,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_620bc54568ee438180bf295c8f6610a8_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 48337eef6b93c1e48a0de58286f59943, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Shading_Ramp:
         m_Texture: {fileID: 2800000, guid: 3a770aaa2500b6c49acd48e3ccebd091, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -104,6 +108,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _HighlightScale: 0.01
     - _Metallic: 0
     - _NoiseWindScale: 12.5
     - _OcclusionStrength: 1
@@ -117,6 +122,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _UseHighlights: 1
     - _UseRim: 0
     - _UseWind: 0
     - _WiggleOffset: 0.4
@@ -131,6 +137,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Dark_Color: {r: 0.13905303, g: 0.33962262, b: 0.19867446, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HighlightColor: {r: 0.8263747, g: 0.8679245, b: 0.4208615, a: 1}
+    - _HighlightOffset: {r: 0.08, g: -0, b: 0, a: 0}
     - _Light_Color: {r: 0.69055414, g: 0.9245283, b: 0.23898178, a: 0}
     - _RimColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
