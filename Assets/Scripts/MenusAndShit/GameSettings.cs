@@ -46,9 +46,9 @@ public class GameSettings : MonoBehaviourWithPause {
         controls = GetComponent<Controls>();
 
 
+
     }
     private void Start(){
-
 
         textLinks.Add("jump",jump);
         textLinks.Add("interact", interact);
@@ -57,6 +57,9 @@ public class GameSettings : MonoBehaviourWithPause {
         textLinks.Add("aim", aim);
         textLinks.Add("reload", reload);
         textLinks.Add("ability", ability);
+
+        textLinks["shoot"].text = "" + controls.keyList["shoot"];
+
 
 
     }
