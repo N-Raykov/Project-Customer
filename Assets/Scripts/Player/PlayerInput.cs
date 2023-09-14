@@ -15,6 +15,9 @@ public class PlayerInput : MonoBehaviourWithPause
     public bool interactionInput { get; private set; }
     public bool skillInput { get; private set; }
 
+    private void Awake(){
+        ignorePausedState = true;
+    }
 
     private void Start(){
 
@@ -26,12 +29,13 @@ public class PlayerInput : MonoBehaviourWithPause
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
         moveDirection = Quaternion.Euler(new Vector3(0, rotationPivot.transform.localEulerAngles.y, 0)) * moveDirection;
-        jumpInput = Input.GetKeyDown(controls.keyList["jump"]);
+        jumpInput = Input.GetKey(controls.keyList["jump"]);
         //jumpInput = Input.GetAxisRaw("Jump") == 1;
         shootInput = Input.GetKey(controls.keyList["shoot"]);
         reloadInput = Input.GetKeyDown(controls.keyList["reload"]);
         aimInput = Input.GetKey(controls.keyList["aim"]);
-        shopInput = Input.GetKeyDown(controls.keyList["shop"]);
+        shopInput = Input.GetKeyUp(controls.keyList["shop"]);
+        Debug.Log(shopInput);
         interactionInput = Input.GetKeyDown(controls.keyList["interact"]);
         skillInput = Input.GetKeyDown(controls.keyList["ability1"]);
     }

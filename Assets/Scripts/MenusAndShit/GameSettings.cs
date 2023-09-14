@@ -43,12 +43,12 @@ public class GameSettings : MonoBehaviourWithPause {
             gameSettings = this;
         }
 
+        controls = GetComponent<Controls>();
 
-        
 
     }
     private void Start(){
-        controls=GetComponent<Controls>();
+
 
         textLinks.Add("jump",jump);
         textLinks.Add("interact", interact);

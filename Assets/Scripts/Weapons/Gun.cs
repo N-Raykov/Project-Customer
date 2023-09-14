@@ -27,6 +27,7 @@ public abstract class Gun : MonoBehaviourWithPause{
     [SerializeField] protected Animator animator;
     [SerializeField] protected PlayerInput input;
     [SerializeField] protected Camera mainCamera;
+    [SerializeField] protected LayerMask mask;
     public int currentAmmo { get; set; }
     protected Vector3 recoilTargetRotation = Vector3.zero;
     protected Vector3 pistolRotationPivotStartPosition;
@@ -202,7 +203,7 @@ public abstract class Gun : MonoBehaviourWithPause{
         RaycastHit info;
         Vector3 targetPosition;
 
-        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out info, gunData.range))
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out info, gunData.range,mask))
             targetPosition = info.point;
         else
             targetPosition = mainCamera.transform.position + mainCamera.transform.forward * gunData.range;
