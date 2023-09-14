@@ -3380,36 +3380,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 233961048, guid: 8a0d4e1dae3c7c14c91144230535aa50, type: 3}
-      propertyPath: mask.m_Bits
-      value: 65
-      objectReference: {fileID: 0}
-    - target: {fileID: 233961048, guid: 8a0d4e1dae3c7c14c91144230535aa50, type: 3}
-      propertyPath: ground.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 451199680, guid: 8a0d4e1dae3c7c14c91144230535aa50, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1732932106, guid: 8a0d4e1dae3c7c14c91144230535aa50, type: 3}
-      propertyPath: mask.m_Bits
-      value: 1921
-      objectReference: {fileID: 0}
-    - target: {fileID: 2036626782, guid: 8a0d4e1dae3c7c14c91144230535aa50, type: 3}
-      propertyPath: mask.m_Bits
-      value: 1921
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001639993959326202, guid: 8a0d4e1dae3c7c14c91144230535aa50,
-        type: 3}
-      propertyPath: near clip plane
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001639994259086697, guid: 8a0d4e1dae3c7c14c91144230535aa50,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1001639994704590389, guid: 8a0d4e1dae3c7c14c91144230535aa50,
         type: 3}
       propertyPath: m_Name

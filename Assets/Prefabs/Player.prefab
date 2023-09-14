@@ -3852,6 +3852,9 @@ MonoBehaviour:
   animator: {fileID: 2036626781}
   input: {fileID: 6599779931964029087}
   mainCamera: {fileID: 1001639993959326202}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1921
   bullet: {fileID: 664451063858303514, guid: 6de9af2161fd93b4db6a0efeedea3bb4, type: 3}
   muzzle: {fileID: 1021259591}
   pistolRotationPivot: {fileID: 1001639994203087779}
@@ -4074,7 +4077,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.2
   far clip plane: 1000
   field of view: 70
   orthographic: 0
@@ -4492,6 +4495,9 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 65
+  ground:
+    serializedVersion: 2
+    m_Bits: 128
   maxPurchases: 5
   weaponsPage: {fileID: 1354668874}
   suppliesPage: {fileID: 210327424}
@@ -5160,6 +5166,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   input: {fileID: 6599779931964029087}
   mainCamera: {fileID: 1001639993959326202}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
   bullet: {fileID: 0}
   muzzle: {fileID: 0}
   pistolRotationPivot: {fileID: 1001639994203087779}
@@ -6063,6 +6072,9 @@ MonoBehaviour:
   animator: {fileID: 1001639994350877142}
   input: {fileID: 6599779931964029087}
   mainCamera: {fileID: 1001639993959326202}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1921
   bullet: {fileID: 664451063858303514, guid: 6de9af2161fd93b4db6a0efeedea3bb4, type: 3}
   muzzle: {fileID: 1001639995303813167}
   pistolRotationPivot: {fileID: 1001639994203087779}
