@@ -8,6 +8,7 @@ public class MusicHandler : MonoBehaviour
 
     [SerializeField] private AudioClip[] musicTracks;
     [SerializeField] private float transitionTimeSpeed = 1.0f;
+    [SerializeField] private float targetVolume = 0.3f;
 
     private List<AudioSource> audioSources;
 
@@ -56,7 +57,7 @@ public class MusicHandler : MonoBehaviour
 
             if (musicTransitionProgress >= startFactor && musicTransitionProgress <= endFactor) 
             {
-                currentAudioSource.volume = Mathf.Lerp(currentAudioSource.volume, 1.0f, Time.deltaTime * transitionTimeSpeed);
+                currentAudioSource.volume = Mathf.Lerp(currentAudioSource.volume, targetVolume, Time.deltaTime * transitionTimeSpeed);
             } else
             {
                 currentAudioSource.volume = Mathf.Lerp(currentAudioSource.volume, 0.0f, Time.deltaTime * transitionTimeSpeed);
