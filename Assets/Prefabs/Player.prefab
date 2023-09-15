@@ -3476,7 +3476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f1f891728d1654093e647546e37f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useHeadBob: 0
+  useHeadBob: 1
   idleBobSpeed: 5
   idleBobAmount: 0.0015
   walkBobSpeed: 10
@@ -4080,7 +4080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f1f891728d1654093e647546e37f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useHeadBob: 0
+  useHeadBob: 1
   idleBobSpeed: 4.25
   idleBobAmount: 0.01
   walkBobSpeed: 14
