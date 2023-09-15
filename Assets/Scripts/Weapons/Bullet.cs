@@ -24,19 +24,21 @@ public class Bullet : MonoBehaviourWithPause{
     }
 
     private void OnCollisionEnter(Collision collision){
-        if(collision.gameObject )
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
-        if (enemy != null) {
-            enemy.TakeDamage(damage);
+        if(collision.gameObject)
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+            if (enemy != null) {
+                enemy.TakeDamage(damage);
+            }
+            //if (tree != null) {
+            //    tree.TakeDamage(collision.contacts[0].normal);
+            //}
+            if (player != null){
+                player.TakeDamage(damage);
+            }
+            Destroy(this.gameObject);
         }
-        //if (tree != null) {
-        //    tree.TakeDamage(collision.contacts[0].normal);
-        //}
-        if (player != null){
-            player.TakeDamage(damage);
-        }
-        Destroy(this.gameObject);
     }
 
     public void AddSpeed(Vector3 direction) {
