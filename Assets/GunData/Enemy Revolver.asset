@@ -19,6 +19,8 @@ MonoBehaviour:
   ammoCapacity: -1
   shotCooldown: 2
   reloadTime: 1.6
+  spreadFactorXMin: 0
+  spreadFactorYMin: 0
   spreadFactorX: 0
   spreadFactorY: 0
   spreadPercentageMultiplier: 0

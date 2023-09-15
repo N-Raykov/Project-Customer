@@ -9,38 +9,58 @@ public class Sway : MonoBehaviourWithPause{
     [SerializeField] float intensityZ;
     [SerializeField] float returnTime;
     [SerializeField] float moveIntensity;
+    [SerializeField] float aimingMultiplier;
 
     [Header("Data")]
     [SerializeField] PlayerInput input;
+    [SerializeField] InteractionAndWeaponManager manager;
 
     Vector3 startPosition;
+    Vector3 targetPosition;
 
     Quaternion startRotation;
+    Quaternion targetRotation;
+
+    float mouseX;
+    float mouseY;
 
     private void Start(){
         startRotation = transform.localRotation;
         startPosition = transform.localPosition;
+        targetPosition = startPosition;
+        targetRotation = startRotation;
     }
+
 
     protected override void UpdateWithPause(){
 
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        mouseX = Input.GetAxisRaw("Mouse X");
+        mouseY = Input.GetAxisRaw("Mouse Y");
 
-        //if (mouseX == 0 || mouseY == 0)
-        //    return;
+
+        float multiplier;
+
+        if (manager.CheckActiveGunisAiming())
+            multiplier = aimingMultiplier;
+        else
+            multiplier = 1f;
+
+        float fpsMultiplier=(1/Time.deltaTime)/500;
+
+        multiplier *= fpsMultiplier;
 
         Vector3 moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
-        Quaternion rotationX = Quaternion.AngleAxis(-intensity * mouseX,Vector3.up);
-        Quaternion rotationY = Quaternion.AngleAxis(intensity * mouseY, Vector3.right);
-        Quaternion rotationZ = Quaternion.AngleAxis(-intensityZ * mouseX, Vector3.forward) * Quaternion.AngleAxis(-intensityZ * moveDirection.x, Vector3.forward);
-        Quaternion targetRotation = startRotation * rotationX * rotationY * rotationZ;
+        Quaternion rotationX = Quaternion.AngleAxis(-intensity * mouseX * multiplier, Vector3.up);
+        Quaternion rotationY = Quaternion.AngleAxis(intensity * mouseY * multiplier, Vector3.right);
+        Quaternion rotationZ = Quaternion.AngleAxis(-intensityZ * mouseX * multiplier, Vector3.forward) * Quaternion.AngleAxis(-intensityZ * moveDirection.x, Vector3.forward);
+        targetRotation = startRotation * rotationX * rotationY * rotationZ;
+        targetPosition = startPosition + new Vector3(-moveDirection.x, 0, -moveDirection.z) * moveIntensity * multiplier / fpsMultiplier;
 
-
-        Vector3 targetPosition = startPosition + new Vector3(-moveDirection.x, 0, -moveDirection.z)*moveIntensity;
-        transform.localRotation = Quaternion.Lerp(transform.localRotation,targetRotation,Time.deltaTime*returnTime);
-        transform.localPosition = Vector3.Lerp(transform.localPosition,targetPosition,Time.deltaTime*returnTime);
-
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * returnTime);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * returnTime);
     }
+
+
+
 }

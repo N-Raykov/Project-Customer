@@ -19,17 +19,8 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float speed;
     [SerializeField] float strafeSpeed;
     [SerializeField] float moonWalkSpeed;
-    [SerializeField] float minRotationSpeed;
-    [SerializeField] float maxRotationSpeed;
-    [SerializeField] float maxRotationTime;
     
     [System.NonSerialized] public NavMeshAgent agent;
-
-    [Header("Attacks")]
-    [SerializeField] EnemyGun gun;
-    [SerializeField] float range;
-    [SerializeField] float shotCD;
-    float timeSinceLastShot;
 
     [Header("Spawn")]
     [SerializeField] float stunAfterFall;
@@ -37,10 +28,11 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] int treesRequired;
     [System.NonSerialized] public bool isActive;
     bool hasSpawned;
+    MeshRenderer meshRenderer;
     Rigidbody rb;
-    Transform gunPivot;
+    EnemyAim enemyAim;
 
-    private enum EnemyState
+    public enum EnemyState
     {
         Aggro,
         PreferredRange,
@@ -55,12 +47,14 @@ public class EnemyMove : MonoBehaviourWithPause
         ignorePausedState = true;
         agent.enabled = false;
         rb = GetComponent<Rigidbody>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        enemyAim = GetComponent<EnemyAim>();
         player = GameObject.Find("Player");
-        gunPivot = gun.transform.parent.transform;
         transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
     }
 
-    private EnemyState currentState = EnemyState.Aggro;
+    [System.NonSerialized] public EnemyState currentState = EnemyState.Aggro;
+    [System.NonSerialized] public EnemyState stunnedState = EnemyState.Stunned;
     [System.NonSerialized] public float stunDuration;
     private float strafeTimer;
 
@@ -68,21 +62,20 @@ public class EnemyMove : MonoBehaviourWithPause
     {
         ExtraStuff();
 
-
         if(agent.enabled == true)
         {
-            HandleStates();
+            HandleStates(enemyAim.target);
         }
     }
 
-    void HandleStates()
+    void HandleStates(GameObject target)
     {
         switch (currentState)
         {
             case EnemyState.Aggro:
-                if (Vector3.Distance(player.transform.position, transform.position) < aggroRange && Vector3.Distance(player.transform.position, transform.position) > preferredRange)
+                if (Vector3.Distance(target.transform.position, transform.position) < aggroRange && Vector3.Distance(target.transform.position, transform.position) > preferredRange)
                 {
-                    agent.SetDestination(player.transform.position);
+                    agent.SetDestination(target.transform.position);
                     agent.speed = speed;
                 }
                 else
@@ -93,13 +86,13 @@ public class EnemyMove : MonoBehaviourWithPause
                 break;
 
             case EnemyState.PreferredRange:
-                if (Vector3.Distance(player.transform.position, transform.position) < preferredRange && Vector3.Distance(player.transform.position, transform.position) > minRange)
+                if (Vector3.Distance(target.transform.position, transform.position) < preferredRange && Vector3.Distance(target.transform.position, transform.position) > minRange)
                 {
                     agent.speed = strafeSpeed;
                     if (Time.time >= strafeTimer)
                     {
                         RandomlySwitchDirection();
-                        ResetstrafeTimer();
+                        ResetStrafeTimer();
                     }
                 }
                 else
@@ -109,10 +102,10 @@ public class EnemyMove : MonoBehaviourWithPause
                 break;
 
             case EnemyState.MinRange:
-                if (Vector3.Distance(player.transform.position, transform.position) < minRange)
+                if (Vector3.Distance(target.transform.position, transform.position) < minRange)
                 {
                     agent.speed = moonWalkSpeed;
-                    Vector3 toPlayer = player.transform.position - transform.position;
+                    Vector3 toPlayer = target.transform.position - transform.position;
                     Vector3 targetPosition = transform.position - toPlayer.normalized * 5f;
                     agent.SetDestination(targetPosition);
                 }
@@ -132,8 +125,6 @@ public class EnemyMove : MonoBehaviourWithPause
 
                     agent.destination = this.transform.position;
 
-                    timeSinceLastShot = shotCD;
-
                     return;
                 }
                 break;
@@ -148,64 +139,15 @@ public class EnemyMove : MonoBehaviourWithPause
                 }
                 return;
         }
-
-        RotateAndShoot();
     }
-
-    void RotateAndShoot()
-    {
-        float distanceToPlayer = Vector3.Distance(gun.transform.position, player.transform.position);
-        timeSinceLastShot -= Time.deltaTime;
-
-        float minDistance = 3.0f;
-        float maxDistance = 15.0f;
-        float minValue = 2.2f;
-        float maxValue = 1.6f;
-
-        float t = Mathf.Clamp01((distanceToPlayer - minDistance) / (maxDistance - minDistance));
-        float marginOfError = Mathf.Lerp(minValue, maxValue, t);
-
-        Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
-        Vector3 predictedPlayerPosition = player.transform.position + playerVelocity * (distanceToPlayer / gun.projectileSpeed) * marginOfError;
-
-        Vector3 direction = predictedPlayerPosition - gun.transform.position;
-
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-
-        float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
-
-        float rotationSpeed = Mathf.Clamp(angleDifference / maxRotationTime, minRotationSpeed, maxRotationSpeed);
-
-        float currentToTargetRotation = compare(targetRotation, transform.rotation);
-
-
-        if(currentToTargetRotation < 50)
-        {
-            gunPivot.transform.rotation = Quaternion.Slerp(gunPivot.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * 0.2f * Time.deltaTime);
-        }
-
-        if (distanceToPlayer < range && timeSinceLastShot < 0.0f)
-        {
-            gun.Shoot();
-            timeSinceLastShot = shotCD;
-        }
-    }
-
-    private float compare(Quaternion quatA, Quaternion quatB)
-    {
-        return Quaternion.Angle(quatA, quatB);
-    }
-
 
     void ExtraStuff()
     {
         if (GameManager.fallenTrees == treesRequired && hasSpawned == false)
         {
             hasSpawned = true;
+            meshRenderer.enabled = true;
+            rb.constraints &= ~RigidbodyConstraints.FreezePosition;
             rb.velocity *= 0;
         }
         else if (hasSpawned == false)
@@ -227,7 +169,8 @@ public class EnemyMove : MonoBehaviourWithPause
     {
         agent.enabled = false;
         transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
-
+        meshRenderer.enabled = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         GetStunned(999);
     }
 
@@ -240,7 +183,7 @@ public class EnemyMove : MonoBehaviourWithPause
             isActive = true;
         }
     }
-
+    
     public void GetStunned(float pDuration)
     {
         stunDuration = Time.time + pDuration;
@@ -262,7 +205,7 @@ public class EnemyMove : MonoBehaviourWithPause
         }
     }
 
-    private void ResetstrafeTimer()
+    private void ResetStrafeTimer()
     {
         strafeTimer = Time.time + Random.Range(minStrafeDuration, maxStrafeDuration);
     }

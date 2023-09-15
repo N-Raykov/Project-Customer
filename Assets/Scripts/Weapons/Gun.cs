@@ -27,6 +27,7 @@ public abstract class Gun : MonoBehaviourWithPause{
     [SerializeField] protected Animator animator;
     [SerializeField] protected PlayerInput input;
     [SerializeField] protected Camera mainCamera;
+    [SerializeField] protected LayerMask mask;
     public int currentAmmo { get; set; }
     protected Vector3 recoilTargetRotation = Vector3.zero;
     protected Vector3 pistolRotationPivotStartPosition;
@@ -181,24 +182,49 @@ public abstract class Gun : MonoBehaviourWithPause{
         OnStateChange = null;
     }
 
-    protected Vector3 AimAtTarget() {//cast from the camera
+    //protected Vector3 AimAtTarget(){
+    //    RaycastHit info;
+    //    Vector3 targetPosition;
+
+    //    if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out info, gunData.range))
+    //        targetPosition = info.point;
+    //    else
+    //        targetPosition = mainCamera.transform.position + mainCamera.transform.forward * gunData.range;
+
+
+    //    float spreadPercentage = 1 + spreadMultiplier / 100.0f;
+    //    var spread = mainCamera.transform.rotation * new Vector3(UnityEngine.Random.Range(-gunData.spreadFactorX * spreadPercentage, gunData.spreadFactorX * spreadPercentage), UnityEngine.Random.Range(-gunData.spreadFactorY * spreadPercentage, gunData.spreadFactorY * spreadPercentage), 0);
+    //    targetPosition += spread;
+
+    //    return (targetPosition - muzzle.position).normalized;
+    //}
+
+    protected Vector3 AimAtTarget(){
         RaycastHit info;
         Vector3 targetPosition;
 
-        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out info, gunData.range)) 
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out info, gunData.range,mask))
             targetPosition = info.point;
         else
             targetPosition = mainCamera.transform.position + mainCamera.transform.forward * gunData.range;
 
         float spreadPercentage = 1 + spreadMultiplier / 100.0f;
-        //change this
-        var spread = new Vector3(UnityEngine.Random.Range(-gunData.spreadFactorX * spreadPercentage, gunData.spreadFactorX * spreadPercentage), UnityEngine.Random.Range(-gunData.spreadFactorY * spreadPercentage, gunData.spreadFactorY * spreadPercentage), 0);
+
+        float randomX = UnityEngine.Random.Range(0, 2);
+        float randomY = UnityEngine.Random.Range(0, 2);
+
+        float newX = ((randomX == 0) ? -1 : 1)* UnityEngine.Random.Range(gunData.spreadFactorXMin * spreadPercentage, gunData.spreadFactorX * spreadPercentage);
+        float newY = ((randomY == 0) ? -1 : 1)* UnityEngine.Random.Range(gunData.spreadFactorYMin * spreadPercentage, gunData.spreadFactorY * spreadPercentage);
+
+        var spread = mainCamera.transform.rotation*new Vector3(newX,newY,0);
+
+        //var spread = mainCamera.transform.rotation * (new Vector3(UnityEngine.Random.Range(-gunData.spreadFactorX * spreadPercentage, gunData.spreadFactorX * spreadPercentage), UnityEngine.Random.Range(-gunData.spreadFactorY * spreadPercentage, gunData.spreadFactorY * spreadPercentage), 0));
         targetPosition += spread;
 
         return (targetPosition - muzzle.position).normalized;
     }
 
-    protected void DecreaseSpreadMultiplier() { //depending on how big the spread multiplier is increase the time it takes to start the decrease
+    protected void DecreaseSpreadMultiplier() { 
         spreadMultiplier = Mathf.Max(spreadMultiplier - gunData.spreadDecreaseRate * Time.deltaTime, 0);
         OnSpreadChange?.Invoke(1 + spreadMultiplier / 100);
     
@@ -213,25 +239,16 @@ public abstract class Gun : MonoBehaviourWithPause{
     }
 
     protected void AddRecoil(){
-        //Debug.Log("working");
-        //if (!isAiming)
-        //    recoilTargetRotation += new Vector3(gunData.recoilHipFire.x, UnityEngine.Random.Range(-gunData.recoilHipFire.y, gunData.recoilHipFire.y), UnityEngine.Random.Range(-gunData.recoilHipFire.z, gunData.recoilHipFire.z));
-        //else
-        //   recoilTargetRotation += new Vector3(gunData.recoilAim.x, UnityEngine.Random.Range(-gunData.recoilAim.y, gunData.recoilAim.y), UnityEngine.Random.Range(-gunData.recoilAim.z, gunData.recoilAim.z));
-
         if (!isAiming)
             recoilTargetRotation += new Vector3(gunData.recoilHipFire.x, 0, 0);
         else
             recoilTargetRotation += new Vector3(gunData.recoilAim.x, 0, 0);
-
     }
 
-    protected void DecreaseRecoilRotation() {//could add a similar system to the spread; dont move towards the center while shooting and start after you stop
+    protected void DecreaseRecoilRotation() {
         recoilTargetRotation = Vector3.Lerp(recoilTargetRotation, Vector3.zero, gunData.returnSpeed * Time.deltaTime);
         recoilPivot.localEulerAngles = recoilTargetRotation;
     }
-
-    //less spread and recoil when zooming in
 
     //shooting to fast makes bullets fire in the wrong diretion when zoomed in
     //probably bcz the raycast hits the gun
