@@ -25,10 +25,13 @@ public class EnemyMove : MonoBehaviourWithPause
     [Header("Spawn")]
     [SerializeField] float stunAfterFall;
     [SerializeField] float heightOfFall;
-    [SerializeField] int treesRequired;
+    [SerializeField] float startingVelocity;
+
+    float startPosition;
+    float currentPosition;
+    float timeToWaitUntilStart;
+
     [System.NonSerialized] public bool isActive;
-    bool hasSpawned;
-    MeshRenderer meshRenderer;
     Rigidbody rb;
     EnemyAim enemyAim;
 
@@ -41,23 +44,39 @@ public class EnemyMove : MonoBehaviourWithPause
         Paused
     }
 
-    void Start()
-    {
-        agent = GetComponentInParent<NavMeshAgent>();
-        ignorePausedState = true;
-        agent.enabled = false;
-        rb = GetComponent<Rigidbody>();
-        meshRenderer = GetComponent<MeshRenderer>();
-        enemyAim = GetComponent<EnemyAim>();
-        player = GameObject.Find("Player");
-        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
-    }
-
     [System.NonSerialized] public EnemyState currentState = EnemyState.Aggro;
     [System.NonSerialized] public EnemyState stunnedState = EnemyState.Stunned;
     [System.NonSerialized] public float stunDuration;
     private float strafeTimer;
 
+    void Start()
+    {
+        GetComponenets();
+
+        GetStunned(999);
+
+        Fall();
+    }
+
+    void GetComponenets()
+    {
+        agent = GetComponentInParent<NavMeshAgent>();
+        ignorePausedState = true;
+        rb = GetComponent<Rigidbody>();
+        enemyAim = GetComponent<EnemyAim>();
+        player = GameObject.Find("Player");
+        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
+    }
+
+    void Fall()
+    {
+        startPosition = transform.position.y;
+        float velocity = startingVelocity + UnityEngine.Random.Range(5, 10) * ((UnityEngine.Random.Range(0, 2) == 0) ? -1 : 1);
+        startingVelocity = 0;
+        timeToWaitUntilStart = UnityEngine.Random.Range(1, 5);
+        StartCoroutine(WaitToStart(timeToWaitUntilStart, velocity));
+    }
+    
     protected override void UpdateWithPause()
     {
         ExtraStuff();
@@ -143,20 +162,11 @@ public class EnemyMove : MonoBehaviourWithPause
 
     void ExtraStuff()
     {
-        if (GameManager.fallenTrees == treesRequired && hasSpawned == false)
+        if(isActive == false)
         {
-            hasSpawned = true;
-            meshRenderer.enabled = true;
-            rb.constraints &= ~RigidbodyConstraints.FreezePosition;
-            rb.velocity *= 0;
-        }
-        else if (hasSpawned == false)
-        {
-            WaitForSpawn();
-        }
-        else if (rb.velocity.y > 40) 
-        {
-            rb.velocity *= 0.9f;
+            currentPosition = transform.position.y;
+            float t = Mathf.Abs(currentPosition - startPosition) / heightOfFall;
+            rb.velocity = new Vector3(0, -Mathf.Lerp(startingVelocity, 0f, t), 0);
         }
 
         if (GameManager.gameIsPaused == true)
@@ -165,13 +175,11 @@ public class EnemyMove : MonoBehaviourWithPause
         }
     }
 
-    void WaitForSpawn()
+    IEnumerator WaitToStart(float pTime, float pVelocity)
     {
-        agent.enabled = false;
-        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
-        meshRenderer.enabled = false;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        GetStunned(999);
+        yield return new WaitForSeconds(pTime);
+        startingVelocity = pVelocity;
+        rb.AddForce(Vector3.down * startingVelocity, ForceMode.VelocityChange);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -179,6 +187,8 @@ public class EnemyMove : MonoBehaviourWithPause
         if (collision.gameObject.tag == "Ground" && isActive == false)
         {
             agent.enabled = true;
+            rb.useGravity = true;
+            rb.constraints = RigidbodyConstraints.None;
             GetStunned(stunAfterFall);
             isActive = true;
         }
