@@ -30,7 +30,7 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
 
 
         if (!isIdle && timePassed != 0 && Time.time - timeReverseTime > timePassed) {
-            Debug.Log("working");
+            //Debug.Log("working");
             timePassed = 0;
             animator.SetTrigger("Reverse");
 

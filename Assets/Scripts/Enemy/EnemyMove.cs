@@ -26,15 +26,12 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float stunAfterFall;
     [SerializeField] float heightOfFall;
     [SerializeField] float startingVelocity;
-    [SerializeField] int treesRequired;
 
     float startPosition;
     float currentPosition;
     float timeToWaitUntilStart;
 
     [System.NonSerialized] public bool isActive;
-    bool hasSpawned;
-    MeshRenderer meshRenderer;
     Rigidbody rb;
     EnemyAim enemyAim;
 
@@ -47,23 +44,39 @@ public class EnemyMove : MonoBehaviourWithPause
         Paused
     }
 
-    void Start()
-    {
-        agent = GetComponentInParent<NavMeshAgent>();
-        ignorePausedState = true;
-        agent.enabled = false;
-        rb = GetComponent<Rigidbody>();
-        meshRenderer = GetComponent<MeshRenderer>();
-        enemyAim = GetComponent<EnemyAim>();
-        player = GameObject.Find("Player");
-        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
-    }
-
     [System.NonSerialized] public EnemyState currentState = EnemyState.Aggro;
     [System.NonSerialized] public EnemyState stunnedState = EnemyState.Stunned;
     [System.NonSerialized] public float stunDuration;
     private float strafeTimer;
 
+    void Start()
+    {
+        GetComponenets();
+
+        GetStunned(999);
+
+        Fall();
+    }
+
+    void GetComponenets()
+    {
+        agent = GetComponentInParent<NavMeshAgent>();
+        ignorePausedState = true;
+        rb = GetComponent<Rigidbody>();
+        enemyAim = GetComponent<EnemyAim>();
+        player = GameObject.Find("Player");
+        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
+    }
+
+    void Fall()
+    {
+        startPosition = transform.position.y;
+        float velocity = startingVelocity + UnityEngine.Random.Range(5, 10) * ((UnityEngine.Random.Range(0, 2) == 0) ? -1 : 1);
+        startingVelocity = 0;
+        timeToWaitUntilStart = UnityEngine.Random.Range(1, 5);
+        StartCoroutine(WaitToStart(timeToWaitUntilStart, velocity));
+    }
+    
     protected override void UpdateWithPause()
     {
         ExtraStuff();
@@ -149,23 +162,6 @@ public class EnemyMove : MonoBehaviourWithPause
 
     void ExtraStuff()
     {
-        if (GameManager.fallenTrees == treesRequired && hasSpawned == false)
-        {
-            hasSpawned = true;
-            meshRenderer.enabled = true;
-
-            startPosition = transform.position.y;
-            float velocity = startingVelocity + UnityEngine.Random.Range(5, 10) * ((UnityEngine.Random.Range(0, 2) == 0) ? -1 : 1);
-            startingVelocity = 0;
-            timeToWaitUntilStart = UnityEngine.Random.Range(1, 5);
-            StartCoroutine(WaitToStart(timeToWaitUntilStart, velocity));
-
-        }
-        else if (hasSpawned == false)
-        {
-            WaitForSpawn();
-        }
-
         if(isActive == false)
         {
             currentPosition = transform.position.y;
@@ -184,14 +180,6 @@ public class EnemyMove : MonoBehaviourWithPause
         yield return new WaitForSeconds(pTime);
         startingVelocity = pVelocity;
         rb.AddForce(Vector3.down * startingVelocity, ForceMode.VelocityChange);
-    }
-
-    void WaitForSpawn()
-    {
-        agent.enabled = false;
-        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
-        meshRenderer.enabled = false;
-        GetStunned(999);
     }
 
     private void OnCollisionEnter(Collision collision)

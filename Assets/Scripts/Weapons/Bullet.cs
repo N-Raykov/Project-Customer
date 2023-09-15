@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviourWithPause{
 
     Rigidbody rb;
+    [SerializeField] List<GameObject> ignoreObjects = new List<GameObject>();
+
     public float damage { get; set; }
     public float range { get; set; }
     public float speed { get; set; }
@@ -22,6 +24,7 @@ public class Bullet : MonoBehaviourWithPause{
     }
 
     private void OnCollisionEnter(Collision collision){
+        if(collision.gameObject )
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
         if (enemy != null) {

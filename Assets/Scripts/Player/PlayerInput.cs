@@ -14,6 +14,7 @@ public class PlayerInput : MonoBehaviourWithPause
     public bool shopInput { get; private set; }
     public bool interactionInput { get; private set; }
     public bool skillInput { get; private set; }
+    public bool spawnBot { get; private set; }
 
     private void Awake(){
         ignorePausedState = true;
@@ -35,9 +36,10 @@ public class PlayerInput : MonoBehaviourWithPause
         reloadInput = Input.GetKeyDown(controls.keyList["reload"]);
         aimInput = Input.GetKey(controls.keyList["aim"]);
         shopInput = Input.GetKeyUp(controls.keyList["shop"]);
-        Debug.Log(shopInput);
+        //Debug.Log(shopInput);
         interactionInput = Input.GetKeyDown(controls.keyList["interact"]);
         skillInput = Input.GetKeyDown(controls.keyList["ability1"]);
+        spawnBot = Input.GetKeyDown(controls.keyList["spawnBot"]);
     }
 
 }

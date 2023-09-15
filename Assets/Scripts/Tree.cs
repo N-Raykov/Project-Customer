@@ -22,20 +22,20 @@ public class Tree : MonoBehaviourWithPause {
             rb.constraints = RigidbodyConstraints.None;
             //rb.AddForce(pNormal*250,ForceMode.Force);//was 35
             //StartCoroutine(Move(pNormal));
-            Debug.LogError("error");
+            //Debug.LogError("error");
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"collision {collision.gameObject.name}");
+        //Debug.Log($"collision {collision.gameObject.name}");
     }
 
     private void OnCollisionStay(Collision collision){
         if (collision.gameObject.CompareTag("Ground") && hasFallen == false) {
             hasFallen = true;
             GameManager.fallenTrees++;
-            Debug.Log("tree has fallen");
+            //Debug.Log("tree has fallen");
             //normal = collision.contacts[0].normal;
             //Debug.DrawLine(collision.contacts[0].point, collision.contacts[0].point+10*normal);
         }
