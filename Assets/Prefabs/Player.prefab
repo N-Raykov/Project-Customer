@@ -3755,7 +3755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2036626780
 Transform:
   m_ObjectHideFlags: 0
@@ -5072,7 +5072,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8b6ae6bdd16100b4cadabba5db0f339a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6905609870639353253, guid: 8b6ae6bdd16100b4cadabba5db0f339a,
         type: 3}
@@ -5268,59 +5268,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1699468294718881290}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &2409264301329434746
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7984782151570738827}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 87044bfb10ffbf14bb20dea1598e7106, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7593571191416135229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7984782151570738827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41eb6555a65c9f64db0c07901c7ccd11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  extraAmmo: 200
-  gunData: {fileID: 11400000, guid: cbea0b237a93e6b4aaf9afd58e9c3109, type: 2}
-  animator: {fileID: 0}
-  input: {fileID: 6599779931964029087}
-  mainCamera: {fileID: 1001639993959326202}
-  mask:
-    serializedVersion: 2
-    m_Bits: 1921
-  bullet: {fileID: 664451063858303514, guid: 6de9af2161fd93b4db6a0efeedea3bb4, type: 3}
-  muzzle: {fileID: 5378335698456081331}
-  pistolRotationPivot: {fileID: 1001639994203087779}
-  recoilPivot: {fileID: 1465239314249981367}
-  muzzleFlash: {fileID: 6064421988791351108, guid: 1ff9a66a753c6be48a3e0f1698a65824,
-    type: 3}
-  mag: {fileID: 4649247723780961147}
-  gunshot: {fileID: 6728813310770451577}
-  gunshotSound: {fileID: 8300000, guid: d76fa9917fa0a5848bdb7749feb4b871, type: 3}
-  cylinderSoundStart: {fileID: 8300000, guid: 875956ea6edbcc74086d60da39e57f5a, type: 3}
-  cylinderSoundEnd: {fileID: 8300000, guid: 3c1b2d69be3cbb54bbd86c942c2032d3, type: 3}
-  bulletFallingSound: {fileID: 8300000, guid: 1ef8f27fc33659b42bc13ee3bc39a801, type: 3}
 --- !u!82 &6728813310770451577
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5418,6 +5365,59 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &2409264301329434746
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7984782151570738827}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 87044bfb10ffbf14bb20dea1598e7106, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7593571191416135229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7984782151570738827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41eb6555a65c9f64db0c07901c7ccd11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  extraAmmo: 200
+  gunData: {fileID: 11400000, guid: cbea0b237a93e6b4aaf9afd58e9c3109, type: 2}
+  animator: {fileID: 0}
+  input: {fileID: 6599779931964029087}
+  mainCamera: {fileID: 1001639993959326202}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1921
+  bullet: {fileID: 664451063858303514, guid: 6de9af2161fd93b4db6a0efeedea3bb4, type: 3}
+  muzzle: {fileID: 5378335698456081331}
+  pistolRotationPivot: {fileID: 1001639994203087779}
+  recoilPivot: {fileID: 1465239314249981367}
+  muzzleFlash: {fileID: 6064421988791351108, guid: 1ff9a66a753c6be48a3e0f1698a65824,
+    type: 3}
+  mag: {fileID: 4649247723780961147}
+  gunshot: {fileID: 6728813310770451577}
+  gunshotSound: {fileID: 8300000, guid: d76fa9917fa0a5848bdb7749feb4b871, type: 3}
+  cylinderSoundStart: {fileID: 8300000, guid: 875956ea6edbcc74086d60da39e57f5a, type: 3}
+  cylinderSoundEnd: {fileID: 8300000, guid: 3c1b2d69be3cbb54bbd86c942c2032d3, type: 3}
+  bulletFallingSound: {fileID: 8300000, guid: 1ef8f27fc33659b42bc13ee3bc39a801, type: 3}
 --- !u!1001 &1817141912858806495
 PrefabInstance:
   m_ObjectHideFlags: 0

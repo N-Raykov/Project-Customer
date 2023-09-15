@@ -953,10 +953,6 @@ MonoBehaviour:
   speed: 3
   strafeSpeed: 2
   moonWalkSpeed: 1
-  rotationSpeed: 5
-  gun: {fileID: 3417777374964521392}
-  range: 15
-  shotCD: 2
   stunAfterFall: 1.5
   heightOfFall: 110
   treesRequired: 0
@@ -1655,11 +1651,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: e9018b19a21160a4cb8cf112a4f211fb, type: 2}
-  animator: {fileID: 3393877003488950199}
-  bullet: {fileID: 3994556913236842264, guid: 511fbda12bac818479d16a9214155630, type: 3}
   muzzle: {fileID: 3393877003526560140}
   pivot: {fileID: 3393877004331873566}
-  pistolRotationPivot: {fileID: 3393877004735669813}
+  animator: {fileID: 3393877003488950199}
+  bullet: {fileID: 3994556913236842264, guid: 511fbda12bac818479d16a9214155630, type: 3}
   muzzleFlash: {fileID: 6064421988791351108, guid: 1ff9a66a753c6be48a3e0f1698a65824,
     type: 3}
   mag: {fileID: 3393443436873441146}

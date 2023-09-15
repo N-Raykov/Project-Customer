@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;    
 
 public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
@@ -9,6 +10,13 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     [SerializeField] float range;
     [SerializeField] List<Gun> gunList;//0 axe, 1 pistol,2 shotgun
     [SerializeField] PlayerUI UI;
+
+
+    [Header("UI")]
+    [SerializeField] GameObject treeHpHolder;
+    [SerializeField] TextMeshProUGUI treeHPText;
+    [SerializeField] RectTransform treeHPTransform;
+
 
     PlayerInput input;
     ShopManager shop;
@@ -111,6 +119,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     }
 
     void CheckForInteractions() {
+        treeHpHolder.SetActive(false);
 
         RaycastHit hitInfo;
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hitInfo, range);
@@ -147,8 +156,11 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     }
 
     void PickUpLog(RaycastHit pHitInfo) {
-        shop.AddMoney(pHitInfo.collider.gameObject.GetComponent<Tree>()._value);
-        Destroy(pHitInfo.collider.gameObject);
+        Tree tree= pHitInfo.collider.gameObject.GetComponent<Tree>();
+        if (tree.hasFallen) {
+            shop.AddMoney(tree._value);
+            Destroy(pHitInfo.collider.gameObject);
+        }
     }
 
 
