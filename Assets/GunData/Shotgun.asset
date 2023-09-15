@@ -19,13 +19,11 @@ MonoBehaviour:
   ammoCapacity: 6
   shotCooldown: 1
   reloadTime: 2
-  spreadFactorXMin: 0.2
-  spreadFactorYMin: 0.2
-  spreadFactorX: 0.4
-  spreadFactorY: 0.4
+  spreadFactorX: 0.3
+  spreadFactorY: 0.3
   spreadPercentageMultiplier: 10
-  spreadPercentageMultiplierAim: 5
-  spreadDecreaseRate: 4
+  spreadPercentageMultiplierAim: 0
+  spreadDecreaseRate: 30
   recoilHipFire: {x: -12, y: 6, z: 0}
   recoilAim: {x: -6, y: 3, z: 0}
   returnSpeed: 4

@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviourWithPause
 {
     [SerializeField] Transform rotationPivot;
-    Controls controls;
+
+    GoodPlayerControls controls;
     public Vector3 moveDirection { get; private set; }
     public bool jumpInput { get; private set; }
     public bool shootInput { get; private set; }
@@ -15,29 +16,36 @@ public class PlayerInput : MonoBehaviourWithPause
     public bool interactionInput { get; private set; }
     public bool skillInput { get; private set; }
 
+    public KeyCode shootKey { get; private set; }
+    public KeyCode reloadKey { get; private set; }
+
     private void Awake(){
         ignorePausedState = true;
+        if (GameSettings.grappleKey != KeyCode.None){
+            shootKey = GameSettings.shootKey;
+            reloadKey = GameSettings.reloadKey;
+        }
+        else {
+            shootKey = KeyCode.Mouse0;
+            reloadKey = KeyCode.R;
+        }
+
     }
-
     private void Start(){
-
-        controls = GameSettings.gameSettings.controls;
-        
+        controls = GetComponent<GoodPlayerControls>();
     }
 
     protected override void UpdateWithPause(){
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
         moveDirection = Quaternion.Euler(new Vector3(0, rotationPivot.transform.localEulerAngles.y, 0)) * moveDirection;
-        jumpInput = Input.GetKey(controls.keyList["jump"]);
-        //jumpInput = Input.GetAxisRaw("Jump") == 1;
-        shootInput = Input.GetKey(controls.keyList["shoot"]);
-        reloadInput = Input.GetKeyDown(controls.keyList["reload"]);
-        aimInput = Input.GetKey(controls.keyList["aim"]);
-        shopInput = Input.GetKeyUp(controls.keyList["shop"]);
-        Debug.Log(shopInput);
-        interactionInput = Input.GetKeyDown(controls.keyList["interact"]);
-        skillInput = Input.GetKeyDown(controls.keyList["ability1"]);
+        jumpInput = Input.GetAxisRaw("Jump") == 1;
+        shootInput = Input.GetKey(shootKey);
+        reloadInput = Input.GetKeyDown(reloadKey);
+        aimInput = Input.GetKey(KeyCode.Mouse1);
+        shopInput = Input.GetKeyDown(KeyCode.H);
+        interactionInput = Input.GetKeyDown(KeyCode.E);
+        skillInput = Input.GetKeyDown(KeyCode.Q);
     }
 
 }

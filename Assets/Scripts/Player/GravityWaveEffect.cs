@@ -30,24 +30,19 @@ public class GravityWaveEffect : MonoBehaviourWithPause
 
     private void Update()
     {
-        for (int i=0;i<enemiesHit.Count;i++)
+        foreach(EnemyMove enemy in enemiesHit)
         {
-            EnemyMove enemy = enemiesHit[i];
-
-            if(enemy != null)
+            if (Time.time > enemy.stunDuration - 999)
             {
-                if (Time.time > enemy.stunDuration - 999)
-                {
-                    enemy.GetComponent<Rigidbody>().useGravity = true;
-                    enemiesHit.Remove(enemy);
-                }
-                else
-                {
-                    enemy.GetComponent<Rigidbody>().useGravity = false;
-                    enemy.agent.enabled = false;
-                    enemy.isActive = false;
-                    enemy.transform.position = Vector3.Lerp(enemy.transform.position, new Vector3(enemy.agent.transform.position.x, enemy.agent.transform.position.y + floatHeight, enemy.agent.transform.position.z), floatSpeed * Time.deltaTime);
-                }
+                enemy.GetComponent<Rigidbody>().useGravity = true;
+                enemiesHit.Remove(enemy);
+            }
+            else
+            {
+                enemy.GetComponent<Rigidbody>().useGravity = false;
+                enemy.agent.enabled = false;
+                enemy.isActive = false;
+                enemy.transform.position = Vector3.Lerp(enemy.transform.position, new Vector3(enemy.agent.transform.position.x, enemy.agent.transform.position.y + floatHeight, enemy.agent.transform.position.z), floatSpeed * Time.deltaTime);
             }
         }
     }

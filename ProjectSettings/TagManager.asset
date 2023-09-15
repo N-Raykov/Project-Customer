@@ -8,7 +8,6 @@ TagManager:
   - DropPod
   - Interactable
   - Log
-  - BigTree
   layers:
   - Default
   - TransparentFX
@@ -20,7 +19,7 @@ TagManager:
   - Ground
   - Weapon
   - Bullet
-  - Axe
+  - 
   - 
   - 
   - 

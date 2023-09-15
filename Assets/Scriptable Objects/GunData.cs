@@ -15,8 +15,6 @@ public class GunData : ScriptableObject{
     public float shotCooldown;
     public float reloadTime;
     [Header("Spread")]
-    public float spreadFactorXMin;
-    public float spreadFactorYMin;
     public float spreadFactorX;
     public float spreadFactorY;
     public float spreadPercentageMultiplier;
