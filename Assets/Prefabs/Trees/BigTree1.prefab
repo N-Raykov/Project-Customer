@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7306171199637496942}
   m_Layer: 0
   m_Name: TreeTrunk.004
-  m_TagString: Untagged
+  m_TagString: Stump
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

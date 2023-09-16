@@ -80,8 +80,7 @@ public class ShopManager : MonoBehaviourWithPause{
         Physics.SphereCast(spawnPoint+new Vector3(0,10,0),dropPodSize, Vector3.down, out hit,200,mask,QueryTriggerInteraction.UseGlobal);
         if (hit.collider == null){
             DropPod dp=(Instantiate(dropPod, spawnPoint, Quaternion.identity)).GetComponent<DropPod>();
-            dp.item = pData.name;
-            dp.amount = pData.amount;
+            dp.data = pData;
             RaycastHit groundCheck;
             Physics.Raycast(spawnPoint,Vector3.down,out groundCheck, 10000, ground);
             dp.distanceToGround = groundCheck.distance;
@@ -92,8 +91,7 @@ public class ShopManager : MonoBehaviourWithPause{
             Debug.Log("help");
             if (hit.collider.gameObject.tag == "DropPod") {
                 DropPod dp = (Instantiate(dropPod, spawnPoint+new Vector3(0,5,0), Quaternion.identity)).GetComponent<DropPod>();
-                dp.item = pData.name;
-                dp.amount = pData.amount;
+                dp.data = pData;
                 RaycastHit groundCheck;
                 Physics.Raycast(spawnPoint + new Vector3(0, 5, 0), Vector3.down, out groundCheck, 10000, ground);
                 dp.distanceToGround = groundCheck.distance;

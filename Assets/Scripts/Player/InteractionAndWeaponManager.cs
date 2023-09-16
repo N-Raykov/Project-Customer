@@ -6,20 +6,25 @@ using TMPro;
 
 public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
+
+    [Header("Data")]
     [SerializeField] Camera mainCamera;
     [SerializeField] float range;
     [SerializeField] List<Gun> gunList;//0 axe, 1 pistol,2 shotgun
     [SerializeField] PlayerUI UI;
 
-
-    [Header("UI")]
+    [Header("TreeHp")]
     [SerializeField] GameObject treeHpHolder;
     [SerializeField] TextMeshProUGUI treeHPText;
     [SerializeField] RectTransform treeHPTransform;
 
+    [Header("SellMessage")]
+    [SerializeField] GameObject treeSellMessageBackground;
+    [SerializeField] TextMeshProUGUI treeSellMessage;
 
     PlayerInput input;
     ShopManager shop;
+    DropPod lastDropPodSeen;
 
     enum Weapons{
         Axe,
@@ -53,8 +58,6 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     }
 
     void ChangeActiveWeapon(Weapons pWeapon) {
-
-
 
         if (activeWeapon != Weapons.None) {
 
@@ -120,27 +123,36 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
     void CheckForInteractions() {
         treeHpHolder.SetActive(false);
+        treeSellMessageBackground.SetActive(false);
+        if (lastDropPodSeen != null) {
+            lastDropPodSeen.ChangeUIState(false);
+        }
 
         RaycastHit hitInfo;
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hitInfo, range);
         if (hitInfo.collider == null)
             return;
-        if (input.interactionInput){
 
-            switch (hitInfo.collider.gameObject.tag) {
-                case "Interactable":
+        switch (hitInfo.collider.gameObject.tag){
+            case "Interactable":
+                lastDropPodSeen = hitInfo.collider.gameObject.gameObject.GetComponent<DropPod>();
+                lastDropPodSeen.LookAtCamera();
+                lastDropPodSeen.ChangeUIState(true);
+                if (input.interactionInput)
                     PickUpDrops(hitInfo);
-                    break;
-                case "Log":
+                break;
+            case "Log":
+                ShowTreeInfo(hitInfo);
+                if (input.interactionInput)
                     PickUpLog(hitInfo);
-                    break;
-            }
+                break;
+
         }
     }
 
     void PickUpDrops(RaycastHit pHitInfo) {
-        string item = pHitInfo.collider.GetComponent<DropPod>().item;
-        int amount = pHitInfo.collider.GetComponent<DropPod>().amount;
+        string item = lastDropPodSeen.data.item;
+        int amount = lastDropPodSeen.data.amount;
         switch (item){
             case "PistolAmmo":
                 gunList[(int)Weapons.Pistol].extraAmmo += amount;
@@ -163,6 +175,20 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         }
     }
 
+    void ShowTreeInfo(RaycastHit pHitInfo) {
+        Tree tree = pHitInfo.collider.gameObject.GetComponent<Tree>();
+        if (tree._hp > 0) {
+            treeHpHolder.SetActive(true);
+            treeHPText.text = String.Format("{0}/{1} HP",tree._hp,tree._maxHP);
+            treeHPTransform.localScale = new Vector3(((float)tree._hp) / tree._maxHP, 1, 1);
+            return;
+        }
+        if (tree.hasFallen) {
+            treeSellMessageBackground.SetActive(true);
+            treeSellMessage.text = String.Format("Sell for {0}$",tree._value);
+            return;
+        }
+    }
 
     public bool CheckActiveGunisAiming() {
         return gunList[(int)activeWeapon].isAiming;

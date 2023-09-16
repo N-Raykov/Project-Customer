@@ -9,6 +9,7 @@ TagManager:
   - Interactable
   - Log
   - BigTree
+  - Stump
   layers:
   - Default
   - TransparentFX

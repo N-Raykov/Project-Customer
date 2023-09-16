@@ -41,6 +41,7 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
 
 
     private void OnTriggerEnter(Collider other){
+
         if (other.CompareTag("Log") && !isIdle) {
             other.GetComponent<Tree>().TakeDamage(transform.right);
             animator.SetFloat("speed", -1);
@@ -48,7 +49,7 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
             timeReverseTime = Time.time;
         }
 
-        if (other.CompareTag("BigTree") && !isIdle){
+        if ((other.CompareTag("BigTree")|| (other.CompareTag("Stump")) && !isIdle)){
             animator.SetFloat("speed", -1);
             timePassed = (Time.time - timeBecameNonIdle);
             timeReverseTime = Time.time;

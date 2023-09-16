@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8814826376877044452}
   m_Layer: 0
   m_Name: Trunk_TreeEnvironment_02.005
-  m_TagString: Untagged
+  m_TagString: Stump
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
