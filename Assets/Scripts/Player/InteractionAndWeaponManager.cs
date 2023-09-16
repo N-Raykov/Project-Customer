@@ -12,6 +12,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     [SerializeField] float range;
     [SerializeField] List<Gun> gunList;//0 axe, 1 pistol,2 shotgun
     [SerializeField] PlayerUI UI;
+    [SerializeField] GameObject ammoPanel;
 
     [Header("TreeHp")]
     [SerializeField] GameObject treeHpHolder;
@@ -98,6 +99,11 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
 
     protected override void UpdateWithPause(){
+
+        if (activeWeapon == Weapons.Axe)
+            ammoPanel.SetActive(false);
+        else
+            ammoPanel.SetActive(true);
 
         foreach (Weapons weapon in Enum.GetValues(typeof(Weapons))) {
 
