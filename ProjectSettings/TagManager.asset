@@ -10,6 +10,7 @@ TagManager:
   - Log
   - BigTree
   - Stump
+  - Enemy
   layers:
   - Default
   - TransparentFX

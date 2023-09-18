@@ -59,6 +59,7 @@ public abstract class Gun : MonoBehaviourWithPause{
         DecreaseRecoilRotation();
     }
 
+
     protected virtual void CheckForActions() {
         CheckForShots();
         CheckForReload();
@@ -88,6 +89,7 @@ public abstract class Gun : MonoBehaviourWithPause{
             if (pistolRotationPivot.localPosition != pistolRotationPivotStartPosition&&isAiming) {
                 pistolRotationPivot.DOLocalMove(pistolRotationPivotStartPosition, gunData.zoomInDuration);
                 mainCamera.DOPause();
+                transform.localEulerAngles -= new Vector3(0, 0, gunData.zChangeForAiming);//here
                 isAiming = false;
                 StartCoroutine(DecreaseFOVAndAddUI(gunData.zoomInDuration));
             }
@@ -99,7 +101,8 @@ public abstract class Gun : MonoBehaviourWithPause{
         if (!isAiming && state != States.Reload&&isAimingAllowed) {
             pistolRotationPivot.DOPause();
             isAiming = true;
-            pistolRotationPivot.DOLocalMove(gunData.targetPosition,gunData.zoomInDuration);
+            transform.localEulerAngles += new Vector3(0, 0, gunData.zChangeForAiming);//here
+            pistolRotationPivot.DOLocalMove(gunData.targetPosition, gunData.zoomInDuration);
             StartCoroutine(IncreaseFOVAndRemoveUI(gunData.zoomInDuration));
         }
     }
@@ -164,6 +167,7 @@ public abstract class Gun : MonoBehaviourWithPause{
         pistolRotationPivot.DOLocalMove(pistolRotationPivotStartPosition, gunData.zoomInDuration / 1.5f);
         mainCamera.DOPause();
         isAiming = false;
+        transform.localEulerAngles -= new Vector3(0, 0, gunData.zChangeForAiming);//here
         StartCoroutine(DecreaseFOVAndAddUI(gunData.zoomInDuration / 1.5f));
         yield return new WaitForSeconds(gunData.zoomInDuration / 1.5f);
         Reload();

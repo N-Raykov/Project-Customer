@@ -30,4 +30,5 @@ public class GunData : ScriptableObject{
     public Vector3 targetPosition;
     public float zoomInDuration;
     public float zoomInFactor;
+    public float zChangeForAiming;
 }
