@@ -12,6 +12,7 @@ public class ShopButtonData : ScriptableObject{
     public int cost;
     public int stock;
     public int amount;
+    public string dropMessage;
 
     public void CopyFrom(ShopButtonData other)
     {

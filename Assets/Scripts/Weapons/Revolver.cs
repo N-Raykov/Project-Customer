@@ -21,7 +21,7 @@ public class Revolver : Gun{
 
     protected override void StartShotAnimation(){
         animator.SetTrigger("Shoot");
-        StartCoroutine(SpinMag());
+        //StartCoroutine(SpinMag());
         gunshot.PlayOneShot(gunshotSound);
     }
 

@@ -14,7 +14,6 @@ public class PlayerInput : MonoBehaviourWithPause
     public bool shopInput { get; private set; }
     public bool interactionInput { get; private set; }
     public bool skillInput { get; private set; }
-    public bool spawnBot { get; private set; }
 
     private void Awake(){
         ignorePausedState = true;
@@ -31,15 +30,12 @@ public class PlayerInput : MonoBehaviourWithPause
         moveDirection.Normalize();
         moveDirection = Quaternion.Euler(new Vector3(0, rotationPivot.transform.localEulerAngles.y, 0)) * moveDirection;
         jumpInput = Input.GetKey(controls.keyList["jump"]);
-        //jumpInput = Input.GetAxisRaw("Jump") == 1;
         shootInput = Input.GetKey(controls.keyList["shoot"]);
         reloadInput = Input.GetKeyDown(controls.keyList["reload"]);
         aimInput = Input.GetKey(controls.keyList["aim"]);
         shopInput = Input.GetKeyUp(controls.keyList["shop"]);
-        //Debug.Log(shopInput);
         interactionInput = Input.GetKeyDown(controls.keyList["interact"]);
         skillInput = Input.GetKeyDown(controls.keyList["ability1"]);
-        spawnBot = Input.GetKeyDown(controls.keyList["spawnBot"]);
     }
 
 }

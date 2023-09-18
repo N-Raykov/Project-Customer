@@ -17,3 +17,4 @@ MonoBehaviour:
   cost: 10
   stock: -1
   amount: 40
+  dropMessage: Pistol Ammo x40
