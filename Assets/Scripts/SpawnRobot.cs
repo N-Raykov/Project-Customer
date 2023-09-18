@@ -24,8 +24,10 @@ public class SpawnRobot : MonoBehaviourWithPause
 
     protected override void UpdateWithPause()
     {
+
         if (input.spawnBot && isAvailable == true)
         {
+            Debug.Log("working");
             isAvailable = false;
             Spawn();
         }
