@@ -38,10 +38,10 @@ public class MoodHandler : MonoBehaviour
     void Update()
     {
         //FOR TESTING ONLY!!!
-        //if (Application.isPlaying)
-        //{
-        //    globalDegradation = (Mathf.Sin(-0.5f*Mathf.PI + (Time.realtimeSinceStartup / 10))/2) +0.5f;
-        //}
+        if (Application.isPlaying)
+        {
+            globalDegradation = (Mathf.Sin(-0.5f*Mathf.PI + (Time.realtimeSinceStartup / 10))/2) +0.5f;
+        }
 
         musicHandler.musicTransitionProgress = globalDegradation;
         float degradeLerp = Mathf.InverseLerp(0.6f, 1.0f, globalDegradation);
