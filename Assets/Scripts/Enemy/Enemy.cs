@@ -41,6 +41,6 @@ public class Enemy : MonoBehaviourWithPause{
     }
 
     void Die() {
-        Destroy(this.gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }
