@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 367520847882982164}
   - component: {fileID: 7376096486648199764}
   - component: {fileID: 9005962327271869960}
-  - component: {fileID: 6810160050774540031}
   m_Layer: 0
   m_Name: Leaves_TreeEnvironment_02.001
   m_TagString: Log
@@ -136,22 +135,6 @@ MonoBehaviour:
   duration: 25
   timeDelay: 0.1
   directionDivisioFactor: 2.5
---- !u!208 &6810160050774540031
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586032155775308676}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.25, y: 3.874, z: 0.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 0
-  m_Center: {x: 0, y: 4.714, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &3334256417082102114
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,6 +39,7 @@ public class DropPod : MonoBehaviourWithPause{
         yield return new WaitForSeconds(pTime);
         startingVelocity = pVelocity;
         rb.AddForce(Vector3.down * startingVelocity, ForceMode.VelocityChange);
+
     }
 
     public void ChangeUIState(bool pState) {

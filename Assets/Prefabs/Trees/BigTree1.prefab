@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 7353449036211361997}
   - component: {fileID: 5633610214705930117}
   - component: {fileID: 3256638940703598367}
-  - component: {fileID: 7547842329319875857}
   m_Layer: 0
   m_Name: TreeTrunk.001
   m_TagString: BigTree
@@ -250,22 +249,6 @@ MonoBehaviour:
   duration: 50
   timeDelay: 0.1
   directionDivisioFactor: 1.75
---- !u!208 &7547842329319875857
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7837755005338450826}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1, y: 8.477, z: 1}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 0
-  m_Center: {x: 0, y: 8.477, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7903446498647816126
 GameObject:
   m_ObjectHideFlags: 0

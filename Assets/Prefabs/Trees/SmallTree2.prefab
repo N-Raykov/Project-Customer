@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 8489057721638871994}
   - component: {fileID: 2731593581674805636}
   - component: {fileID: 6484306786180998354}
-  - component: {fileID: 1258601315969900750}
   m_Layer: 0
   m_Name: 2Leaves.143
   m_TagString: Log
@@ -250,22 +249,6 @@ MonoBehaviour:
   duration: 25
   timeDelay: 0.1
   directionDivisioFactor: 2.5
---- !u!208 &1258601315969900750
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653294560171635628}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.25, y: 3.933, z: 0.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 0
-  m_Center: {x: 0, y: 4.655, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &2878561405115263582
 GameObject:
   m_ObjectHideFlags: 0
