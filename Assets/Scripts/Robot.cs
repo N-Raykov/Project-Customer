@@ -16,17 +16,8 @@ public class Robot : MonoBehaviourWithPause
     Tree bigTree;
     float timeStartedCutting;
 
-    [SerializeField] float startingVelocity;
-    bool isActive = false;
-
-    float startPosition;
-    float currentPosition;
-    float timeToWaitUntilStart;
-
     GameObject closestTree;
     Vector3 treeDirection;
-
-    public float distanceToGround { get; set; }
 
     private enum RobotState 
     { 
@@ -41,35 +32,18 @@ public class Robot : MonoBehaviourWithPause
 
     private void Start()
     {
-        GetComponents();
-
-        Fall();
-    }
-
-    void GetComponents()
-    {
-        agent = transform.parent.GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         closestTree = FindClosestBigTree();
-        bigTree = closestTree.GetComponent<Tree>();
+        if (closestTree == null)
+        {
+            closestTree = this.gameObject;
+        }
+        else
+        {
+            bigTree = closestTree.GetComponent<Tree>();
+        }
         GameManager.robot = gameObject;
-        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
-    }
-
-    void Fall()
-    {
-        startPosition = transform.position.y;
-        float velocity = startingVelocity + UnityEngine.Random.Range(5, 10) * ((UnityEngine.Random.Range(0, 2) == 0) ? -1 : 1);
-        startingVelocity = 0;
-        timeToWaitUntilStart = UnityEngine.Random.Range(1, 5);
-        StartCoroutine(WaitToStart(timeToWaitUntilStart, velocity));
-    }
-
-    IEnumerator WaitToStart(float pTime, float pVelocity)
-    {
-        yield return new WaitForSeconds(pTime);
-        startingVelocity = pVelocity;
-        rb.AddForce(Vector3.down * startingVelocity, ForceMode.VelocityChange);
     }
 
     GameObject FindClosestBigTree()
@@ -108,9 +82,7 @@ public class Robot : MonoBehaviourWithPause
         {
             case RobotState.Walking:
 
-                Vector3 closestTreeTrunk = new Vector3(closestTree.transform.position.x, transform.position.y, closestTree.transform.position.z);
-
-                agent.SetDestination(closestTreeTrunk);
+                agent.SetDestination(closestTree.transform.position);
                 agent.speed = speed;
 
                 treeDirection = closestTree.transform.position - transform.position;
@@ -122,7 +94,7 @@ public class Robot : MonoBehaviourWithPause
                     transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
                 }
 
-                if (Vector3.Distance(agent.destination, transform.position) < 1f)
+                if (Vector3.Distance(closestTree.transform.position, transform.position) < 2.5f)
                 {
                     currentState = RobotState.Cutting;
                     agent.SetDestination(transform.position);
@@ -175,21 +147,18 @@ public class Robot : MonoBehaviourWithPause
 
     void ExtraStuff()
     {
+        /*
+        if (rb.velocity.y > 40)
+        {
+            rb.velocity *= 0.9f;
+        }
+        */
+
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
         if (GameManager.gameIsPaused == true)
         {
             currentState = RobotState.Paused;
-        }
-
-        if (isActive == false)
-        {
-            currentPosition = transform.position.y;
-            float t = Mathf.Abs(currentPosition - startPosition) / heightOfFall;
-            rb.velocity = new Vector3(0, -Mathf.Lerp(startingVelocity, 0f, t), 0);
-        }
-
-        if (bigTree == null)
-        {
-            Destroy(transform.parent.gameObject);
         }
     }
 
@@ -203,18 +172,8 @@ public class Robot : MonoBehaviourWithPause
     {
         if (collision.gameObject.tag == "BigTree")
         {
-            Destroy(transform.parent.gameObject);
-        }
-
-        if (collision.gameObject.tag == "Ground" && isActive == false)
-        {
-            agent.enabled = true;
-            rb.useGravity = true;
-            rb.constraints = RigidbodyConstraints.None;
-            GetStunned(stunAfterFall);
-            isActive = true;
+            Debug.Log("L");
+            Destroy(this.gameObject);
         }
     }
-
-
 }
