@@ -31,6 +31,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         Axe,
         Pistol,
         Shotgun,
+        AssaultRifle,
         None
     }
 

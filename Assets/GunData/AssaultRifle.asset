@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 815de4f95265bac45a343bc461822c9c, type: 3}
-  m_Name: Shotgun
+  m_Name: AssaultRifle
   m_EditorClassIdentifier: 
   gunName: AssaultRIfle
   damage: 10
-  range: 15
-  bulletSpeed: 40
-  ammoCapacity: 6
-  shotCooldown: 1
-  reloadTime: 2
-  spreadFactorXMin: 0.2
-  spreadFactorYMin: 0.2
-  spreadFactorX: 0.4
-  spreadFactorY: 0.4
-  spreadPercentageMultiplier: 10
-  spreadPercentageMultiplierAim: 5
-  spreadDecreaseRate: 4
-  recoilHipFire: {x: -12, y: 6, z: 0}
-  recoilAim: {x: -6, y: 3, z: 0}
-  returnSpeed: 4
+  range: 50
+  bulletSpeed: 50
+  ammoCapacity: 30
+  shotCooldown: 0.075
+  reloadTime: 2.5
+  spreadFactorXMin: 0.05
+  spreadFactorYMin: 0.05
+  spreadFactorX: 0.1
+  spreadFactorY: 0.1
+  spreadPercentageMultiplier: 5
+  spreadPercentageMultiplierAim: 2.5
+  spreadDecreaseRate: 20
+  recoilHipFire: {x: -4, y: 2, z: 0}
+  recoilAim: {x: -2, y: 1, z: 0}
+  returnSpeed: 3
   targetPosition: {x: 0, y: -0.3410001, z: 0.6820004}
   zoomInDuration: 0.5
   zoomInFactor: 1.25
