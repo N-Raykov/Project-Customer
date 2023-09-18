@@ -947,7 +947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minStrafeDuration: 1
   maxStrafeDuration: 3
-  aggroRange: 30
+  aggroRange: 15
   preferredRange: 10
   minRange: 5
   speed: 3

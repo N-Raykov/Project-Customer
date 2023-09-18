@@ -35,9 +35,8 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float stunAfterFall;
     [SerializeField] float heightOfFall;
     [SerializeField] int treesRequired;
-    bool isActive;
+    [System.NonSerialized] public bool isActive;
     bool hasSpawned;
-    MeshRenderer meshRenderer;
     Rigidbody rb;
     Transform gunPivot;
 
@@ -56,7 +55,6 @@ public class EnemyMove : MonoBehaviourWithPause
         ignorePausedState = true;
         agent.enabled = false;
         rb = GetComponent<Rigidbody>();
-        meshRenderer = GetComponent<MeshRenderer>();
         player = GameObject.Find("Player");
         gunPivot = gun.transform.parent.transform;
         transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
@@ -69,6 +67,7 @@ public class EnemyMove : MonoBehaviourWithPause
     protected override void UpdateWithPause()
     {
         ExtraStuff();
+
 
         if(agent.enabled == true)
         {
@@ -100,7 +99,7 @@ public class EnemyMove : MonoBehaviourWithPause
                     if (Time.time >= strafeTimer)
                     {
                         RandomlySwitchDirection();
-                        ResetStrafeTimer();
+                        ResetstrafeTimer();
                     }
                 }
                 else
@@ -133,6 +132,8 @@ public class EnemyMove : MonoBehaviourWithPause
 
                     agent.destination = this.transform.position;
 
+                    timeSinceLastShot = shotCD;
+
                     return;
                 }
                 break;
@@ -158,8 +159,8 @@ public class EnemyMove : MonoBehaviourWithPause
 
         float minDistance = 3.0f;
         float maxDistance = 15.0f;
-        float minValue = 1.9f;
-        float maxValue = 1.3f;
+        float minValue = 2.2f;
+        float maxValue = 1.6f;
 
         float t = Mathf.Clamp01((distanceToPlayer - minDistance) / (maxDistance - minDistance));
         float marginOfError = Mathf.Lerp(minValue, maxValue, t);
@@ -175,18 +176,17 @@ public class EnemyMove : MonoBehaviourWithPause
 
         float rotationSpeed = Mathf.Clamp(angleDifference / maxRotationTime, minRotationSpeed, maxRotationSpeed);
 
-        float currentToTargetRotation = Compare(targetRotation, transform.rotation);
+        float currentToTargetRotation = compare(targetRotation, transform.rotation);
 
 
         if(currentToTargetRotation < 50)
         {
             gunPivot.transform.rotation = Quaternion.Slerp(gunPivot.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * 0.2f * Time.deltaTime);
-
-        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
-        
+        else
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * 0.2f * Time.deltaTime);
+        }
 
         if (distanceToPlayer < range && timeSinceLastShot < 0.0f)
         {
@@ -195,7 +195,7 @@ public class EnemyMove : MonoBehaviourWithPause
         }
     }
 
-    private float Compare(Quaternion quatA, Quaternion quatB)
+    private float compare(Quaternion quatA, Quaternion quatB)
     {
         return Quaternion.Angle(quatA, quatB);
     }
@@ -206,8 +206,6 @@ public class EnemyMove : MonoBehaviourWithPause
         if (GameManager.fallenTrees == treesRequired && hasSpawned == false)
         {
             hasSpawned = true;
-            meshRenderer.enabled = true;
-            rb.constraints &= ~RigidbodyConstraints.FreezePosition;
             rb.velocity *= 0;
         }
         else if (hasSpawned == false)
@@ -229,8 +227,7 @@ public class EnemyMove : MonoBehaviourWithPause
     {
         agent.enabled = false;
         transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
-        meshRenderer.enabled = false;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
+
         GetStunned(999);
     }
 
@@ -265,7 +262,7 @@ public class EnemyMove : MonoBehaviourWithPause
         }
     }
 
-    private void ResetStrafeTimer()
+    private void ResetstrafeTimer()
     {
         strafeTimer = Time.time + Random.Range(minStrafeDuration, maxStrafeDuration);
     }

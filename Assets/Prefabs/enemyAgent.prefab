@@ -391,7 +391,7 @@ MonoBehaviour:
   animator: {fileID: 1762181674428946154}
   bullet: {fileID: 3994556913236842264, guid: 511fbda12bac818479d16a9214155630, type: 3}
   muzzle: {fileID: 1762181674407852241}
-  pivot: {fileID: 1762181673203255144}
+  pivot: {fileID: 0}
   pistolRotationPivot: {fileID: 1762181673203255144}
   muzzleFlash: {fileID: 6064421988791351108, guid: 1ff9a66a753c6be48a3e0f1698a65824,
     type: 3}
@@ -774,7 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c91b6702efd374aa33e14ffad22c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHp: 50
+  enemyMaxHp: 100
   hpBar: {fileID: 1762181673799011553}
   hpBarTransform: {fileID: 1762181673147677022}
   timeBeforeHidingBar: 5
@@ -802,11 +802,11 @@ MonoBehaviour:
   maxRotationSpeed: 10
   maxRotationTime: 1.5
   gun: {fileID: 1730400028305504493}
-  range: 25
+  range: 15
   shotCD: 2
   stunAfterFall: 1.5
   heightOfFall: 110
-  treesRequired: 0
+  treesRequired: 1
 --- !u!1 &1762181673147677017
 GameObject:
   m_ObjectHideFlags: 0
