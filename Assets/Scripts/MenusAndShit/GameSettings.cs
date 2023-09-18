@@ -45,8 +45,6 @@ public class GameSettings : MonoBehaviourWithPause {
 
         controls = GetComponent<Controls>();
 
-
-
     }
     private void Start(){
 
@@ -56,11 +54,15 @@ public class GameSettings : MonoBehaviourWithPause {
         textLinks.Add("shoot", shoot);
         textLinks.Add("aim", aim);
         textLinks.Add("reload", reload);
-        textLinks.Add("ability", ability);
+        textLinks.Add("ability1", ability);
 
+        textLinks["jump"].text = "" + controls.keyList["jump"];
+        textLinks["interact"].text = "" + controls.keyList["interact"];
+        textLinks["shop"].text = "" + controls.keyList["shop"];
         textLinks["shoot"].text = "" + controls.keyList["shoot"];
-
-
+        textLinks["aim"].text = "" + controls.keyList["aim"];
+        textLinks["reload"].text = "" + controls.keyList["reload"];
+        textLinks["ability1"].text = "" + controls.keyList["ability1"];
 
     }
     public void SetVolume(float pVolume) {

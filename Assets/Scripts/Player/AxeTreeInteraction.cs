@@ -42,6 +42,8 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
 
     private void OnTriggerEnter(Collider other){
 
+        Debug.Log(other.tag);
+
         if (other.CompareTag("Log") && !isIdle) {
             other.GetComponent<Tree>().TakeDamage(transform.right);
             animator.SetFloat("speed", -1);

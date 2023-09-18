@@ -1876,6 +1876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPivot: {fileID: 0}
   animator: {fileID: 369046176}
+  data: {fileID: 11400000, guid: 9e06ec82376f4844f8637a3bca4bab86, type: 2}
 --- !u!1 &977011954
 GameObject:
   m_ObjectHideFlags: 0
@@ -4033,7 +4034,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2036626780
 Transform:
   m_ObjectHideFlags: 0
@@ -5664,7 +5665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9040261223094942639
 Transform:
   m_ObjectHideFlags: 0
@@ -7064,7 +7065,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8b6ae6bdd16100b4cadabba5db0f339a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6905609870639353253, guid: 8b6ae6bdd16100b4cadabba5db0f339a,
         type: 3}
@@ -7731,7 +7732,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 1921
-  bullet: {fileID: 664451063858303514, guid: 6de9af2161fd93b4db6a0efeedea3bb4, type: 3}
+  bullet: {fileID: 3354344775506969188, guid: d4251bd2b76dd944199467a2fb3e1425, type: 3}
   muzzle: {fileID: 4366635989540009933}
   pistolRotationPivot: {fileID: 1001639994203087779}
   recoilPivot: {fileID: 1465239314249981367}
