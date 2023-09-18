@@ -70,13 +70,13 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9b501bf9c70caac4893b7d73cc19bc08,
         type: 3}
       propertyPath: m_Name
-      value: BigTree_CutVersion_02
+      value: BigTree_CutVersion_02 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6820088007293618789, guid: 9b501bf9c70caac4893b7d73cc19bc08,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1df6f8c9d710fcc4fa8817feee8e05d5, type: 2}
+      objectReference: {fileID: 2100000, guid: 3c62d606f3c8b4d4d939c7f3ead3efe9, type: 2}
     - target: {fileID: 6820088007293618789, guid: 9b501bf9c70caac4893b7d73cc19bc08,
         type: 3}
       propertyPath: m_Materials.Array.data[1]

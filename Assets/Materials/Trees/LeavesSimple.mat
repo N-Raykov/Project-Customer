@@ -14,7 +14,7 @@ Material:
   - _ALPHATEST_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap:
@@ -99,6 +99,7 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DegradationProgress: 0
+    - _DegradationSize: 10
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -134,7 +135,7 @@ Material:
     - _Dark_Color: {r: 0.053079378, g: 0.1981132, b: 0.13938928, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Light_Color: {r: 0.4312959, g: 0.6603774, b: 0.22054109, a: 0}
-    - _RimColor: {r: 0.5353206, g: 0.6037736, b: 0.36682093, a: 0}
+    - _RimColor: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _WindDirection: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

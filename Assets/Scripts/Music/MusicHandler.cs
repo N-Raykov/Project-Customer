@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicHandler : MonoBehaviour
 {
-    [SerializeField] [Range(0.0f, 1.0f)] private float musicTransitionProgress;
+    [Range(0.0f, 1.0f)] public float musicTransitionProgress;
 
     [SerializeField] private AudioClip[] musicTracks;
     [SerializeField] private float transitionTimeSpeed = 1.0f;

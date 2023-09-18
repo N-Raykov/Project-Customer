@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6bdc033b126af1c48bfb2032b05458cf,
         type: 3}
       propertyPath: m_Name
-      value: SmallTree_CutVersion_05
+      value: SmallTree_CutVersion_05 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5198542658538022550, guid: 6bdc033b126af1c48bfb2032b05458cf,
         type: 3}
@@ -76,7 +76,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: cbc51dc297b3c254e88f867c63076d2b, type: 2}
+      objectReference: {fileID: 2100000, guid: 98da8d63c4638eb42941ca15e2d4efbe, type: 2}
     - target: {fileID: 7120508712075924844, guid: 6bdc033b126af1c48bfb2032b05458cf,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
