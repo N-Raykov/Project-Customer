@@ -37,6 +37,16 @@ public class Revolver : Gun{
             yield return new WaitForSeconds(0.01f);
         }
     }
+    protected override void CreateBullet(){
+        Vector3 targetRotation = mainCamera.transform.eulerAngles - new Vector3(0,90,0);
+        GameObject b = Instantiate(bullet, muzzle.position, Quaternion.Euler(targetRotation));
+        Bullet bt = b.GetComponent<Bullet>();
+        bt.damage = gunData.damage;
+        bt.speed = gunData.bulletSpeed;
+        bt.range = gunData.range;
+        bt.AddSpeed(AimAtTarget());
+        Instantiate(muzzleFlash, muzzle.position, mainCamera.transform.rotation, muzzle);
+    }
 
     void PlayCylinderStart(){
         gunshot.PlayOneShot(cylinderSoundStart);
