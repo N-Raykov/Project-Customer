@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   gunName: Axe
-  damage: 20
+  damage: 100
   range: 0
+  bulletSpeed: 0
   ammoCapacity: 1
   shotCooldown: 1
   reloadTime: 0
+  spreadFactorXMin: 0
+  spreadFactorYMin: 0
   spreadFactorX: 0
   spreadFactorY: 0
   spreadPercentageMultiplier: 0
-  timeBeforeSpreadDecrease: 0
+  spreadPercentageMultiplierAim: 0
   spreadDecreaseRate: 0
   recoilHipFire: {x: 0, y: 0, z: 0}
   recoilAim: {x: 0, y: 0, z: 0}
@@ -29,3 +32,4 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   zoomInDuration: 0
   zoomInFactor: 0
+  zChangeForAiming: 0

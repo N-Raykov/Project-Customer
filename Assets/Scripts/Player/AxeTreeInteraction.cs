@@ -7,6 +7,7 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
     [Header("Data")]
     [SerializeField] Transform cameraPivot;
     [SerializeField] Animator animator;
+    [SerializeField] GunData data;
 
     bool isIdle = true;
     float timeBecameNonIdle;
@@ -39,8 +40,9 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
 
     }
 
-
     private void OnTriggerEnter(Collider other){
+
+        Debug.Log(other.tag);
 
         if (other.CompareTag("Log") && !isIdle) {
             other.GetComponent<Tree>().TakeDamage(transform.right);
@@ -50,6 +52,13 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
         }
 
         if ((other.CompareTag("BigTree")|| (other.CompareTag("Stump")) && !isIdle)){
+            animator.SetFloat("speed", -1);
+            timePassed = (Time.time - timeBecameNonIdle);
+            timeReverseTime = Time.time;
+        }
+
+        if (other.CompareTag("Enemy") && !isIdle){
+            other.GetComponent<Enemy>().TakeDamage(data.damage);
             animator.SetFloat("speed", -1);
             timePassed = (Time.time - timeBecameNonIdle);
             timeReverseTime = Time.time;

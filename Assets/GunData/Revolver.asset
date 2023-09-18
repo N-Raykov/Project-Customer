@@ -17,7 +17,7 @@ MonoBehaviour:
   range: 50
   bulletSpeed: 40
   ammoCapacity: 6
-  shotCooldown: 0.4
+  shotCooldown: 0.6
   reloadTime: 1.6
   spreadFactorXMin: 0.1
   spreadFactorYMin: 0.1
@@ -27,8 +27,9 @@ MonoBehaviour:
   spreadPercentageMultiplierAim: 4
   spreadDecreaseRate: 10
   recoilHipFire: {x: -8.5, y: 0, z: 0}
-  recoilAim: {x: 4, y: 0, z: 0}
+  recoilAim: {x: -4, y: 0, z: 0}
   returnSpeed: 4
-  targetPosition: {x: 0, y: -0.3310001, z: 0.6820004}
+  targetPosition: {x: 0, y: -0.285, z: 0.6820002}
   zoomInDuration: 0.5
-  zoomInFactor: 1.25
+  zoomInFactor: 1
+  zChangeForAiming: -3
