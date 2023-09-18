@@ -17,3 +17,4 @@ MonoBehaviour:
   cost: 50
   stock: 1
   amount: -1
+  dropMessage: Shotgun

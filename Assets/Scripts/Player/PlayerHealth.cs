@@ -2,29 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
-public class PlayerHealth : MonoBehaviourWithPause
-{
+public class PlayerHealth : MonoBehaviourWithPause{
+
     [Header("Hp")]
     [SerializeField] float maxHp;
-    float currentHP;
+    //[Header("Hp")]
+    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] RectTransform hpBarTransform;
 
-    void Start()
-    {
+    public float currentHP { get; private set; }
+
+    void Start(){
         currentHP = maxHp;
+        text.text = string.Format("{0}/{1} HP", currentHP, maxHp);
     }
 
-    public void TakeDamage(float pDamage)
-    {
+    public void TakeDamage(float pDamage){
         currentHP = Mathf.Max(0, currentHP - pDamage);
-        if (currentHP == 0)
-        {
+        text.text = string.Format("{0}/{1} HP",currentHP,maxHp);
+        hpBarTransform.localScale = new Vector3(currentHP / maxHp, 1, 1);
+        if (currentHP == 0){
             Die();
         }
     }
 
-    void Die()
-    {
+    void Die(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.fallenTrees = 0;
     }

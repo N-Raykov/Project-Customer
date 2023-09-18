@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815de4f95265bac45a343bc461822c9c, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  gunName: Shotgun
+  gunName: AssaultRIfle
   damage: 10
   range: 15
   bulletSpeed: 40

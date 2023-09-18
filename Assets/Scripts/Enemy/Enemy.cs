@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviourWithPause{
     [SerializeField]float enemyMaxHp;
     float currentHP;
 
-    [System.NonSerialized] public float missingHealth;
+    public float missingHealth { get; set; }
 
     [Header("References")]
     [SerializeField] GameObject hpBar;

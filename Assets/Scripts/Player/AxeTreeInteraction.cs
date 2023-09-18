@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class AxeTreeInteraction : MonoBehaviourWithPause{
 
+    [Header("Data")]
     [SerializeField] Transform cameraPivot;
     [SerializeField] Animator animator;
+
     bool isIdle = true;
     float timeBecameNonIdle;
     float timeReverseTime;
@@ -30,7 +32,6 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
 
 
         if (!isIdle && timePassed != 0 && Time.time - timeReverseTime > timePassed) {
-            //Debug.Log("working");
             timePassed = 0;
             animator.SetTrigger("Reverse");
 
@@ -40,8 +41,15 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
 
 
     private void OnTriggerEnter(Collider other){
+
         if (other.CompareTag("Log") && !isIdle) {
             other.GetComponent<Tree>().TakeDamage(transform.right);
+            animator.SetFloat("speed", -1);
+            timePassed = (Time.time - timeBecameNonIdle);
+            timeReverseTime = Time.time;
+        }
+
+        if ((other.CompareTag("BigTree")|| (other.CompareTag("Stump")) && !isIdle)){
             animator.SetFloat("speed", -1);
             timePassed = (Time.time - timeBecameNonIdle);
             timeReverseTime = Time.time;
