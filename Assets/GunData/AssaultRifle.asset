@@ -18,7 +18,7 @@ MonoBehaviour:
   bulletSpeed: 100
   ammoCapacity: 30
   shotCooldown: 0.145
-  reloadTime: 2.5
+  reloadTime: 3
   spreadFactorXMin: 0.05
   spreadFactorYMin: 0.05
   spreadFactorX: 0.1
