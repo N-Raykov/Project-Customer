@@ -350,6 +350,7 @@ MonoBehaviour:
   stunAfterFall: 0
   heightOfFall: 0
   timeToCut: 5
+  startingVelocity: 100
 --- !u!1 &2752344671710476835
 GameObject:
   m_ObjectHideFlags: 0

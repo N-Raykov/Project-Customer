@@ -12,7 +12,7 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
     }
     State state;
     State lastState;
-
+    public int zone { get; set; }
 
     [Header("Movement")]
     [SerializeField] float moveSpeed;
@@ -44,6 +44,7 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
         normalSpeedMultiplier = 1;
         maxSpeedMultiplier = normalMaxSpeedMultiplier;
         speedMultiplier = normalSpeedMultiplier;
+        zone = -1;
     }
     protected override void FixedUpdateWithPause(){
         StateMachine();

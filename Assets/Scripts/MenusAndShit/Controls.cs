@@ -17,6 +17,7 @@ public class Controls : MonoBehaviourWithPause {
         keyList.Add("aim", KeyCode.Mouse1);
         keyList.Add("reload", KeyCode.R);
         keyList.Add("ability1", KeyCode.Q);
+        keyList.Add("robotSpawn", KeyCode.G);
 
     }
 
