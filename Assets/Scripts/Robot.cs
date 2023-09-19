@@ -13,7 +13,7 @@ public class Robot : MonoBehaviourWithPause
     [SerializeField] float heightOfFall;
     [SerializeField] float timeToCut;
     Rigidbody rb;
-    Tree bigTree;
+
     float timeStartedCutting;
 
     [SerializeField] float startingVelocity;
@@ -26,21 +26,29 @@ public class Robot : MonoBehaviourWithPause
     GameObject closestTree;
     Vector3 treeDirection;
 
+    [SerializeField] Animator animator;
+
+    const string isMoving = "isMoving";
+    const string startsCutting = "Starts Cutting";
+    const string stopsCutting = "Stops Cutting";
+
     public float distanceToGround { get; set; }
 
-    private enum RobotState
+    public enum RobotState
     {
         Walking,
         Cutting,
         Stunned,
         Paused
     }
-
-    private RobotState currentState = RobotState.Walking;
     float stunDuration;
+
+    public RobotState currentState { get; private set; }
+    public Tree bigTree { get; private set; }
 
     private void Start()
     {
+        currentState = RobotState.Walking;
         GetComponents();
 
         Fall();
@@ -122,11 +130,12 @@ public class Robot : MonoBehaviourWithPause
                     transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
                 }
 
-                if (Vector3.Distance(agent.destination, transform.position) < 2f)
+                if (Vector3.Distance(agent.destination, transform.position) < 2.5f)
                 {
                     currentState = RobotState.Cutting;
                     agent.SetDestination(transform.position);
                     timeStartedCutting = Time.time;
+                    animator.SetTrigger(startsCutting);
                 }
 
                 break;
@@ -145,6 +154,7 @@ public class Robot : MonoBehaviourWithPause
                     bigTree.TakeDamage(-transform.forward);
                     agent.enabled = false;
                     GameManager.robot = null;
+                    animator.SetTrigger(stopsCutting);
                 }
                 break;
 
@@ -175,6 +185,8 @@ public class Robot : MonoBehaviourWithPause
 
     void ExtraStuff()
     {
+        animator.SetBool(isMoving, agent.velocity.magnitude > Mathf.Epsilon);
+
         if (GameManager.gameIsPaused == true)
         {
             currentState = RobotState.Paused;
