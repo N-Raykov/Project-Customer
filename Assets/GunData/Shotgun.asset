@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   gunName: AssaultRIfle
-  damage: 10
+  damage: 70
   range: 15
   bulletSpeed: 70
   ammoCapacity: 6

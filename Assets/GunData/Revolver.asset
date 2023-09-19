@@ -17,7 +17,7 @@ MonoBehaviour:
   range: 50
   bulletSpeed: 80
   ammoCapacity: 6
-  shotCooldown: 0.6
+  shotCooldown: 0.5
   reloadTime: 1.6
   spreadFactorXMin: 0.1
   spreadFactorYMin: 0.1
