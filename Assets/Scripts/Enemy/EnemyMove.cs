@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviourWithPause
 {
-
-    GameObject player;
     [SerializeField] float minStrafeDuration;
     [SerializeField] float maxStrafeDuration;
 
@@ -64,7 +62,6 @@ public class EnemyMove : MonoBehaviourWithPause
         ignorePausedState = true;
         rb = GetComponent<Rigidbody>();
         enemyAim = GetComponent<EnemyAim>();
-        player = GameObject.Find("Player");
         transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
     }
 

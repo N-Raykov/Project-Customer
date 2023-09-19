@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class SpawnRobot : MonoBehaviourWithPause
 {
-    bool isAvailable = true;
-
     Rigidbody rb;
     [SerializeField] PlayerInput input;
     [SerializeField] GameObject robot;
@@ -22,9 +20,8 @@ public class SpawnRobot : MonoBehaviourWithPause
 
     protected override void UpdateWithPause()
     {
-        if (input.spawnBot && isAvailable == true)
+        if (input.spawnBot)
         {
-            isAvailable = false;
             Spawn();
         }
     }
@@ -42,7 +39,7 @@ public class SpawnRobot : MonoBehaviourWithPause
         spawnPoint.z = rb.position.z + UnityEngine.Random.Range(dropRobotRangeMin, dropRobotRangeMax) * ((randomZOrientation == 0) ? -1 : 1);
 
         RaycastHit hit;
-        Physics.SphereCast(spawnPoint + new Vector3(0, 10, 0), robotAgent.radius, Vector3.down, out hit, 200, mask, QueryTriggerInteraction.UseGlobal);
+        Physics.SphereCast(spawnPoint + new Vector3(0, 110, 0), robotAgent.radius, Vector3.down, out hit, 200, mask, QueryTriggerInteraction.UseGlobal);
 
         if (hit.collider == null)
         {

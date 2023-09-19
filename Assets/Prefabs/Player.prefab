@@ -5599,6 +5599,7 @@ GameObject:
   - component: {fileID: 233961056}
   - component: {fileID: 8852772988171748887}
   - component: {fileID: 9184005020548936512}
+  - component: {fileID: 5227175}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -5830,6 +5831,28 @@ MonoBehaviour:
   maxHp: 1000
   text: {fileID: 287728066134241825}
   hpBarTransform: {fileID: 473804813950019301}
+--- !u!114 &5227175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001639994704590389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c147bf36be3dc4d42a72da6ba9d21b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 6599779931964029087}
+  robot: {fileID: 2752344671248881259, guid: aef309c706b55094dab6bbe93d6dcaf4, type: 3}
+  dropRobotRangeMax: 2
+  dropRobotRangeMin: 2
+  mask:
+    serializedVersion: 2
+    m_Bits: 65
+  ground:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1001639994911549480
 GameObject:
   m_ObjectHideFlags: 0

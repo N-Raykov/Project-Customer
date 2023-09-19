@@ -26,6 +26,12 @@ public class Robot : MonoBehaviourWithPause
     GameObject closestTree;
     Vector3 treeDirection;
 
+    [SerializeField] Animator animator;
+
+    const string isMoving = "isMoving";
+    const string startsCutting = "Starts Cutting";
+    const string stopsCutting = "Stops Cutting";
+
     public float distanceToGround { get; set; }
 
     public enum RobotState
@@ -40,7 +46,8 @@ public class Robot : MonoBehaviourWithPause
     public RobotState currentState { get; private set; }
     public Tree bigTree { get; private set; }
 
-    private void Start(){
+    private void Start()
+    {
         currentState = RobotState.Walking;
         GetComponents();
 
@@ -123,11 +130,12 @@ public class Robot : MonoBehaviourWithPause
                     transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
                 }
 
-                if (Vector3.Distance(agent.destination, transform.position) < 1f)
+                if (Vector3.Distance(agent.destination, transform.position) < 2.5f)
                 {
                     currentState = RobotState.Cutting;
                     agent.SetDestination(transform.position);
                     timeStartedCutting = Time.time;
+                    animator.SetTrigger(startsCutting);
                 }
 
                 break;
@@ -146,6 +154,7 @@ public class Robot : MonoBehaviourWithPause
                     bigTree.TakeDamage(-transform.forward);
                     agent.enabled = false;
                     GameManager.robot = null;
+                    animator.SetTrigger(stopsCutting);
                 }
                 break;
 
@@ -176,6 +185,8 @@ public class Robot : MonoBehaviourWithPause
 
     void ExtraStuff()
     {
+        animator.SetBool(isMoving, agent.velocity.magnitude > Mathf.Epsilon);
+
         if (GameManager.gameIsPaused == true)
         {
             currentState = RobotState.Paused;
@@ -202,11 +213,6 @@ public class Robot : MonoBehaviourWithPause
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "BigTree")
-        {
-            Destroy(gameObject);
-        }
-
         if (collision.gameObject.tag == "Ground" && isActive == false)
         {
             agent.enabled = true;
