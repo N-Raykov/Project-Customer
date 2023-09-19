@@ -13,7 +13,7 @@ public class Robot : MonoBehaviourWithPause
     [SerializeField] float heightOfFall;
     [SerializeField] float timeToCut;
     Rigidbody rb;
-    Tree bigTree;
+
     float timeStartedCutting;
 
     [SerializeField] float startingVelocity;
@@ -28,19 +28,20 @@ public class Robot : MonoBehaviourWithPause
 
     public float distanceToGround { get; set; }
 
-    private enum RobotState
+    public enum RobotState
     {
         Walking,
         Cutting,
         Stunned,
         Paused
     }
-
-    private RobotState currentState = RobotState.Walking;
     float stunDuration;
 
-    private void Start()
-    {
+    public RobotState currentState { get; private set; }
+    public Tree bigTree { get; private set; }
+
+    private void Start(){
+        currentState = RobotState.Walking;
         GetComponents();
 
         Fall();
