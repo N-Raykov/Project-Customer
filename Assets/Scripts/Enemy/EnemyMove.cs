@@ -226,7 +226,7 @@ public class EnemyMove : MonoBehaviourWithPause
     void WaitForSpawn()
     {
         agent.enabled = false;
-        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
+        //transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
 
         GetStunned(999);
     }

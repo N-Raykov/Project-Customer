@@ -40,8 +40,13 @@ public class MoodHandler : MonoBehaviour
         //FOR TESTING ONLY!!!
         if (Application.isPlaying)
         {
-            globalDegradation = (Mathf.Sin(-0.5f*Mathf.PI + (Time.realtimeSinceStartup / 10))/2) +0.5f;
+            //    globalDegradation = (Mathf.Sin(-0.5f*Mathf.PI + (Time.realtimeSinceStartup / 10))/2) +0.5f;
+            globalDegradation = (float)(GameManager.fallenTrees) / 6;
         }
+
+        //globalDegradation = (float) (6 - GameManager.fallenTrees) / 6;
+        
+
 
         musicHandler.musicTransitionProgress = globalDegradation;
         float degradeLerp = Mathf.InverseLerp(0.6f, 1.0f, globalDegradation);
