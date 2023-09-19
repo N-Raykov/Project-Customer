@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class SpawnRobot : MonoBehaviourWithPause
 {
-    bool isAvailable = true;
-
     Rigidbody rb;
     [SerializeField] PlayerInput input;
     [SerializeField] GameObject robot;
@@ -22,9 +20,8 @@ public class SpawnRobot : MonoBehaviourWithPause
 
     protected override void UpdateWithPause()
     {
-        if (input.spawnBot && isAvailable == true)
+        if (input.spawnBot)
         {
-            isAvailable = false;
             Spawn();
         }
     }

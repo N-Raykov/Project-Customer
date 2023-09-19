@@ -979,7 +979,7 @@ MonoBehaviour:
   moonWalkSpeed: 1
   stunAfterFall: 1.5
   heightOfFall: 110
-  treesRequired: 0
+  startingVelocity: 0
 --- !u!114 &1901957840
 MonoBehaviour:
   m_ObjectHideFlags: 0

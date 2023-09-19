@@ -122,7 +122,7 @@ public class Robot : MonoBehaviourWithPause
                     transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
                 }
 
-                if (Vector3.Distance(agent.destination, transform.position) < 1f)
+                if (Vector3.Distance(agent.destination, transform.position) < 2f)
                 {
                     currentState = RobotState.Cutting;
                     agent.SetDestination(transform.position);
@@ -201,11 +201,6 @@ public class Robot : MonoBehaviourWithPause
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "BigTree")
-        {
-            Destroy(gameObject);
-        }
-
         if (collision.gameObject.tag == "Ground" && isActive == false)
         {
             agent.enabled = true;
