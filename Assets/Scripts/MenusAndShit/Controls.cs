@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Controls : MonoBehaviourWithPause {
     public Dictionary<string, KeyCode> keyList { get; set; }
+
     void Awake() {
         keyList = new Dictionary<string, KeyCode>();
         //movement

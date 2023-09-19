@@ -140,6 +140,8 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         if (hitInfo.collider == null)
             return;
 
+        Debug.Log(hitInfo.collider.gameObject.name);
+
         switch (hitInfo.collider.gameObject.tag){
             case "Interactable":
                 lastDropPodSeen = hitInfo.collider.gameObject.gameObject.GetComponent<DropPod>();
