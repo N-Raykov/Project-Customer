@@ -16,8 +16,6 @@ public class PlayerInput : MonoBehaviourWithPause
     public bool skillInput { get; private set; }
     public bool spawnBot { get; private set; }
 
-    public bool spawnBot { get; private set; }
-
     private void Awake(){
         ignorePausedState = true;
     }
