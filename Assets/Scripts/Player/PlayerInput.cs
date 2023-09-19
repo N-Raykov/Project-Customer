@@ -14,6 +14,7 @@ public class PlayerInput : MonoBehaviourWithPause
     public bool shopInput { get; private set; }
     public bool interactionInput { get; private set; }
     public bool skillInput { get; private set; }
+    public bool spawnBot { get; private set; }
 
     private void Awake(){
         ignorePausedState = true;
@@ -36,6 +37,7 @@ public class PlayerInput : MonoBehaviourWithPause
         shopInput = Input.GetKeyUp(controls.keyList["shop"]);
         interactionInput = Input.GetKeyDown(controls.keyList["interact"]);
         skillInput = Input.GetKeyDown(controls.keyList["ability1"]);
+        spawnBot = Input.GetKeyDown(controls.keyList["robotSpawn"]);
     }
 
 }
