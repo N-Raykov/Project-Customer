@@ -7,6 +7,8 @@ public class Tree : MonoBehaviourWithPause {
     [Header("Gameplay")]
     [SerializeField] int hp;
     [SerializeField] int value;
+    [SerializeField] int healValue;
+    PlayerHealth playerHp;
 
     [Header("Physics Stuff")]
 
@@ -22,6 +24,7 @@ public class Tree : MonoBehaviourWithPause {
     public int _maxHP{ get; private set; }
 
     void Start(){
+        playerHp = GameObject.FindAnyObjectByType<PlayerHealth>();
         _value = value;
         rb = GetComponent<Rigidbody>();
         hasFallen = false;
@@ -31,6 +34,7 @@ public class Tree : MonoBehaviourWithPause {
     public void TakeDamage(Vector3 pNormal) {
         hp--;
         if (hp == 0) {
+            playerHp.AddHp(healValue);
             rb.constraints = RigidbodyConstraints.None;
             rb.AddForce(pNormal*pushForce,ForceMode.Force);
             StartCoroutine(Move(pNormal));

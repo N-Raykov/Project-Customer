@@ -16,6 +16,7 @@ public class GameSettings : MonoBehaviourWithPause {
     [SerializeField] TextMeshProUGUI jump;
     [SerializeField] TextMeshProUGUI interact;
     [SerializeField] TextMeshProUGUI shop;
+    [SerializeField] TextMeshProUGUI robot;
     [SerializeField] TextMeshProUGUI shoot;
     [SerializeField] TextMeshProUGUI aim;
     [SerializeField] TextMeshProUGUI reload;
@@ -51,6 +52,7 @@ public class GameSettings : MonoBehaviourWithPause {
         textLinks.Add("jump",jump);
         textLinks.Add("interact", interact);
         textLinks.Add("shop", shop);
+        textLinks.Add("robotSpawn", robot);
         textLinks.Add("shoot", shoot);
         textLinks.Add("aim", aim);
         textLinks.Add("reload", reload);
@@ -59,6 +61,7 @@ public class GameSettings : MonoBehaviourWithPause {
         textLinks["jump"].text = "" + controls.keyList["jump"];
         textLinks["interact"].text = "" + controls.keyList["interact"];
         textLinks["shop"].text = "" + controls.keyList["shop"];
+        textLinks["robotSpawn"].text = "" + controls.keyList["robotSpawn"];
         textLinks["shoot"].text = "" + controls.keyList["shoot"];
         textLinks["aim"].text = "" + controls.keyList["aim"];
         textLinks["reload"].text = "" + controls.keyList["reload"];

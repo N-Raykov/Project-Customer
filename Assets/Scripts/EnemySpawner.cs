@@ -52,8 +52,6 @@ public class EnemySpawner : MonoBehaviourWithPause{
     }
 
     protected override void UpdateWithPause() {
-        Debug.Log(player.zone);
-
         if (player.zone != -1) {
             lastPlayerZone = player.zone;
         }
