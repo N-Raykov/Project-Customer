@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  stunAfterFall: 0
+  stunAfterFall: 1
   heightOfFall: 110
   timeToCut: 5
   startingVelocity: 100
