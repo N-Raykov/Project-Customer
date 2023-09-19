@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   gunName: AssaultRIfle
-  damage: 10
+  damage: 70
   range: 15
   bulletSpeed: 40
   ammoCapacity: 6
@@ -32,3 +32,4 @@ MonoBehaviour:
   targetPosition: {x: 0, y: -0.3410001, z: 0.6820004}
   zoomInDuration: 0.5
   zoomInFactor: 1.25
+  zChangeForAiming: 0
