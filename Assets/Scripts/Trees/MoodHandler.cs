@@ -45,8 +45,6 @@ public class MoodHandler : MonoBehaviour
         }
 
         //globalDegradation = (float) (6 - GameManager.fallenTrees) / 6;
-        
-
 
         musicHandler.musicTransitionProgress = globalDegradation;
         float degradeLerp = Mathf.InverseLerp(0.6f, 1.0f, globalDegradation);

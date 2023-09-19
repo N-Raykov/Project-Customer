@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//PARICLE TESTING, REMOVE LATER!!!
-using UnityEngine.Events;
-
 public class Enemy : MonoBehaviourWithPause{
 
     [Header("Hp")]
@@ -18,10 +15,6 @@ public class Enemy : MonoBehaviourWithPause{
     [Header("BarDuration")]
     [SerializeField]float timeBeforeHidingBar;
     float lastHitTime=-100000;
-
-
-    //PARICLE TESTING, REMOVE LATER!!!
-    public UnityEvent dieEvent;
 
     void Start(){
         hpBar.SetActive(false);
@@ -44,7 +37,6 @@ public class Enemy : MonoBehaviourWithPause{
     }
 
     void Die() {
-        dieEvent?.Invoke();
         Destroy(this.gameObject);
     }
 }

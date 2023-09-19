@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//PARICLE TESTING, REMOVE LATER!!!
-using UnityEngine.Events;
-
 public class Tree : MonoBehaviourWithPause {
 
     [SerializeField] int hp;
@@ -12,9 +9,6 @@ public class Tree : MonoBehaviourWithPause {
     Rigidbody rb;
     public bool hasFallen { get; private set; }
     public int _value{ get; private set; }
-
-    //PARICLE TESTING, REMOVE LATER!!!
-    public UnityEvent dmg_event;
 
     void Start(){
         _value = value;
@@ -24,9 +18,6 @@ public class Tree : MonoBehaviourWithPause {
 
     public void TakeDamage(Vector3 pNormal) {
         hp--;
-
-        //PARICLE TESTING, REMOVE LATER!!!
-        dmg_event?.Invoke();
 
         if (hp == 0 && hasFallen == false) {
             hasFallen = true;

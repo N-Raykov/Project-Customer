@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class TreeDegradationTest : MonoBehaviour
 {
 
@@ -9,6 +10,8 @@ public class TreeDegradationTest : MonoBehaviour
 
     //We're using a "MaterialPropertyBlock" to change only a property on THIS specific instance
     private MaterialPropertyBlock leavesDegradationMat;
+
+    [SerializeField] [Range (0.0f,1.0f)] float DegradeProgress;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +23,10 @@ public class TreeDegradationTest : MonoBehaviour
     }
 
     // Update is called once per frame
+
     void Update()
     {
-        leavesDegradationMat.SetFloat("_DegradationProgress", Mathf.Sin(Time.realtimeSinceStartup) + 0.5f);
+        leavesDegradationMat.SetFloat("_DegradationProgress", DegradeProgress);
         meshRenderer.SetPropertyBlock(leavesDegradationMat);
     }
 }

@@ -2140,33 +2140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   value: 50
-  dmg_event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 590699132}
-        m_TargetAssemblyTypeName: SpawnParticle, Assembly-CSharp
-        m_MethodName: InstantiateParticle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1268374909}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!136 &590699134
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2347,7 +2320,7 @@ PrefabInstance:
     - target: {fileID: 6294452254073057351, guid: 9205f08d3705c8849b179c071bc3e0ff,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.167
+      value: -3.127
       objectReference: {fileID: 0}
     - target: {fileID: 6294452254073057351, guid: 9205f08d3705c8849b179c071bc3e0ff,
         type: 3}
@@ -2357,7 +2330,7 @@ PrefabInstance:
     - target: {fileID: 6294452254073057351, guid: 9205f08d3705c8849b179c071bc3e0ff,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.162
+      value: -16.192
       objectReference: {fileID: 0}
     - target: {fileID: 6294452254073057351, guid: 9205f08d3705c8849b179c071bc3e0ff,
         type: 3}
@@ -2526,33 +2499,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   value: 50
-  dmg_event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 737806243}
-        m_TargetAssemblyTypeName: SpawnParticle, Assembly-CSharp
-        m_MethodName: InstantiateParticle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1022237761}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!136 &737806245
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3747,33 +3693,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   value: 50
-  dmg_event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1178291947}
-        m_TargetAssemblyTypeName: SpawnParticle, Assembly-CSharp
-        m_MethodName: InstantiateParticle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 331872251}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!136 &1178291945
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3804,21 +3723,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &1178291947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178291939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a13b0f47011d4be48a3e638000e3a711, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particle: {fileID: 3202276890614567552, guid: 7d7fb9b116052e445a65c9b13c62bec4,
-    type: 3}
-  offset: {x: 0, y: 1, z: 0}
 --- !u!1 &1179206580
 GameObject:
   m_ObjectHideFlags: 0
@@ -4074,33 +3978,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   value: 50
-  dmg_event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1187277377}
-        m_TargetAssemblyTypeName: SpawnParticle, Assembly-CSharp
-        m_MethodName: InstantiateParticle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1349589940}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!136 &1187277379
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4929,33 +4806,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   value: 50
-  dmg_event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1270203444}
-        m_TargetAssemblyTypeName: SpawnParticle, Assembly-CSharp
-        m_MethodName: InstantiateParticle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1485340538}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!136 &1270203446
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5185,7 +5035,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1308925846}
+      objectReference: {fileID: 0}
     - target: {fileID: 1762181672652821782, guid: f28e56558c4a2b7409514d54bfef5052,
         type: 3}
       propertyPath: dieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -5268,27 +5118,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f28e56558c4a2b7409514d54bfef5052, type: 3}
---- !u!1 &1308925845 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1762181672652821777, guid: f28e56558c4a2b7409514d54bfef5052,
-    type: 3}
-  m_PrefabInstance: {fileID: 1308925844}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1308925846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1308925845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a13b0f47011d4be48a3e638000e3a711, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particle: {fileID: 6952311445211100482, guid: 27bb6b7b65edb354abb4ac7e659602f5,
-    type: 3}
-  offset: {x: 0, y: 0, z: 0}
 --- !u!1001 &1336521674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7950,33 +7779,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   value: 50
-  dmg_event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2094209585}
-        m_TargetAssemblyTypeName: SpawnParticle, Assembly-CSharp
-        m_MethodName: InstantiateParticle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1503532054}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!136 &2094209587
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8350,7 +8152,7 @@ PrefabInstance:
     - target: {fileID: 6126204826482792502, guid: d24d180368ac42d4eaea4c9898dd1c82,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.51
+      value: -12.59
       objectReference: {fileID: 0}
     - target: {fileID: 6126204826482792502, guid: d24d180368ac42d4eaea4c9898dd1c82,
         type: 3}
@@ -8360,7 +8162,7 @@ PrefabInstance:
     - target: {fileID: 6126204826482792502, guid: d24d180368ac42d4eaea4c9898dd1c82,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.687
+      value: -21.24
       objectReference: {fileID: 0}
     - target: {fileID: 6126204826482792502, guid: d24d180368ac42d4eaea4c9898dd1c82,
         type: 3}
@@ -8460,6 +8262,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365458110498622406, guid: 59605b17bbc500143a92708a8170d616,
+        type: 3}
+      propertyPath: end_SunColor.b
+      value: 0.37308648
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365458110498622406, guid: 59605b17bbc500143a92708a8170d616,
+        type: 3}
+      propertyPath: end_SunColor.g
+      value: 0.5751262
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365458110498622406, guid: 59605b17bbc500143a92708a8170d616,
+        type: 3}
+      propertyPath: end_SunColor.r
+      value: 0.754717
       objectReference: {fileID: 0}
     - target: {fileID: 4365458110498622406, guid: 59605b17bbc500143a92708a8170d616,
         type: 3}
