@@ -15,7 +15,7 @@ MonoBehaviour:
   gunName: AssaultRIfle
   damage: 10
   range: 15
-  bulletSpeed: 40
+  bulletSpeed: 70
   ammoCapacity: 6
   shotCooldown: 1
   reloadTime: 2
@@ -32,3 +32,4 @@ MonoBehaviour:
   targetPosition: {x: 0, y: -0.3410001, z: 0.6820004}
   zoomInDuration: 0.5
   zoomInFactor: 1.25
+  zChangeForAiming: 0

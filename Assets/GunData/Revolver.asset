@@ -15,7 +15,7 @@ MonoBehaviour:
   gunName: Revolver
   damage: 25
   range: 50
-  bulletSpeed: 40
+  bulletSpeed: 80
   ammoCapacity: 6
   shotCooldown: 0.6
   reloadTime: 1.6

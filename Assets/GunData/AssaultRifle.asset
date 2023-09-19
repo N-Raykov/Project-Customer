@@ -15,10 +15,10 @@ MonoBehaviour:
   gunName: AssaultRIfle
   damage: 10
   range: 50
-  bulletSpeed: 50
+  bulletSpeed: 100
   ammoCapacity: 30
-  shotCooldown: 0.075
-  reloadTime: 2.5
+  shotCooldown: 0.145
+  reloadTime: 3
   spreadFactorXMin: 0.05
   spreadFactorYMin: 0.05
   spreadFactorX: 0.1
@@ -29,6 +29,7 @@ MonoBehaviour:
   recoilHipFire: {x: -4, y: 2, z: 0}
   recoilAim: {x: -2, y: 1, z: 0}
   returnSpeed: 3
-  targetPosition: {x: 0, y: -0.3410001, z: 0.6820004}
-  zoomInDuration: 0.5
-  zoomInFactor: 1.25
+  targetPosition: {x: 0.002, y: -0.3175, z: 0.6820004}
+  zoomInDuration: 0.6
+  zoomInFactor: 1.5
+  zChangeForAiming: 0

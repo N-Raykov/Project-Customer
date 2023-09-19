@@ -90,6 +90,7 @@ public abstract class Gun : MonoBehaviourWithPause{
                 pistolRotationPivot.DOLocalMove(pistolRotationPivotStartPosition, gunData.zoomInDuration);
                 mainCamera.DOPause();
                 transform.localEulerAngles -= new Vector3(0, 0, gunData.zChangeForAiming);//here
+                pistolRotationPivot.localEulerAngles = new Vector3(0, -5, 0);
                 isAiming = false;
                 StartCoroutine(DecreaseFOVAndAddUI(gunData.zoomInDuration));
             }
@@ -102,6 +103,7 @@ public abstract class Gun : MonoBehaviourWithPause{
             pistolRotationPivot.DOPause();
             isAiming = true;
             transform.localEulerAngles += new Vector3(0, 0, gunData.zChangeForAiming);//here
+            pistolRotationPivot.localEulerAngles = new Vector3(0, 0, 0);
             pistolRotationPivot.DOLocalMove(gunData.targetPosition, gunData.zoomInDuration);
             StartCoroutine(IncreaseFOVAndRemoveUI(gunData.zoomInDuration));
         }
@@ -168,6 +170,7 @@ public abstract class Gun : MonoBehaviourWithPause{
         mainCamera.DOPause();
         isAiming = false;
         transform.localEulerAngles -= new Vector3(0, 0, gunData.zChangeForAiming);//here
+        pistolRotationPivot.localEulerAngles = new Vector3(0, -5, 0);
         StartCoroutine(DecreaseFOVAndAddUI(gunData.zoomInDuration / 1.5f));
         yield return new WaitForSeconds(gunData.zoomInDuration / 1.5f);
         Reload();
