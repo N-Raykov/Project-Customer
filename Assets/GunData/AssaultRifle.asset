@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
   gunName: AssaultRIfle
-  damage: 10
+  damage: 20
   range: 50
   bulletSpeed: 100
   ammoCapacity: 30
@@ -26,9 +26,9 @@ MonoBehaviour:
   spreadPercentageMultiplier: 5
   spreadPercentageMultiplierAim: 2.5
   spreadDecreaseRate: 20
-  recoilHipFire: {x: -4, y: 2, z: 0}
+  recoilHipFire: {x: -3, y: 2, z: 0}
   recoilAim: {x: -2, y: 1, z: 0}
-  returnSpeed: 3
+  returnSpeed: 1.5
   targetPosition: {x: 0.002, y: -0.3175, z: 0.6820004}
   zoomInDuration: 0.6
   zoomInFactor: 1.5
