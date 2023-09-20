@@ -82,6 +82,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyRocket
       objectReference: {fileID: 0}
+    - target: {fileID: 664451063858303514, guid: 6de9af2161fd93b4db6a0efeedea3bb4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 664451063858303515, guid: 6de9af2161fd93b4db6a0efeedea3bb4,
         type: 3}
       propertyPath: speed
@@ -132,6 +137,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RocketThruster
+      objectReference: {fileID: 0}
+    - target: {fileID: 6126204826482792501, guid: d24d180368ac42d4eaea4c9898dd1c82,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6126204826482792502, guid: d24d180368ac42d4eaea4c9898dd1c82,
         type: 3}

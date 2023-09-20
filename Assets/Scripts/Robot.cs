@@ -80,12 +80,6 @@ public class Robot : MonoBehaviourWithPause
         rb.AddForce(Vector3.down * startingVelocity, ForceMode.VelocityChange);
     }
 
-    IEnumerator Die(float pTime)
-    {
-        yield return new WaitForSeconds(3);
-        Destroy(gameObject);
-    }
-
     GameObject FindClosestBigTree()
     {
         GameObject[] gos;
@@ -128,7 +122,7 @@ public class Robot : MonoBehaviourWithPause
         {
             case RobotState.Walking:
 
-                Vector3 closestTreeTrunk = new Vector3(closestTree.transform.position.x, transform.position.y, closestTree.transform.position.z);
+                Vector3 closestTreeTrunk = new Vector3(closestTree.transform.position.x, closestTree.transform.position.y, closestTree.transform.position.z);
 
                 agent.SetDestination(closestTreeTrunk);
                 agent.speed = speed;
@@ -167,7 +161,7 @@ public class Robot : MonoBehaviourWithPause
                     agent.enabled = false;
                     GameManager.robot = null;
                     animator.SetTrigger(stopsCutting);
-                    Die(1);
+                    Destroy(gameObject);
                 }
                 break;
 
@@ -229,11 +223,8 @@ public class Robot : MonoBehaviourWithPause
         if (collision.gameObject.tag == "Ground" && isActive == false)
         {
             agent.enabled = true;
-            rb.constraints = RigidbodyConstraints.None;
             GetStunned(stunAfterFall);
             isActive = true;
         }
     }
-
-
 }
