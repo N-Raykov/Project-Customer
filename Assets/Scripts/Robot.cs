@@ -130,7 +130,7 @@ public class Robot : MonoBehaviourWithPause
                     transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
                 }
 
-                if (Vector3.Distance(agent.destination, transform.position) < 1.5f)
+                if (Vector3.Distance(agent.destination, transform.position) < 2.5f)
                 {
                     currentState = RobotState.Cutting;
                     agent.SetDestination(transform.position);

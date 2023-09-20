@@ -18,7 +18,7 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float strafeSpeed;
     [SerializeField] float moonWalkSpeed;
 
-    [System.NonSerialized] public NavMeshAgent agent;
+    public NavMeshAgent agent { get; private set; }
 
     [Header("Spawn")]
     [SerializeField] float stunAfterFall;
@@ -29,9 +29,12 @@ public class EnemyMove : MonoBehaviourWithPause
     float currentPosition;
     float timeToWaitUntilStart;
 
-    [System.NonSerialized] public bool isActive;
+    public bool isActive { get; set; }
     Rigidbody rb;
     EnemyAim enemyAim;
+
+    [SerializeField] Animator animator;
+    const string isMoving = "IsMoving";
 
     public enum EnemyState
     {
@@ -39,12 +42,15 @@ public class EnemyMove : MonoBehaviourWithPause
         PreferredRange,
         MinRange,
         Stunned,
+        Aiming,
         Paused
     }
 
     [System.NonSerialized] public EnemyState currentState = EnemyState.Aggro;
     [System.NonSerialized] public EnemyState stunnedState = EnemyState.Stunned;
-    [System.NonSerialized] public float stunDuration;
+    [System.NonSerialized] public EnemyState aimingState = EnemyState.Aiming;
+
+    public float stunDuration { get; set; }
     private float strafeTimer;
 
     void Start()
@@ -159,6 +165,8 @@ public class EnemyMove : MonoBehaviourWithPause
 
     void ExtraStuff()
     {
+        animator.SetBool(isMoving, agent.velocity.magnitude > Mathf.Epsilon);
+
         if (isActive == false)
         {
             currentPosition = transform.position.y;
@@ -188,6 +196,7 @@ public class EnemyMove : MonoBehaviourWithPause
             rb.constraints = RigidbodyConstraints.None;
             GetStunned(stunAfterFall);
             isActive = true;
+            animator.SetTrigger("Land");
         }
     }
 

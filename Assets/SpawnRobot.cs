@@ -20,7 +20,7 @@ public class SpawnRobot : MonoBehaviourWithPause
 
     protected override void UpdateWithPause()
     {
-        if (input.spawnBot)
+        if (input.spawnBot && GameManager.robot == null)
         {
             Spawn();
         }

@@ -15,8 +15,6 @@ public class EnemyAim : MonoBehaviourWithPause
 
     [Header("Attacks")]
     [SerializeField] float range;
-    [SerializeField] EnemyGun gun;
-    [SerializeField] float normalShotCD;
     [SerializeField] EnemyBazooka bazooka;
     [SerializeField] float bazookaShotCD;
 
@@ -28,6 +26,8 @@ public class EnemyAim : MonoBehaviourWithPause
     [SerializeField] float aggroOffset;
     [SerializeField] float aggroThreshold;
 
+    [SerializeField] Animator animator;
+
     GameObject player;
 
     EnemyMove enemy;
@@ -36,7 +36,7 @@ public class EnemyAim : MonoBehaviourWithPause
 
     float playerAggro;
 
-    [System.NonSerialized] public GameObject target;
+    public GameObject target { get; private set; }
 
     private void Start()
     {
@@ -55,9 +55,8 @@ public class EnemyAim : MonoBehaviourWithPause
     void SetValues()
     {
         bazooka.weaponPivot = bazooka.transform.parent.transform;
-        gun.weaponPivot = gun.transform.parent.transform;
-        gun.shotCD = normalShotCD;
         bazooka.shotCD = bazookaShotCD;
+        
     }
 
     protected override void UpdateWithPause()
@@ -71,8 +70,6 @@ public class EnemyAim : MonoBehaviourWithPause
 
         if (enemy.currentState != enemy.stunnedState)
         {
-            Aim(target, gun);
-
             Aim(target, bazooka);
         }
     }
@@ -100,6 +97,15 @@ public class EnemyAim : MonoBehaviourWithPause
     {
         float distanceToTarget = Vector3.Distance(weapon.transform.position, target.transform.position);
         weapon.timeSinceLastShot -= Time.deltaTime;
+
+        if (distanceToTarget < range)
+        {
+            animator.SetBool("InRange", true);
+        }
+        else
+        {
+            animator.SetBool("InRange", false);
+        }
 
         float t = Mathf.Clamp01((distanceToTarget - minDistanceAim) / (maxDistanceAim - minDistanceAim));
         float marginOfError = Mathf.Lerp(minValue, maxValue, t);
@@ -132,6 +138,7 @@ public class EnemyAim : MonoBehaviourWithPause
             {
                 weapon.Shoot();
                 weapon.timeSinceLastShot = weapon.shotCD;
+                animator.SetTrigger("Shoot");
             }
         }
     }
