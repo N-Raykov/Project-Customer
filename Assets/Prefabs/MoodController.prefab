@@ -103,6 +103,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 916367b46c751a846a0f83ef965b4b92, type: 3}
   transitionTimeSpeed: 1
   targetVolume: 0.6
+  outputMixer: {fileID: 1376174234394420800, guid: 8faf1570903bc7f458199f14aa785bf4,
+    type: 2}
 --- !u!1 &6921384159194878531
 GameObject:
   m_ObjectHideFlags: 0

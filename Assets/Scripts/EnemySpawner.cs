@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class EnemySpawner : MonoBehaviourWithPause{
 
@@ -32,6 +33,9 @@ public class EnemySpawner : MonoBehaviourWithPause{
     List<Zone> zones;
     List<Tree> bigTrees;
     MoodHandler moodHandler;
+
+    //Used for notifiying player that a wave starts
+    public static event Action onWaveEvent;
 
     private void Start() {
         moodHandler = GameObject.FindObjectOfType<MoodHandler>();
@@ -117,6 +121,7 @@ public class EnemySpawner : MonoBehaviourWithPause{
 
     void SpawnWave() {
         Debug.Log(waveSize + treesCut * waveSizeIncreasePerCutTree);
+        onWaveEvent?.Invoke();
         for (int i = 0; i < waveSize + treesCut * waveSizeIncreasePerCutTree; i++){
             SpawnEnemyForWave(delayForWaves);
         }

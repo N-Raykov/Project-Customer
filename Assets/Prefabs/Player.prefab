@@ -2068,7 +2068,7 @@ MonoBehaviour:
     type: 3}
   mag: {fileID: 4420919319611620545}
   gunshot: {fileID: 7290309097663247362}
-  gunshotSound: {fileID: 8300000, guid: d76fa9917fa0a5848bdb7749feb4b871, type: 3}
+  gunshotSound: {fileID: 8300000, guid: 2a701fbe4caee7e42bdb1e679f166cc9, type: 3}
   cylinderSoundStart: {fileID: 8300000, guid: 875956ea6edbcc74086d60da39e57f5a, type: 3}
   cylinderSoundEnd: {fileID: 8300000, guid: 3c1b2d69be3cbb54bbd86c942c2032d3, type: 3}
   bulletFallingSound: {fileID: 8300000, guid: 1ef8f27fc33659b42bc13ee3bc39a801, type: 3}
@@ -6908,6 +6908,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ActivatePage
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115371383529615901, guid: 4b124a70c76d00349bf8bfa3a8736498,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9115371383624435694, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
