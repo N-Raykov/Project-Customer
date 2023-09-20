@@ -15,6 +15,8 @@ public class EnemyAim : MonoBehaviourWithPause
 
     [Header("Attacks")]
     [SerializeField] float range;
+    [SerializeField] EnemyLaser laser;
+    [SerializeField] float laserCD;
     [SerializeField] EnemyBazooka bazooka;
     [SerializeField] float bazookaShotCD;
 
@@ -56,7 +58,8 @@ public class EnemyAim : MonoBehaviourWithPause
     {
         bazooka.weaponPivot = bazooka.transform.parent.transform;
         bazooka.shotCD = bazookaShotCD;
-        
+        laser.weaponPivot = laser.transform.parent.transform;
+        laser.shotCD = laserCD;
     }
 
     protected override void UpdateWithPause()
@@ -73,6 +76,8 @@ public class EnemyAim : MonoBehaviourWithPause
         if (enemy.currentState != enemy.stunnedState)
         {
             Aim(target, bazooka);
+
+            Aim(target, laser);
         }
     }
 
@@ -126,12 +131,12 @@ public class EnemyAim : MonoBehaviourWithPause
             float rotationSpeed = Mathf.Clamp(angleDifference / maxRotationTime, minRotationSpeed, maxRotationSpeed);
 
             float currentToTargetRotation = Compare(targetRotation, transform.rotation);
-/*
+
             if (currentToTargetRotation < 50)
             {
                 weapon.weaponPivot.transform.rotation = Quaternion.Slerp(weapon.weaponPivot.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
-*/
+
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * 0.2f * Time.deltaTime);
 
             transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);

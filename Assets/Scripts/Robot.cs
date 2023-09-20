@@ -122,7 +122,7 @@ public class Robot : MonoBehaviourWithPause
         {
             case RobotState.Walking:
 
-                Vector3 closestTreeTrunk = new Vector3(closestTree.transform.position.x, transform.position.y, closestTree.transform.position.z);
+                Vector3 closestTreeTrunk = new Vector3(closestTree.transform.position.x, closestTree.transform.position.y, closestTree.transform.position.z);
 
                 agent.SetDestination(closestTreeTrunk);
                 agent.speed = speed;
@@ -223,11 +223,8 @@ public class Robot : MonoBehaviourWithPause
         if (collision.gameObject.tag == "Ground" && isActive == false)
         {
             agent.enabled = true;
-            rb.constraints = RigidbodyConstraints.None;
             GetStunned(stunAfterFall);
             isActive = true;
         }
     }
-
-
 }
