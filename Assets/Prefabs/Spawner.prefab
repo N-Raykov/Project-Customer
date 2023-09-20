@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69088f29f7440c442a4be15f4c8a0daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 3994129654328848410, guid: f28e56558c4a2b7409514d54bfef5052, type: 3}
+  enemy: {fileID: 7396313343910974370, guid: f20f52d13aa263e4fb6567df19145f6a, type: 3}
   player: {fileID: 0}
-  minSpawnTimeRandom: 4
-  maxSpawnTimeRandom: 12
-  percentChanceForASecondEnemy: 25
+  minSpawnTimeRandom: 10
+  maxSpawnTimeRandom: 15
+  percentChanceForASecondEnemy: 10
   delayForRandomEnemy: 5
   delayForWaves: 100
   waveSize: 5

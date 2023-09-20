@@ -298,7 +298,6 @@ MonoBehaviour:
   hp: 3
   value: 50
   healValue: 50
-  playerHp: {fileID: 0}
   pushForce: 80
   duration: 25
   timeDelay: 0.1

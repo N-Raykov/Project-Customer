@@ -275,7 +275,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   extraAmmo: 1
   gunData: {fileID: 11400000, guid: 9e06ec82376f4844f8637a3bca4bab86, type: 2}
-  animator: {fileID: 0}
+  animator: {fileID: 369046176}
   input: {fileID: 6599779931964029087}
   mainCamera: {fileID: 1001639993959326202}
   weaponCamera: {fileID: 1910560408}
@@ -1320,7 +1320,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -3118,7 +3118,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3665014877676924479}
   m_LocalRotation: {x: -0.00000005960463, y: 0.7071068, z: -0.00000005960463, w: 0.7071068}
-  m_LocalPosition: {x: 0.39330047, y: 0.13760012, z: 0.00039994722}
+  m_LocalPosition: {x: 0.3933, y: 0.13760012, z: -0.0009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
