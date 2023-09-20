@@ -255,10 +255,16 @@ public abstract class Gun : MonoBehaviourWithPause{
     }
 
     protected void AddRecoil(){
+        // need to randomize y recoil and maybe z recoil
+        float randomY = UnityEngine.Random.Range(0, 2);
+        float randomZ = UnityEngine.Random.Range(0, 2);
+        randomY = ((randomY == 0) ? -1 : 1);
+        randomZ = ((randomZ == 0) ? -1 : 1);
+
         if (!isAiming)
-            recoilTargetRotation += new Vector3(gunData.recoilHipFire.x, 0, 0);
+            recoilTargetRotation += new Vector3(gunData.recoilHipFire.x, randomY*gunData.recoilHipFire.y, randomZ*gunData.recoilHipFire.z);
         else
-            recoilTargetRotation += new Vector3(gunData.recoilAim.x, 0, 0);
+            recoilTargetRotation += new Vector3(gunData.recoilAim.x, randomY*gunData.recoilAim.y, randomZ*gunData.recoilAim.z);
     }
 
     protected void DecreaseRecoilRotation() {
