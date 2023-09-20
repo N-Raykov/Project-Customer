@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Revolver
   m_EditorClassIdentifier: 
   gunName: Revolver
-  damage: 50
+  damage: 35
   range: 50
   bulletSpeed: 80
   ammoCapacity: 6

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
   gunName: AssaultRIfle
-  damage: 10
+  damage: 15
   range: 50
   bulletSpeed: 100
   ammoCapacity: 30
