@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAbility : MonoBehaviourWithPause
 {
     [SerializeField] float abilityCD;
-    bool isAvailable = true;
+    bool isAvailable = false;
     PlayerInput input;
 
     private void Start()
@@ -44,6 +44,10 @@ public class PlayerAbility : MonoBehaviourWithPause
 
         yield return new WaitForSeconds(abilityCD);
 
+        isAvailable = true;
+    }
+
+    public void MakeAbilityAvailable() {
         isAvailable = true;
     }
 }

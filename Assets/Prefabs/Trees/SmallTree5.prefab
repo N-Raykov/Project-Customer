@@ -346,6 +346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 3
   value: 50
+  healValue: 60
+  playerHp: {fileID: 0}
   pushForce: 150
   duration: 25
   timeDelay: 0.1

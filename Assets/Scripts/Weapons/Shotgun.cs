@@ -23,12 +23,13 @@ public class Shotgun : Gun{
     }
 
     protected override void StartReloadAnimation(){
-        Debug.Log("reload");
+        //Debug.Log("reload");
+        animator.SetTrigger("Reload");
         //throw new System.NotImplementedException();
     }
     protected override void StartShotAnimation()
     {
-        Debug.Log("shoot");
+        animator.SetTrigger("Shoot");
         //throw new System.NotImplementedException();
     }
 }

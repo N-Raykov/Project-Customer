@@ -40,6 +40,8 @@ public class ShopManager : MonoBehaviourWithPause{
     Button lastDisabledButton;
     
     void Start(){
+        activePage = null;
+        lastDisabledButton = null;
         money = 110;
         UI.DisplayCash(money);
         rb = GetComponent<Rigidbody>();
@@ -64,6 +66,16 @@ public class ShopManager : MonoBehaviourWithPause{
         ammoUI.SetActive(!pState);
         crosshairUI.SetActive(!pState);
         shopUI.SetActive(pState);
+        if (activePage != null)
+        {
+            activePage.SetActive(false);
+            activePage = null;
+        }
+        if (lastDisabledButton != null) {
+            lastDisabledButton.enabled = true;
+            lastDisabledButton = null;
+        }
+
     }
 
     public void SpawnDropPod(ShopButtonData pData) {

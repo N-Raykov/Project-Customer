@@ -12,24 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815de4f95265bac45a343bc461822c9c, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  gunName: AssaultRIfle
-  damage: 70
-  range: 15
+  gunName: Shotgun
+  damage: 10
+  range: 20
   bulletSpeed: 70
   ammoCapacity: 6
-  shotCooldown: 1
-  reloadTime: 2
-  spreadFactorXMin: 0.2
-  spreadFactorYMin: 0.2
-  spreadFactorX: 0.4
-  spreadFactorY: 0.4
+  shotCooldown: 1.04
+  reloadTime: 3.2
+  spreadFactorXMin: 0.15
+  spreadFactorYMin: 0.15
+  spreadFactorX: 0.3
+  spreadFactorY: 0.3
   spreadPercentageMultiplier: 10
   spreadPercentageMultiplierAim: 5
   spreadDecreaseRate: 4
   recoilHipFire: {x: -12, y: 6, z: 0}
   recoilAim: {x: -6, y: 3, z: 0}
   returnSpeed: 4
-  targetPosition: {x: 0, y: -0.3410001, z: 0.6820004}
+  targetPosition: {x: 0, y: -0.19, z: 0.6820004}
   zoomInDuration: 0.5
   zoomInFactor: 1.25
   zChangeForAiming: 0
