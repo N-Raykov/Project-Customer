@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviourWithPause{
     public float damage { get; set; }
     public float range { get; set; }
     public float speed { get; set; }
+
     Vector3 startPosition;
 
     void Awake(){

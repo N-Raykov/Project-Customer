@@ -68,6 +68,8 @@ public class EnemyAim : MonoBehaviourWithPause
     {
         target = Targeting();
 
+        bazooka.target = this.target;
+
         if (enemy.currentState != enemy.stunnedState)
         {
             Aim(target, bazooka);
