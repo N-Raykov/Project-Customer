@@ -23,12 +23,12 @@ public class EnemyBazooka : EnemyWeapon
 
     protected virtual void CreateBullet()
     {
-        GameObject b = Instantiate(rocket, muzzle.position, pivot.rotation);
-        Bullet bt = b.GetComponent<Bullet>();
-        bt.damage = gunData.damage;
-        bt.speed = gunData.bulletSpeed;
-        bt.range = gunData.range;
-        bt.AddSpeed(AimAtTarget());
+        GameObject r = Instantiate(rocket, muzzle.position, pivot.rotation);
+        Rocket rckt = r.GetComponent<Rocket>();
+        rckt.damage = gunData.damage;
+        rckt.speed = gunData.bulletSpeed;
+        rckt.range = gunData.range;
+        rckt.AddSpeed(transform.forward);
     }
 
 }

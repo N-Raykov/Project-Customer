@@ -141,7 +141,9 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hitInfo, range);
         if (hitInfo.collider == null)
             return;
-            
+
+        Debug.Log(hitInfo.collider.gameObject.name);
+
         switch (hitInfo.collider.gameObject.tag){
             case "Interactable":
                 lastDropPodSeen = hitInfo.collider.gameObject.gameObject.GetComponent<DropPod>();
