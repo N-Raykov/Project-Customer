@@ -42,7 +42,7 @@ public class PlayerUI : MonoBehaviourWithPause{
     }
 
     public void DisplayAmmo(int magAmmo,int ammoInReserve) {
-        ammoText.text = String.Format("Ammo : {0} / {1}" , magAmmo , ammoInReserve);
+        ammoText.text = String.Format("{0} / {1}" , magAmmo , ammoInReserve);
     }
 
     public void ChangeCrosshairActivationState(bool state) {
