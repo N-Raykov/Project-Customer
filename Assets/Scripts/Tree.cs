@@ -17,6 +17,7 @@ public class Tree : MonoBehaviourWithPause {
     [SerializeField] float timeDelay;
     [SerializeField] float directionDivisioFactor;
     Rigidbody rb;
+    public bool hasStarterFalling { get; private set; }
     public bool hasFallen { get; private set; }
     public int _value { get; private set; }
     public int _hp { get { return hp; } }
@@ -34,6 +35,7 @@ public class Tree : MonoBehaviourWithPause {
     public void TakeDamage(Vector3 pNormal) {
         hp--;
         if (hp == 0) {
+            hasStarterFalling = true;
             playerHp.AddHp(healValue);
             rb.constraints = RigidbodyConstraints.None;
             rb.AddForce(pNormal*pushForce,ForceMode.Force);
