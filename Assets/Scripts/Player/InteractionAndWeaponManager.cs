@@ -62,6 +62,9 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
         if (activeWeapon != Weapons.None) {
 
+            if (gunList[(int)activeWeapon].isAiming)
+                return;
+
             if (gunList[(int)activeWeapon].state != Gun.States.Idle)
                 return;
 

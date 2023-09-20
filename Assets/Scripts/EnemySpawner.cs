@@ -35,7 +35,6 @@ public class EnemySpawner : MonoBehaviourWithPause{
         bigTrees = new List<Tree>();
         zones = new List<Zone>();
         zonesTemp = GameObject.FindGameObjectsWithTag("SpawnArea");
-        Debug.Log(zonesTemp.Length);
         bigTreesTemp = GameObject.FindGameObjectsWithTag("BigTree");
         foreach (GameObject g in bigTreesTemp) {
             bigTrees.Add(g.GetComponent<Tree>());

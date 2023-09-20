@@ -10,6 +10,7 @@ public abstract class Gun : MonoBehaviourWithPause{
     public event Action<float> OnSpreadChange;
     public event Action<float> OnReload;
     public event Action<bool> OnZoomChange;
+    public event Action OnShoot;
     protected event Action OnStateChange;
 
     public enum States {
@@ -27,12 +28,14 @@ public abstract class Gun : MonoBehaviourWithPause{
     [SerializeField] protected Animator animator;
     [SerializeField] protected PlayerInput input;
     [SerializeField] protected Camera mainCamera;
+    [SerializeField] protected Camera weaponCamera;
     [SerializeField] protected LayerMask mask;
     public int currentAmmo { get; set; }
     protected Vector3 recoilTargetRotation = Vector3.zero;
     protected Vector3 pistolRotationPivotStartPosition;
     public bool isAiming { get; protected set; }
     protected float originalFOV;
+    protected float originalFOVWeaponCamera;
     protected bool isAimingAllowed = true;
 
     [Header("Objects")]
@@ -51,6 +54,7 @@ public abstract class Gun : MonoBehaviourWithPause{
         OnAmmoChange?.Invoke(currentAmmo, extraAmmo);
         pistolRotationPivotStartPosition = pistolRotationPivot.localPosition;
         originalFOV = mainCamera.fieldOfView;
+        originalFOVWeaponCamera = weaponCamera.fieldOfView;
     }
 
     protected override void UpdateWithPause() {
@@ -87,7 +91,7 @@ public abstract class Gun : MonoBehaviourWithPause{
             Aim();
         else {
             if (pistolRotationPivot.localPosition != pistolRotationPivotStartPosition&&isAiming) {
-                pistolRotationPivot.DOLocalMove(pistolRotationPivotStartPosition, gunData.zoomInDuration);
+                pistolRotationPivot.DOLocalMove(pistolRotationPivotStartPosition, gunData.zoomInDuration);//1
                 mainCamera.DOPause();
                 transform.localEulerAngles -= new Vector3(0, 0, gunData.zChangeForAiming);//here
                 pistolRotationPivot.localEulerAngles = new Vector3(0, -5, 0);
@@ -104,7 +108,7 @@ public abstract class Gun : MonoBehaviourWithPause{
             isAiming = true;
             transform.localEulerAngles += new Vector3(0, 0, gunData.zChangeForAiming);//here
             pistolRotationPivot.localEulerAngles = new Vector3(0, 0, 0);
-            pistolRotationPivot.DOLocalMove(gunData.targetPosition, gunData.zoomInDuration);
+            pistolRotationPivot.DOLocalMove(gunData.targetPosition, gunData.zoomInDuration);//2
             StartCoroutine(IncreaseFOVAndRemoveUI(gunData.zoomInDuration));
         }
     }
@@ -112,8 +116,11 @@ public abstract class Gun : MonoBehaviourWithPause{
     protected IEnumerator IncreaseFOVAndRemoveUI(float duration) {
 
         yield return new WaitForSeconds(duration / 2);
-        if (isAiming) 
+        if (isAiming) {
             mainCamera.DOFieldOfView(originalFOV / gunData.zoomInFactor, duration / 2);
+            weaponCamera.DOFieldOfView(originalFOVWeaponCamera/gunData.zoomInFactor,duration/2);
+        }
+
         yield return new WaitForSeconds(duration / 4);
         if (isAiming)
             OnZoomChange?.Invoke(false);
@@ -124,11 +131,13 @@ public abstract class Gun : MonoBehaviourWithPause{
         yield return new WaitForSeconds(duration / 4);
         if (!isAiming) {
             mainCamera.DOFieldOfView(originalFOV, duration / 2);
+            weaponCamera.DOFieldOfView(originalFOVWeaponCamera,duration/2);
             OnZoomChange?.Invoke(true);
         }
     }
 
     protected virtual void Shoot() {
+        OnShoot?.Invoke();
         AddRecoil();
         StartShotAnimation();
         lastShotTime = Time.time;
@@ -166,7 +175,7 @@ public abstract class Gun : MonoBehaviourWithPause{
     IEnumerator MoveBackAndReload() {
 
         isAimingAllowed = false;
-        pistolRotationPivot.DOLocalMove(pistolRotationPivotStartPosition, gunData.zoomInDuration / 1.5f);
+        pistolRotationPivot.DOLocalMove(pistolRotationPivotStartPosition, gunData.zoomInDuration / 1.5f);//3
         mainCamera.DOPause();
         isAiming = false;
         transform.localEulerAngles -= new Vector3(0, 0, gunData.zChangeForAiming);//here
