@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using DG.Tweening;
 
 [ExecuteInEditMode]
 public class MoodHandler : MonoBehaviourWithPause
@@ -35,7 +36,7 @@ public class MoodHandler : MonoBehaviourWithPause
     [SerializeField] private Color end_SecColor;
 
     // Update is called once per frame
-    protected override void UpdateWithPause()
+    void Update()
     {
         ////FOR TESTING ONLY!!!
         //if (Application.isPlaying)
@@ -65,5 +66,12 @@ public class MoodHandler : MonoBehaviourWithPause
 
         col_Adj.saturation.value = Mathf.Lerp(15, -85, globalDegradation);
         vignette.intensity.value = Mathf.Lerp(0.0f, 0.4f, globalDegradation);
+
+        //Debug.Log(globalDegradation);
+    }
+
+    public void TweenDegradation(float pStage) {
+        Debug.Log(pStage);
+        DOTween.To(() => globalDegradation, x => globalDegradation = x, pStage, 10f);
     }
 }

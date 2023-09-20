@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviourWithPause{
     [SerializeField] int waveSizeIncreasePerCutTree;
     int treesCut = 0;
     int lastTreesCut = -1;
+    int totalTreesStart;
 
 
     int lastPlayerZone=0;//used for spawning waves 
@@ -30,8 +31,10 @@ public class EnemySpawner : MonoBehaviourWithPause{
     GameObject[] bigTreesTemp;
     List<Zone> zones;
     List<Tree> bigTrees;
+    MoodHandler moodHandler;
 
     private void Start() {
+        moodHandler = GameObject.FindObjectOfType<MoodHandler>();
         bigTrees = new List<Tree>();
         zones = new List<Zone>();
         zonesTemp = GameObject.FindGameObjectsWithTag("SpawnArea");
@@ -47,6 +50,7 @@ public class EnemySpawner : MonoBehaviourWithPause{
         }
         bigTreesTemp = null;
         zonesTemp = null;
+        totalTreesStart = bigTrees.Count;
 
     }
 
@@ -65,6 +69,7 @@ public class EnemySpawner : MonoBehaviourWithPause{
                 bigTrees.RemoveAt(i);
                 lastTreesCut = treesCut;
                 treesCut++;
+                moodHandler.TweenDegradation(((float)treesCut)/totalTreesStart);
                 i--;
             }
         }

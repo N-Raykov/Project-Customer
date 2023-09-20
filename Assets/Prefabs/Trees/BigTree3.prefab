@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 1
   value: 50
+  healValue: 0
   pushForce: 120
   duration: 70
   timeDelay: 0.1
@@ -327,7 +328,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1df6f8c9d710fcc4fa8817feee8e05d5, type: 2}
+  - {fileID: 2100000, guid: 3c62d606f3c8b4d4d939c7f3ead3efe9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

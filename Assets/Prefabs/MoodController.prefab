@@ -48,7 +48,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: e0b9f20820969f847a481107ffda7c48, type: 2}
+  sharedProfile: {fileID: 11400000, guid: dba229aef396c054ca1495abb0802030, type: 2}
 --- !u!1 &6921384159189947099
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   pp_volume: {fileID: 6921384158190517500}
   sunLight: {fileID: 6921384159194878533}
   start_SunColor: {r: 1, g: 1, b: 1, a: 0}
-  end_SunColor: {r: 0.6415094, g: 0.4849862, b: 0.31107154, a: 0}
+  end_SunColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0}
   skyBoxMat: {fileID: 2100000, guid: 6f98f353be1403c4abcc425d95fa45a6, type: 2}
   start_SkyColor: {r: 0.23709504, g: 0.4572009, b: 0.5660378, a: 0}
   start_GroundColor: {r: 0.3201317, g: 0.3703415, b: 0.5188679, a: 0}

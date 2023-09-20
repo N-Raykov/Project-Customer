@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 56bb108651e147b41a205d632cc5e98f, type: 2}
+  - {fileID: 2100000, guid: 5a68b738c409d494d8b06b53c70d6264, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -347,7 +347,6 @@ MonoBehaviour:
   hp: 3
   value: 50
   healValue: 60
-  playerHp: {fileID: 0}
   pushForce: 150
   duration: 25
   timeDelay: 0.1

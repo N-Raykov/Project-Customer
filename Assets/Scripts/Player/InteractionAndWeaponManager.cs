@@ -60,6 +60,8 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
     void ChangeActiveWeapon(Weapons pWeapon) {
 
+        Debug.Log(activeWeapon);
+
         if (activeWeapon != Weapons.None) {
 
             if (gunList[(int)activeWeapon].isAiming)
@@ -78,6 +80,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         }
 
         activeWeapon = pWeapon;
+        Debug.Log(activeWeapon);
 
         if (activeWeapon != Weapons.None) {
 
