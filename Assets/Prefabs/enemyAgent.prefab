@@ -953,7 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c91b6702efd374aa33e14ffad22c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHp: 150
+  enemyMaxHp: 100
   hpBar: {fileID: 1762181673799011553}
   hpBarTransform: {fileID: 1762181673147677022}
   timeBeforeHidingBar: 5
