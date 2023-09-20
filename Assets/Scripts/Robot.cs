@@ -167,6 +167,7 @@ public class Robot : MonoBehaviourWithPause
                     agent.enabled = false;
                     GameManager.robot = null;
                     animator.SetTrigger(stopsCutting);
+                    Die(1);
                 }
                 break;
 
