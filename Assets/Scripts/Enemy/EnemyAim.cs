@@ -124,12 +124,12 @@ public class EnemyAim : MonoBehaviourWithPause
             float rotationSpeed = Mathf.Clamp(angleDifference / maxRotationTime, minRotationSpeed, maxRotationSpeed);
 
             float currentToTargetRotation = Compare(targetRotation, transform.rotation);
-
+/*
             if (currentToTargetRotation < 50)
             {
                 weapon.weaponPivot.transform.rotation = Quaternion.Slerp(weapon.weaponPivot.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
-
+*/
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * 0.2f * Time.deltaTime);
 
             transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
