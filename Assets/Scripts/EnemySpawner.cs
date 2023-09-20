@@ -35,7 +35,6 @@ public class EnemySpawner : MonoBehaviourWithPause{
         bigTrees = new List<Tree>();
         zones = new List<Zone>();
         zonesTemp = GameObject.FindGameObjectsWithTag("SpawnArea");
-        Debug.Log(zonesTemp.Length);
         bigTreesTemp = GameObject.FindGameObjectsWithTag("BigTree");
         foreach (GameObject g in bigTreesTemp) {
             bigTrees.Add(g.GetComponent<Tree>());
@@ -52,8 +51,6 @@ public class EnemySpawner : MonoBehaviourWithPause{
     }
 
     protected override void UpdateWithPause() {
-        Debug.Log(player.zone);
-
         if (player.zone != -1) {
             lastPlayerZone = player.zone;
         }

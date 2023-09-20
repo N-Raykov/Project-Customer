@@ -6,7 +6,6 @@ using TMPro;
 
 public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
-
     [Header("Data")]
     [SerializeField] Camera mainCamera;
     [SerializeField] float range;
@@ -62,6 +61,9 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     void ChangeActiveWeapon(Weapons pWeapon) {
 
         if (activeWeapon != Weapons.None) {
+
+            if (gunList[(int)activeWeapon].isAiming)
+                return;
 
             if (gunList[(int)activeWeapon].state != Gun.States.Idle)
                 return;
@@ -139,9 +141,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hitInfo, range);
         if (hitInfo.collider == null)
             return;
-
-        Debug.Log(hitInfo.collider.gameObject.name);
-
+            
         switch (hitInfo.collider.gameObject.tag){
             case "Interactable":
                 lastDropPodSeen = hitInfo.collider.gameObject.gameObject.GetComponent<DropPod>();
@@ -155,7 +155,21 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
                 if (input.interactionInput)
                     PickUpLog(hitInfo);
                 break;
+            case "BigTree":
+                BigTreeSellInfo(hitInfo);
+                if (input.interactionInput)
+                    PickUpLog(hitInfo);
+                break;
 
+        }
+    }
+
+    void BigTreeSellInfo(RaycastHit pHitInfo) {
+        Tree tree = pHitInfo.collider.gameObject.GetComponent<Tree>();
+        if (tree.hasFallen){
+            treeSellMessageBackground.SetActive(true);
+            treeSellMessage.text = String.Format("Sell for {0}$", tree._value);
+            return;
         }
     }
 
@@ -169,8 +183,27 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
                     DisplayAmmo(gunList[(int)activeWeapon].currentAmmo, gunList[(int)activeWeapon].extraAmmo);
                 }
                 break;
+            case "ShotgunAmmo":
+                gunList[(int)Weapons.Shotgun].extraAmmo += amount;
+                if (activeWeapon == Weapons.Shotgun){
+                    DisplayAmmo(gunList[(int)activeWeapon].currentAmmo, gunList[(int)activeWeapon].extraAmmo);
+                }
+                break;
+            case "AssaultRifleAmmo":
+                gunList[(int)Weapons.AssaultRifle].extraAmmo += amount;
+                if (activeWeapon == Weapons.AssaultRifle)
+                {
+                    DisplayAmmo(gunList[(int)activeWeapon].currentAmmo, gunList[(int)activeWeapon].extraAmmo);
+                }
+                break;
             case "Shotgun":
                 gunList[(int)Weapons.Shotgun].canBeAccessed = true;
+                break;
+            case "AssaultRifle":
+                gunList[(int)Weapons.AssaultRifle].canBeAccessed = true;
+                break;
+            case "GravityWave":
+                GetComponent<PlayerAbility>().MakeAbilityAvailable();
                 break;
         }
         Destroy(pHitInfo.collider.gameObject);

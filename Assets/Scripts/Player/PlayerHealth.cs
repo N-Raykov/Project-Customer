@@ -32,5 +32,11 @@ public class PlayerHealth : MonoBehaviourWithPause{
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.fallenTrees = 0;
     }
+
+    public void AddHp(float pHp) {
+        currentHP = Mathf.Min(currentHP + pHp, maxHp);
+        text.text = string.Format("{0}/{1} HP", currentHP, maxHp);
+        hpBarTransform.localScale = new Vector3(currentHP / maxHp, 1, 1);
+    }
 }
 

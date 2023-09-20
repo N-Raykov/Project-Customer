@@ -13,12 +13,12 @@ public class Controls : MonoBehaviourWithPause {
         //interaction
         keyList.Add("interact", KeyCode.E);
         keyList.Add("shop", KeyCode.H);
+        keyList.Add("robotSpawn", KeyCode.G);
         //combat
         keyList.Add("shoot", KeyCode.Mouse0);
         keyList.Add("aim", KeyCode.Mouse1);
         keyList.Add("reload", KeyCode.R);
         keyList.Add("ability1", KeyCode.Q);
-        keyList.Add("robotSpawn", KeyCode.G);
 
     }
 
