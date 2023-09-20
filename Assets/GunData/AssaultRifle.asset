@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
   gunName: AssaultRIfle
-  damage: 10
+  damage: 23
   range: 50
   bulletSpeed: 100
   ammoCapacity: 30
   shotCooldown: 0.145
-  reloadTime: 3
+  reloadTime: 1.7
   spreadFactorXMin: 0.05
   spreadFactorYMin: 0.05
   spreadFactorX: 0.1
