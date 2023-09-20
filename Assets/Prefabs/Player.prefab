@@ -1628,7 +1628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0256655a9a350347bc9a18d12c49a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 1000
+  maxHp: 400
   text: {fileID: 287728066134241825}
   hpBarTransform: {fileID: 473804813950019301}
 --- !u!1 &1022498302681748274
