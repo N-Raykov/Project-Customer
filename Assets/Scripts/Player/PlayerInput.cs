@@ -24,7 +24,7 @@ public class PlayerInput : MonoBehaviourWithPause
 
     private void Start(){
 
-        controls = GameSettings.gameSettings.controls;
+        controls = Controls.controls;
         
     }
 

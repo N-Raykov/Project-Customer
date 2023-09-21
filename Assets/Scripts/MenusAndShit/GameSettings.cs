@@ -9,9 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class GameSettings : MonoBehaviourWithPause {
 
-    public static GameSettings gameSettings { get; private set; }
-
-    public Controls controls { get; private set; }
+    //public Controls controls { get; private set; }
+    Controls controls;
 
     [SerializeField] TextMeshProUGUI jump;
     [SerializeField] TextMeshProUGUI interact;
@@ -41,17 +40,9 @@ public class GameSettings : MonoBehaviourWithPause {
     private void Awake(){
         ignorePausedState = true;
 
-        if (gameSettings != null)
-            Destroy(gameObject);
-        else{
-            DontDestroyOnLoad(gameObject);
-            gameSettings = this;
-        }
-
-        controls = GetComponent<Controls>();
-
     }
     private void Start(){
+        controls = GameObject.FindObjectOfType<Controls>();
 
         textLinks.Add("jump",jump);
         textLinks.Add("interact", interact);
@@ -87,8 +78,6 @@ public class GameSettings : MonoBehaviourWithPause {
 
 
     protected override void UpdateWithPause(){
-        if (SceneManager.GetActiveScene().name != "MainMenu")
-            UI.SetActive(false);
 
         if (canCheckForInput) {
             for (int i = 0; i < 400; i++){

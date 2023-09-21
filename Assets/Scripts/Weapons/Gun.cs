@@ -186,7 +186,6 @@ public abstract class Gun : MonoBehaviourWithPause{
         StartReloadAnimation();
         state = States.Reload;
         extraAmmo += currentAmmo;
-        Debug.Log(gunData.reloadTime);
         OnReload?.Invoke(gunData.reloadTime);
         currentAmmo = Mathf.Min(gunData.ammoCapacity, extraAmmo);
         extraAmmo -= Mathf.Min(gunData.ammoCapacity, extraAmmo);

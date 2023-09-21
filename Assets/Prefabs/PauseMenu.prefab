@@ -147,12 +147,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 1786501745987800803, guid: 88ab4d2f67a48de4c8d78436ff50dc5e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1786501746320499137, guid: 88ab4d2f67a48de4c8d78436ff50dc5e,
         type: 3}
       propertyPath: m_text
       value: Resume
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1786501745353909733, guid: 88ab4d2f67a48de4c8d78436ff50dc5e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 88ab4d2f67a48de4c8d78436ff50dc5e, type: 3}
 --- !u!1 &2301247530922569188 stripped
 GameObject:
@@ -179,3 +185,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 2301247530922569188}
+  playerUI: {fileID: 0}

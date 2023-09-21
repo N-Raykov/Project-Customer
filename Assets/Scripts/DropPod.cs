@@ -30,7 +30,7 @@ public class DropPod : MonoBehaviourWithPause{
         StartCoroutine(WaitToStart(timeToWaitUntilStart, velocity));
         thruster = Instantiate(thrusterPrefab,spawnPoint.position,Quaternion.identity,transform);
 
-        text.text=string.Format("[{0}] Pick Up \n {1}", GameSettings.gameSettings.controls.keyList["interact"],data.dropMessage);
+        text.text=string.Format("[{0}] Pick Up \n {1}", Controls.controls.keyList["interact"],data.dropMessage);
     }
 
     protected override void UpdateWithPause(){

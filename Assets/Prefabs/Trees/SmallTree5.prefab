@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 2
-  value: 50
+  value: 60
   healValue: 60
   pushForce: 150
   duration: 25
