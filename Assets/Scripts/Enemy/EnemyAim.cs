@@ -136,7 +136,10 @@ public class EnemyAim : MonoBehaviourWithPause
             {
                 weapon.Shoot();
                 weapon.timeSinceLastShot = weapon.shotCD;
-                animator.SetTrigger("Shoot");
+                if (weapon == bazooka)
+                {
+                    animator.SetTrigger("ShootRocket"); 
+                }
             }
         }
     }

@@ -2040,6 +2040,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMaxHp: 100
+  deathEffect: {fileID: 6952311445211100482, guid: 27bb6b7b65edb354abb4ac7e659602f5,
+    type: 3}
   hpBar: {fileID: 5313547083849543513}
   hpBarTransform: {fileID: 5313547085356718822}
   timeBeforeHidingBar: 5
@@ -2066,6 +2068,8 @@ MonoBehaviour:
   stunAfterFall: 1.5
   heightOfFall: 110
   startingVelocity: 100
+  landingParticles: {fileID: 3516828931786033971, guid: 47bd253ac6593844b85ae5e540117b92,
+    type: 3}
   spawnPoint: {fileID: 5333390402762721853}
   spawnPoint2: {fileID: 385904882917200537}
   thrusterPrefab: {fileID: 6126204826482792501, guid: d24d180368ac42d4eaea4c9898dd1c82,

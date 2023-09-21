@@ -25,6 +25,8 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float heightOfFall;
     [SerializeField] float startingVelocity;
 
+    [SerializeField] GameObject landingParticles;
+
     float startPosition;
     float currentPosition;
     float timeToWaitUntilStart;
@@ -182,8 +184,11 @@ public class EnemyMove : MonoBehaviourWithPause
             currentPosition = transform.position.y;
             float t = Mathf.Abs(currentPosition - startPosition) / heightOfFall;
             rb.velocity = new Vector3(0, -Mathf.Lerp(startingVelocity, 0f, t), 0);
-            thruster.transform.localScale = new Vector3(Mathf.Lerp(2, 1f, t), Mathf.Lerp(2, 0.8f, t), Mathf.Lerp(2, 1f, t));
-            thruster2.transform.localScale = new Vector3(Mathf.Lerp(2, 1f, t), Mathf.Lerp(2, 0.8f, t), Mathf.Lerp(2, 1f, t));
+            if(thruster != null)
+            {
+                thruster.transform.localScale = new Vector3(Mathf.Lerp(2, 1f, t), Mathf.Lerp(2, 0.8f, t), Mathf.Lerp(2, 1f, t));
+                thruster2.transform.localScale = new Vector3(Mathf.Lerp(2, 1f, t), Mathf.Lerp(2, 0.8f, t), Mathf.Lerp(2, 1f, t));
+            }
         }
 
         if (GameManager.gameIsPaused == true)
@@ -210,6 +215,7 @@ public class EnemyMove : MonoBehaviourWithPause
             animator.SetTrigger("Land");
             Destroy(thruster);
             Destroy(thruster2);
+            Instantiate(landingParticles, new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z), Quaternion.identity);
         }
     }
 

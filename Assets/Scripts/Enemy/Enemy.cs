@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviourWithPause{
 
     [Header("Hp")]
     [SerializeField]float enemyMaxHp;
+    [SerializeField] GameObject deathEffect;
     float currentHP;
 
     public float missingHealth { get; set; }
@@ -41,6 +42,7 @@ public class Enemy : MonoBehaviourWithPause{
     }
 
     void Die() {
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
         if (transform.parent != null)
         {
             Destroy(transform.parent.gameObject);

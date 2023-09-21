@@ -126,8 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6a3c5547aa49a45981e8e2b1f1b1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  homingRange: 0
-  homingStrength: 0.8
+  homingRange: 4
+  homingStrength: 0.6
+  explosionTimer: 3
+  explosion: {fileID: 5977462431445457715, guid: 477a62a4e86c9e24c9cde4953d3825ad,
+    type: 3}
 --- !u!1001 &7008575278453073320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,6 +271,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: rocket Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018319241419007026, guid: 2735cc8bb8e2bd947981eca2ef618ba0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2735cc8bb8e2bd947981eca2ef618ba0, type: 3}

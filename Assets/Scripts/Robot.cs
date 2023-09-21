@@ -39,6 +39,9 @@ public class Robot : MonoBehaviourWithPause
     const string startsCutting = "Starts Cutting";
     const string stopsCutting = "Stops Cutting";
 
+    [SerializeField] Enemy health;
+    [SerializeField] GameObject landingParticles;
+
     public float distanceToGround { get; set; }
 
     public enum RobotState
@@ -68,7 +71,7 @@ public class Robot : MonoBehaviourWithPause
         closestTree = FindClosestBigTree();
         bigTree = closestTree.GetComponent<Tree>();
         GameManager.robot = gameObject;
-        transform.position = new Vector3(transform.position.x, transform.position.y + heightOfFall + 2f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y + heightOfFall, transform.position.z);
         thruster = Instantiate(thrusterPrefab, spawnPoint.position, spawnPoint.rotation, transform);
         thruster2 = Instantiate(thrusterPrefab, spawnPoint2.position, spawnPoint2.rotation, transform);
     }
@@ -170,7 +173,7 @@ public class Robot : MonoBehaviourWithPause
                     agent.enabled = false;
                     GameManager.robot = null;
                     animator.SetTrigger(stopsCutting);
-                    Destroy(gameObject);
+                    health.TakeDamage(9999);
                 }
                 break;
 
@@ -238,6 +241,7 @@ public class Robot : MonoBehaviourWithPause
             isActive = true;
             Destroy(thruster);
             Destroy(thruster2);
+            Instantiate(landingParticles, new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z), Quaternion.identity);
         }
     }
 }

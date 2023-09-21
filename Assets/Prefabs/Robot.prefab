@@ -321,7 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c91b6702efd374aa33e14ffad22c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHp: 11111
+  enemyMaxHp: 1000
+  deathEffect: {fileID: 6952311445211100482, guid: 27bb6b7b65edb354abb4ac7e659602f5,
+    type: 3}
   hpBar: {fileID: 2752344669976792987}
   hpBarTransform: {fileID: 2752344671710476836}
   timeBeforeHidingBar: 5
@@ -368,6 +370,9 @@ MonoBehaviour:
   spawnPoint: {fileID: 6423381228578246678}
   spawnPoint2: {fileID: 4634801203320507482}
   thrusterPrefab: {fileID: 6126204826482792501, guid: d24d180368ac42d4eaea4c9898dd1c82,
+    type: 3}
+  health: {fileID: 2752344671248881260}
+  landingParticles: {fileID: 3516828931786033971, guid: 47bd253ac6593844b85ae5e540117b92,
     type: 3}
 --- !u!1 &2752344671710476835
 GameObject:
