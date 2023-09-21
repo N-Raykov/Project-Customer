@@ -8,6 +8,7 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
     [SerializeField] Transform cameraPivot;
     [SerializeField] Animator animator;
     [SerializeField] GunData data;
+    [SerializeField] GameObject splinters;
 
     bool isIdle = true;
     float timeBecameNonIdle;
@@ -45,6 +46,7 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
         Debug.Log(other.tag);
 
         if (other.CompareTag("Log") && !isIdle) {
+            Instantiate(splinters,transform.position,Quaternion.identity);
             Debug.Log(1);
             other.GetComponent<Tree>().TakeDamage(transform.right);
             //animator.SetFloat("speed", -1);
@@ -53,16 +55,18 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
         }
 
         if ((other.CompareTag("BigTree")|| (other.CompareTag("Stump")) && !isIdle)){
-            animator.SetFloat("speed", -1);
-            timePassed = (Time.time - timeBecameNonIdle);
-            timeReverseTime = Time.time;
+            Instantiate(splinters, transform.position, Quaternion.identity);
+            //animator.SetFloat("speed", -1);
+            //timePassed = (Time.time - timeBecameNonIdle);
+            //timeReverseTime = Time.time;
         }
 
         if (other.CompareTag("Enemy") && !isIdle){
+            Instantiate(splinters, transform.position, Quaternion.identity);
             other.GetComponent<Enemy>().TakeDamage(data.damage);
-            animator.SetFloat("speed", -1);
-            timePassed = (Time.time - timeBecameNonIdle);
-            timeReverseTime = Time.time;
+            //animator.SetFloat("speed", -1);
+            //timePassed = (Time.time - timeBecameNonIdle);
+            //timeReverseTime = Time.time;
         }
     }
     

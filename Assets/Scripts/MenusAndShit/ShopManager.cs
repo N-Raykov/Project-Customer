@@ -12,6 +12,7 @@ public class ShopManager : MonoBehaviourWithPause{
     [SerializeField] GameObject shopUI;
     [SerializeField] TextMeshProUGUI purchasePanel;
     [SerializeField] PlayerUI UI;
+    [SerializeField] Color orange;
 
     [Header("Info")]
     [SerializeField] GameObject dropPod;
@@ -36,6 +37,7 @@ public class ShopManager : MonoBehaviourWithPause{
     bool shopIsActive = false;
     Rigidbody rb;
 
+    Image lastImageChanged = null;
     GameObject activePage;
     Button lastDisabledButton;
     CollisionCheckForDropboxes[] spawnPointsTemp;
@@ -89,6 +91,12 @@ public class ShopManager : MonoBehaviourWithPause{
             lastDisabledButton = null;
         }
 
+        if (lastImageChanged != null)
+        {
+            lastImageChanged.color = new Color(255, 255, 255);
+            lastImageChanged = null;
+        }
+
         spawnPoints = new List<Vector3>();
         foreach (CollisionCheckForDropboxes c in spawnPointsTemp){
             if (c.canBeSpawnedOn)
@@ -121,43 +129,6 @@ public class ShopManager : MonoBehaviourWithPause{
 
     }
 
-    //public void SpawnDropPod(ShopButtonData pData) {
-
-    //    Vector3 spawnPoint = new Vector3(0,110,0);
-
-    //    int randomXOrientation = UnityEngine.Random.Range(0, 2);
-    //    int randomZOrientation = UnityEngine.Random.Range(0, 2);
-
-    //    spawnPoint.x = rb.position.x + UnityEngine.Random.Range(dropPodRangeMin, dropPodRangeMax) * ((randomXOrientation == 0) ? -1 : 1);
-    //    spawnPoint.z = rb.position.z + UnityEngine.Random.Range(dropPodRangeMin, dropPodRangeMax) * ((randomZOrientation == 0) ? -1 : 1);
-
-    //    RaycastHit hit;
-    //    Physics.SphereCast(spawnPoint+new Vector3(0,10,0),dropPodSize, Vector3.down, out hit,200,mask,QueryTriggerInteraction.UseGlobal);
-    //    if (hit.collider == null){
-    //        DropPod dp=(Instantiate(dropPod, spawnPoint, Quaternion.identity)).GetComponent<DropPod>();
-    //        dp.data = pData;
-    //        RaycastHit groundCheck;
-    //        Physics.Raycast(spawnPoint,Vector3.down,out groundCheck, 10000, ground);
-    //        dp.distanceToGround = groundCheck.distance;
-    //        purchases++;
-    //        UpdatePurchasePanel();
-    //    }
-    //    else {//could use method instead
-    //        Debug.Log("help");
-    //        if (hit.collider.gameObject.tag == "DropPod") {
-    //            DropPod dp = (Instantiate(dropPod, spawnPoint+new Vector3(0,5,0), Quaternion.identity)).GetComponent<DropPod>();
-    //            dp.data = pData;
-    //            RaycastHit groundCheck;
-    //            Physics.Raycast(spawnPoint + new Vector3(0, 5, 0), Vector3.down, out groundCheck, 10000, ground);
-    //            dp.distanceToGround = groundCheck.distance;
-    //            purchases++;
-    //            UpdatePurchasePanel();
-    //        }
-    //        else
-    //            SpawnDropPod(pData);
-    //    }
-    //}
-
     void UpdatePurchasePanel() {
         purchasePanel.text = String.Format("{0} / {1} max purchases", purchases, maxPurchases);
     }
@@ -187,6 +158,11 @@ public class ShopManager : MonoBehaviourWithPause{
     public void DisableButton(Button pButton) {
         if (lastDisabledButton != null)
             lastDisabledButton.enabled = true;
+
+        if (lastImageChanged != null){
+            lastImageChanged.color = new Color(255, 255, 255);
+            lastImageChanged = null;
+        }
 
         if (pButton != null){
             lastDisabledButton = pButton;
@@ -240,5 +216,10 @@ public class ShopManager : MonoBehaviourWithPause{
         Debug.Log(1);
         //Debug.Log(vector3 + " " + spawnPoints.Count);
 
+    }
+
+    public void ChangeImageColor(Image pImage) {
+        pImage.color = orange;
+        lastImageChanged = pImage;
     }
 }

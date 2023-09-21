@@ -15,6 +15,7 @@ public class Controls : MonoBehaviourWithPause {
         keyList.Add("interact", KeyCode.E);
         keyList.Add("shop", KeyCode.H);
         keyList.Add("robotSpawn", KeyCode.G);
+        keyList.Add("pause",KeyCode.Tab);
         //combat
         keyList.Add("shoot", KeyCode.Mouse0);
         keyList.Add("aim", KeyCode.Mouse1);

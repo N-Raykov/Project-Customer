@@ -26,6 +26,7 @@ public class Bullet : MonoBehaviourWithPause{
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
         if (enemy != null) {
+            HitMarkerBehavior.hitEnemy = true;
             enemy.TakeDamage(damage);
         }
         //if (tree != null) {

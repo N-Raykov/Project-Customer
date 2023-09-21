@@ -95,7 +95,7 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
                 MovePlayer();
                 Jump();
                 ChangeStateToJump();
-                ChangeStateToSprint();
+                //ChangeStateToSprint();
                 break;
             case State.Jump:
                 MovePlayer();
