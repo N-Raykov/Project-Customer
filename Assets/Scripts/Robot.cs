@@ -68,7 +68,7 @@ public class Robot : MonoBehaviourWithPause
         closestTree = FindClosestBigTree();
         bigTree = closestTree.GetComponent<Tree>();
         GameManager.robot = gameObject;
-        transform.position = new Vector3(transform.position.x, transform.position.y + heightOfFall + 2f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y + heightOfFall - 2f, transform.position.z);
         thruster = Instantiate(thrusterPrefab, spawnPoint.position, spawnPoint.rotation, transform);
         thruster2 = Instantiate(thrusterPrefab, spawnPoint2.position, spawnPoint2.rotation, transform);
     }

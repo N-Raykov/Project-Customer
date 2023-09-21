@@ -30,7 +30,7 @@ public class SpawnRobot : MonoBehaviourWithPause
     {
         NavMeshAgent robotAgent = robot.GetComponent<NavMeshAgent>();
 
-        Vector3 spawnPoint = new Vector3(0, transform.position.y - robotAgent.height * 0.5f, 0);
+        Vector3 spawnPoint = new Vector3(0, transform.position.y, 0);
 
         int randomXOrientation = UnityEngine.Random.Range(0, 2);
         int randomZOrientation = UnityEngine.Random.Range(0, 2);
