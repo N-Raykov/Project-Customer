@@ -12,6 +12,10 @@ public class Rocket : MonoBehaviourWithPause
 
     [SerializeField] float homingRange;
     [SerializeField] float homingStrength;
+    [SerializeField] float explosionTimer;
+
+    [SerializeField] GameObject explosion;
+
     bool canHome = true;
 
     Vector3 startPosition;
@@ -20,6 +24,7 @@ public class Rocket : MonoBehaviourWithPause
     {
         rb = GetComponent<Rigidbody>();
         startPosition = transform.position;
+        StartCoroutine(WaitToExplode());
     }
 
     protected override void UpdateWithPause()
@@ -29,17 +34,19 @@ public class Rocket : MonoBehaviourWithPause
             Destroy(this.gameObject);
         }
 
-        float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
-
-        if (distanceToTarget > homingRange && canHome)
+        if (target != null)
         {
-            FollowTarget(target);
-        }
-        else
-        {
-            canHome = false;
-        }
+            float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
+            if (distanceToTarget > homingRange && canHome == true)
+            {
+                FollowTarget(target);
+            }
+            else
+            {
+                canHome = false;
+            }
+        }
     }
 
     void FollowTarget(GameObject target)
@@ -63,6 +70,19 @@ public class Rocket : MonoBehaviourWithPause
         {
             player.TakeDamage(damage);
         }
+        Explode();
+    }
+
+    IEnumerator WaitToExplode()
+    {
+        yield return new WaitForSeconds(explosionTimer);
+        Explode();
+
+    }
+
+    void Explode()
+    {
+        Instantiate(explosion, transform.position,Quaternion.identity);
         Destroy(this.gameObject);
     }
 }

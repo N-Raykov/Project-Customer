@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy Bazooka
   m_EditorClassIdentifier: 
   gunName: Bazooka
-  damage: 50
+  damage: 25
   range: 100
   bulletSpeed: 20
   ammoCapacity: -1

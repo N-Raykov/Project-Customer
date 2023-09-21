@@ -1993,6 +1993,8 @@ Transform:
   m_Children:
   - {fileID: 2677512058819924453}
   - {fileID: 5313547083849543517}
+  - {fileID: 5333390402762721853}
+  - {fileID: 385904882917200537}
   m_Father: {fileID: 7396313343910974369}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2038,6 +2040,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMaxHp: 100
+  deathEffect: {fileID: 6952311445211100482, guid: 27bb6b7b65edb354abb4ac7e659602f5,
+    type: 3}
   hpBar: {fileID: 5313547083849543513}
   hpBarTransform: {fileID: 5313547085356718822}
   timeBeforeHidingBar: 5
@@ -2064,6 +2068,12 @@ MonoBehaviour:
   stunAfterFall: 1.5
   heightOfFall: 110
   startingVelocity: 100
+  landingParticles: {fileID: 3516828931786033971, guid: 47bd253ac6593844b85ae5e540117b92,
+    type: 3}
+  spawnPoint: {fileID: 5333390402762721853}
+  spawnPoint2: {fileID: 385904882917200537}
+  thrusterPrefab: {fileID: 6126204826482792501, guid: d24d180368ac42d4eaea4c9898dd1c82,
+    type: 3}
   animator: {fileID: 1637100541802499431}
 --- !u!114 &5893246048637940072
 MonoBehaviour:
@@ -2659,6 +2669,37 @@ Transform:
   m_Father: {fileID: 1020583336641004061}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6456288403455905808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 385904882917200537}
+  m_Layer: 0
+  m_Name: SpawnPoint 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &385904882917200537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6456288403455905808}
+  m_LocalRotation: {x: 0.14157274, y: 0.35014096, z: 0.3470866, w: 0.8584226}
+  m_LocalPosition: {x: 0.61, y: 3.46, z: 0.771}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5313547084727105202}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 44.38, z: 44.03}
 --- !u!1 &6471337086304724329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2929,7 +2970,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7396313343910974370}
   m_Enabled: 0
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50
@@ -2938,7 +2979,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1
+  m_Height: 3.9
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -3350,6 +3391,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.053130984, y: 0.06638157, z: 0.5454848}
     m_Extent: {x: 2.6197662, y: 2.1330523, z: 1.4975722}
   m_DirtyAABB: 0
+--- !u!1 &8599566194524524311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5333390402762721853}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5333390402762721853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599566194524524311}
+  m_LocalRotation: {x: 0.14157271, y: -0.350141, z: -0.34708652, w: 0.8584227}
+  m_LocalPosition: {x: -0.56, y: 3.46, z: 0.771}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5313547084727105202}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -44.38, z: -44.03}
 --- !u!1 &8650525210472455279
 GameObject:
   m_ObjectHideFlags: 0

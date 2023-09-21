@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3516828931786033968}
   - component: {fileID: 3516828931786033969}
   - component: {fileID: 3516828931786033970}
+  - component: {fileID: 718511336130874735}
   m_Layer: 0
   m_Name: LandSmoke
   m_TagString: Untagged
@@ -110,3 +111,15 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &718511336130874735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3516828931786033971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65ecfb516e53e1429051f1e2b37970a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
