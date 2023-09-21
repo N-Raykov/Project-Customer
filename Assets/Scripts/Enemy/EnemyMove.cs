@@ -85,7 +85,7 @@ public class EnemyMove : MonoBehaviourWithPause
         startPosition = transform.position.y;
         float velocity = startingVelocity + UnityEngine.Random.Range(5, 10) * ((UnityEngine.Random.Range(0, 2) == 0) ? -1 : 1);
         startingVelocity = 0;
-        timeToWaitUntilStart = UnityEngine.Random.Range(1, 5);
+        //timeToWaitUntilStart = UnityEngine.Random.Range(1, 5);
         StartCoroutine(WaitToStart(timeToWaitUntilStart, velocity));
     }
 
