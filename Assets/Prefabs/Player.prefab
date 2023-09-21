@@ -1932,7 +1932,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7603596110123682499, guid: 8faf1570903bc7f458199f14aa785bf4,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: d76fa9917fa0a5848bdb7749feb4b871, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8cc29c6f91951224bab53f50cc5202b0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6346,7 +6346,7 @@ PrefabInstance:
     - target: {fileID: 2333771773611666572, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2333771773611666572, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
@@ -6492,6 +6492,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ActivatePage
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885299343969708193, guid: 4b124a70c76d00349bf8bfa3a8736498,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5117179984257896929, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
@@ -6651,7 +6656,7 @@ PrefabInstance:
     - target: {fileID: 9115371382075130654, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9115371382441776734, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
@@ -6807,7 +6812,7 @@ PrefabInstance:
     - target: {fileID: 9115371383021598270, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9115371383042595476, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}

@@ -25,6 +25,7 @@ public class Tree : MonoBehaviourWithPause {
 
     public int _maxHP{ get; private set; }
 
+
     void Start(){
         playerHp = GameObject.FindAnyObjectByType<PlayerHealth>();
         _value = value;
