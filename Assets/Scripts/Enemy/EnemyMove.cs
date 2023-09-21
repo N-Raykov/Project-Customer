@@ -218,7 +218,7 @@ public class EnemyMove : MonoBehaviourWithPause
             animator.SetTrigger("Land");
             Destroy(thruster);
             Destroy(thruster2);
-            Instantiate(landingParticles, new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z), Quaternion.identity);
+            Instantiate(landingParticles, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
         }
     }
 
@@ -234,13 +234,13 @@ public class EnemyMove : MonoBehaviourWithPause
         float randomValue = Random.value;
         if (randomValue < 0.5f)
         {
-            // Move left
             agent.destination = transform.position - transform.right * 5f;
+            animator.SetBool("isStrafingLeft", false);
         }
         else
         {
-            // Move right
             agent.destination = transform.position + transform.right * 5f;
+            animator.SetBool("isStrafingLeft", true);
         }
     }
 

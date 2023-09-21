@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c91b6702efd374aa33e14ffad22c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHp: 1000
+  enemyMaxHp: 250
   deathEffect: {fileID: 6952311445211100482, guid: 27bb6b7b65edb354abb4ac7e659602f5,
     type: 3}
   hpBar: {fileID: 2752344669976792987}
@@ -364,7 +364,7 @@ MonoBehaviour:
   speed: 3
   stunAfterFall: 1
   heightOfFall: 110
-  timeToCut: 5
+  timeToCut: 30
   startingVelocity: 100
   animator: {fileID: 9090940521634035480}
   spawnPoint: {fileID: 6423381228578246678}
