@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: ShotgunAmmo
   type: supplies
-  cost: 20
-  stock: -1
+  cost: 60
+  stock: -5
   amount: 20
   dropMessage: Shotgun Ammo x20

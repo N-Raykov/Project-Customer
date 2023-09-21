@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: AssaultRifle
   type: weapons
-  cost: 100
+  cost: 350
   stock: 1
   amount: -1
   dropMessage: Assault Rifle

@@ -1397,7 +1397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1001639993959326202}
-  range: 1.75
+  range: 2.25
   gunList:
   - {fileID: 5666791571397099019}
   - {fileID: 5095838758442340299}
@@ -1866,7 +1866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41eb6555a65c9f64db0c07901c7ccd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extraAmmo: 200
+  extraAmmo: 0
   gunData: {fileID: 11400000, guid: cbea0b237a93e6b4aaf9afd58e9c3109, type: 2}
   animator: {fileID: 8115640344517925988}
   input: {fileID: 6599779931964029087}
@@ -3911,7 +3911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8db12b986116740a0912ed61947b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extraAmmo: 300
+  extraAmmo: 90
   gunData: {fileID: 11400000, guid: dbff48810329a8e4196c1603baf7bace, type: 2}
   animator: {fileID: 3080581814830910660}
   input: {fileID: 6599779931964029087}
@@ -5682,7 +5682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b010e8a3c583bc141b9c44e0263b1792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extraAmmo: 100
+  extraAmmo: 20
   gunData: {fileID: 11400000, guid: ec334ff5caaf89b43806f46401a48a3b, type: 2}
   animator: {fileID: 1911226772087413986}
   input: {fileID: 6599779931964029087}

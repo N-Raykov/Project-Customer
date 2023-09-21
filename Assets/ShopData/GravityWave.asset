@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: GravityWave
   type: abilities
-  cost: 100
+  cost: 600
   stock: 1
   amount: -1
   dropMessage: GravityWave

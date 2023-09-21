@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: Shotgun
   type: weapons
-  cost: 50
-  stock: 1
+  cost: 550
+  stock: 0
   amount: -1
   dropMessage: Shotgun

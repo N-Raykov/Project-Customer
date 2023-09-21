@@ -19,6 +19,18 @@ public class Revolver : Gun{
         gameObject.SetActive(false);
     }
 
+    protected override void Start()
+    {
+        recoilTargetRotation = Vector3.zero;
+        state = States.Idle;
+        animator = transform.GetComponent<Animator>();
+        currentAmmo = 0;
+        InvokeOnAmmoChange();
+        pistolRotationPivotStartPosition = pistolRotationPivot.localPosition;
+        originalFOV = mainCamera.fieldOfView;
+        originalFOVWeaponCamera = weaponCamera.fieldOfView;
+    }
+
     protected override void StartShotAnimation(){
         animator.SetTrigger("Shoot");
         //StartCoroutine(SpinMag());
