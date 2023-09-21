@@ -272,7 +272,7 @@ MonoBehaviour:
   pp_volume: {fileID: 6921384158190517500}
   sunLight: {fileID: 6921384159194878533}
   start_SunColor: {r: 1, g: 1, b: 1, a: 0}
-  end_SunColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0}
+  end_SunColor: {r: 0.7924528, g: 0.54873616, b: 0.54873616, a: 0}
   skyBoxMat: {fileID: 2100000, guid: 6f98f353be1403c4abcc425d95fa45a6, type: 2}
   start_SkyColor: {r: 0.23709504, g: 0.4572009, b: 0.5660378, a: 0}
   start_GroundColor: {r: 0.3201317, g: 0.3703415, b: 0.5188679, a: 0}

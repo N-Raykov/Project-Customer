@@ -9098,7 +9098,7 @@ PrefabInstance:
     - target: {fileID: 2333771773611666572, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BuyItem
+      value: BackToPreviousPage
       objectReference: {fileID: 0}
     - target: {fileID: 2333771773611666572, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
@@ -9924,6 +9924,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &693466314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9115371382940120340, guid: 4b124a70c76d00349bf8bfa3a8736498,
+    type: 3}
+  m_PrefabInstance: {fileID: 9115371382249439710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6286555112607620430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693466314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59897ad7c7cde848a2dc3d1e3d6a60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 693466316}
+  shopManager: {fileID: 233961048}
+  buttonSO: {fileID: 11400000, guid: 2fc8f80ad95e16e43b3cebf449111c1a, type: 2}
+--- !u!114 &693466316 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9115371382940120338, guid: 4b124a70c76d00349bf8bfa3a8736498,
+    type: 3}
+  m_PrefabInstance: {fileID: 9115371382249439710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693466314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &788910112 stripped
