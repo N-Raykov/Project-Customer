@@ -29,17 +29,19 @@ public class Rocket : MonoBehaviourWithPause
             Destroy(this.gameObject);
         }
 
-        float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
-
-        if (distanceToTarget > homingRange && canHome)
+        if (target != null)
         {
-            FollowTarget(target);
-        }
-        else
-        {
-            canHome = false;
-        }
+            float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
+            if (distanceToTarget > homingRange && canHome)
+            {
+                FollowTarget(target);
+            }
+            else
+            {
+                canHome = false;
+            }
+        }
     }
 
     void FollowTarget(GameObject target)
