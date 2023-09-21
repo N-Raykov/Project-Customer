@@ -10,6 +10,12 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
     [SerializeField] GunData data;
     [SerializeField] GameObject splinters;
 
+    [Header("Sounds")]
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip sound1;
+    [SerializeField] AudioClip sound2;
+    [SerializeField] AudioClip sound3;
+
     bool isIdle = true;
     float timeBecameNonIdle;
     float timeReverseTime;
@@ -49,6 +55,7 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
             Instantiate(splinters,transform.position,Quaternion.identity);
             Debug.Log(1);
             other.GetComponent<Tree>().TakeDamage(transform.right);
+            PlaySound();
             //animator.SetFloat("speed", -1);
             //timePassed = (Time.time - timeBecameNonIdle);
             //timeReverseTime = Time.time;
@@ -56,6 +63,7 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
 
         if ((other.CompareTag("BigTree")|| (other.CompareTag("Stump")) && !isIdle)){
             Instantiate(splinters, transform.position, Quaternion.identity);
+            PlaySound();
             //animator.SetFloat("speed", -1);
             //timePassed = (Time.time - timeBecameNonIdle);
             //timeReverseTime = Time.time;
@@ -67,6 +75,21 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
             //animator.SetFloat("speed", -1);
             //timePassed = (Time.time - timeBecameNonIdle);
             //timeReverseTime = Time.time;
+        }
+    }
+
+    void PlaySound() {
+        int randomNumber = UnityEngine.Random.Range(0, 3);
+        switch (randomNumber) {
+            case 0:
+                source.PlayOneShot(sound1);
+                break;
+            case 1:
+                source.PlayOneShot(sound2);
+                break;
+            case 2:
+                source.PlayOneShot(sound3);
+                break;
         }
     }
     
