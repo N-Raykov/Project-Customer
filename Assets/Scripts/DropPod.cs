@@ -9,6 +9,8 @@ public class DropPod : MonoBehaviourWithPause{
     [SerializeField] float startingVelocity;
     [SerializeField] GameObject canvas;
     [SerializeField] TextMeshProUGUI text;
+    [SerializeField] Transform spawnPoint;
+    [SerializeField] GameObject thrusterPrefab;
 
     public ShopButtonData data { get; set; }
     public float distanceToGround { get; set; }
@@ -17,6 +19,8 @@ public class DropPod : MonoBehaviourWithPause{
     float currentPosition;
     float timeToWaitUntilStart;
 
+    GameObject thruster;
+
     void Start(){
         startPosition = transform.position.y;
         rb = GetComponent<Rigidbody>();
@@ -24,6 +28,7 @@ public class DropPod : MonoBehaviourWithPause{
         startingVelocity = 0;
         timeToWaitUntilStart = UnityEngine.Random.Range(1,5);
         StartCoroutine(WaitToStart(timeToWaitUntilStart, velocity));
+        thruster = Instantiate(thrusterPrefab,spawnPoint.position,Quaternion.identity,transform);
 
         text.text=string.Format("[{0}] Pick Up \n {1}", GameSettings.gameSettings.controls.keyList["interact"],data.dropMessage);
     }
@@ -33,6 +38,7 @@ public class DropPod : MonoBehaviourWithPause{
         currentPosition = transform.position.y;
         float t = Mathf.Abs(currentPosition-startPosition) / distanceToGround;
         rb.velocity = new Vector3(0,-Mathf.Lerp(startingVelocity,0f,t),0);
+        thruster.transform.localScale= new Vector3(Mathf.Lerp(2, 1f, t), Mathf.Lerp(2, 0.8f, t), Mathf.Lerp(2, 1f, t));
     }
 
     IEnumerator WaitToStart(float pTime,float pVelocity) {

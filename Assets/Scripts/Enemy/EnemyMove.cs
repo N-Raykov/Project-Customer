@@ -29,6 +29,13 @@ public class EnemyMove : MonoBehaviourWithPause
     float currentPosition;
     float timeToWaitUntilStart;
 
+    [SerializeField] Transform spawnPoint;
+    [SerializeField] Transform spawnPoint2;
+    [SerializeField] GameObject thrusterPrefab;
+
+    GameObject thruster;
+    GameObject thruster2;
+
     public bool isActive { get; set; }
     Rigidbody rb;
     EnemyAim enemyAim;
@@ -68,7 +75,9 @@ public class EnemyMove : MonoBehaviourWithPause
         ignorePausedState = true;
         rb = GetComponent<Rigidbody>();
         enemyAim = GetComponent<EnemyAim>();
-        transform.position = new Vector3(transform.position.x, heightOfFall, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y + heightOfFall - 2f, transform.position.z);
+        thruster = Instantiate(thrusterPrefab, spawnPoint.position, spawnPoint.rotation, transform);
+        thruster2 = Instantiate(thrusterPrefab, spawnPoint2.position, spawnPoint2.rotation, transform);
     }
 
     void Fall()
@@ -84,7 +93,7 @@ public class EnemyMove : MonoBehaviourWithPause
     {
         ExtraStuff();
 
-        if (agent.enabled == true)
+        if (agent.enabled == true && enemyAim.target != null)
         {
             HandleStates(enemyAim.target);
         }
@@ -141,6 +150,7 @@ public class EnemyMove : MonoBehaviourWithPause
                 if (Time.time >= stunDuration)
                 {
                     currentState = EnemyState.Aggro;
+                    animator.SetBool("isStunned", false);
                 }
                 else
                 {
@@ -172,6 +182,8 @@ public class EnemyMove : MonoBehaviourWithPause
             currentPosition = transform.position.y;
             float t = Mathf.Abs(currentPosition - startPosition) / heightOfFall;
             rb.velocity = new Vector3(0, -Mathf.Lerp(startingVelocity, 0f, t), 0);
+            thruster.transform.localScale = new Vector3(Mathf.Lerp(2, 1f, t), Mathf.Lerp(2, 0.8f, t), Mathf.Lerp(2, 1f, t));
+            thruster2.transform.localScale = new Vector3(Mathf.Lerp(2, 1f, t), Mathf.Lerp(2, 0.8f, t), Mathf.Lerp(2, 1f, t));
         }
 
         if (GameManager.gameIsPaused == true)
@@ -193,10 +205,11 @@ public class EnemyMove : MonoBehaviourWithPause
         {
             agent.enabled = true;
             rb.useGravity = true;
-            rb.constraints = RigidbodyConstraints.None;
             GetStunned(stunAfterFall);
             isActive = true;
             animator.SetTrigger("Land");
+            Destroy(thruster);
+            Destroy(thruster2);
         }
     }
 
@@ -204,6 +217,7 @@ public class EnemyMove : MonoBehaviourWithPause
     {
         stunDuration = Time.time + pDuration;
         currentState = EnemyState.Stunned;
+        animator.SetBool("isStunned", true);
     }
 
     private void RandomlySwitchDirection()
