@@ -25,8 +25,6 @@ public class Tree : MonoBehaviourWithPause {
 
     public int _maxHP{ get; private set; }
 
-    public UnityEvent OnTreeCut;
-
     void Start(){
         playerHp = GameObject.FindAnyObjectByType<PlayerHealth>();
         _value = value;
@@ -38,7 +36,6 @@ public class Tree : MonoBehaviourWithPause {
     public void TakeDamage(Vector3 pNormal) {
         hp--;
         if (hp == 0) {
-            OnTreeCut?.Invoke();
             hasStarterFalling = true;
             playerHp.AddHp(healValue);
             rb.constraints = RigidbodyConstraints.None;
