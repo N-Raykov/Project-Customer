@@ -243,7 +243,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 1
 --- !u!114 &2752344671248881260
 MonoBehaviour:
@@ -444,6 +444,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animas_CutTreesRobot_UseThis
       objectReference: {fileID: 0}
+    - target: {fileID: 1960064544252378459, guid: 1daf6a9724984744d8ac5d695c77e23a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fac5a128bb45ab74c8a4f1a7a2d9cdbe, type: 2}
+    - target: {fileID: 1960064544252378459, guid: 1daf6a9724984744d8ac5d695c77e23a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: e5ee5b94226c4a74c821638d25437c21, type: 2}
+    - target: {fileID: 1960064544252378459, guid: 1daf6a9724984744d8ac5d695c77e23a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: a5b1c1b483973ab4a8a3a7bd60193933, type: 2}
+    - target: {fileID: 1960064544252378459, guid: 1daf6a9724984744d8ac5d695c77e23a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 660459c2721e4034d949f92dd2d271f8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1daf6a9724984744d8ac5d695c77e23a, type: 3}
 --- !u!4 &4830404841942447688 stripped

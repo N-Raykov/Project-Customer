@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using TMPro;    
 
@@ -290,7 +291,8 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         if (tree._hp > 0) {
             treeHpHolder.SetActive(true);
             treeHPText.text = String.Format("{0}/{1} HP",tree._hp,tree._maxHP);
-            treeHPTransform.localScale = new Vector3(((float)tree._hp) / tree._maxHP, 1, 1);
+            //treeHPTransform.localScale = new Vector3(((float)tree._hp) / tree._maxHP, 1, 1);
+            treeHPTransform.GetComponent<Image>().fillAmount = ((float)tree._hp) / tree._maxHP;
             return;
         }
         if (tree.hasFallen) {

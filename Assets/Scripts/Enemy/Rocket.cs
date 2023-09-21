@@ -10,6 +10,10 @@ public class Rocket : MonoBehaviourWithPause
     public float speed { get; set; }
     public GameObject target { get; set; }
 
+    [SerializeField] float homingRange;
+    [SerializeField] float homingStrength;
+    bool canHome = true;
+
     Vector3 startPosition;
 
     void Awake()
@@ -24,6 +28,27 @@ public class Rocket : MonoBehaviourWithPause
         {
             Destroy(this.gameObject);
         }
+
+        float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+
+        if (distanceToTarget > homingRange && canHome)
+        {
+            FollowTarget(target);
+        }
+        else
+        {
+            canHome = false;
+        }
+
+    }
+
+    void FollowTarget(GameObject target)
+    {
+        Vector3 direction = target.transform.position - transform.position;
+
+        transform.rotation = Quaternion.LookRotation(direction);
+
+        rb.AddForce(direction * homingStrength, ForceMode.Force);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -34,21 +59,10 @@ public class Rocket : MonoBehaviourWithPause
         {
             enemy.TakeDamage(damage);
         }
-        //if (tree != null) {
-        //    tree.TakeDamage(collision.contacts[0].normal);
-        //}
         if (player != null)
         {
             player.TakeDamage(damage);
         }
         Destroy(this.gameObject);
-    }
-
-    public void AddSpeed(Vector3 direction)
-    {
-        if (rb.velocity.magnitude == 0)
-        {
-            rb.AddForce(direction * speed, ForceMode.Impulse);
-        }
     }
 }

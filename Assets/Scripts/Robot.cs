@@ -89,6 +89,12 @@ public class Robot : MonoBehaviourWithPause
         Vector3 position = transform.position;
         foreach (GameObject go in gos)
         {
+            if (go.GetComponent<Tree>().hasStarterFalling) {
+                Debug.Log("HELP");
+                continue;
+            }
+
+
             Vector3 diff = go.transform.position - position;
             float curDistance = diff.sqrMagnitude;
             if (curDistance < distance)
@@ -116,7 +122,7 @@ public class Robot : MonoBehaviourWithPause
         {
             case RobotState.Walking:
 
-                Vector3 closestTreeTrunk = new Vector3(closestTree.transform.position.x, transform.position.y, closestTree.transform.position.z);
+                Vector3 closestTreeTrunk = new Vector3(closestTree.transform.position.x, closestTree.transform.position.y, closestTree.transform.position.z);
 
                 agent.SetDestination(closestTreeTrunk);
                 agent.speed = speed;
@@ -155,6 +161,7 @@ public class Robot : MonoBehaviourWithPause
                     agent.enabled = false;
                     GameManager.robot = null;
                     animator.SetTrigger(stopsCutting);
+                    Destroy(gameObject);
                 }
                 break;
 
@@ -213,19 +220,11 @@ public class Robot : MonoBehaviourWithPause
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "BigTree")
-        {
-            Destroy(gameObject);
-        }
-
         if (collision.gameObject.tag == "Ground" && isActive == false)
         {
             agent.enabled = true;
-            rb.constraints = RigidbodyConstraints.None;
             GetStunned(stunAfterFall);
             isActive = true;
         }
     }
-
-
 }

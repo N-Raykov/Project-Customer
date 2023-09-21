@@ -8,6 +8,7 @@ public class EnemyBazooka : EnemyWeapon
 
     [Header("Objects")]
     [SerializeField] protected GameObject rocket;
+    public GameObject target { get; set; }
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class EnemyBazooka : EnemyWeapon
         rckt.damage = gunData.damage;
         rckt.speed = gunData.bulletSpeed;
         rckt.range = gunData.range;
-        rckt.AddSpeed(transform.forward);
+        rckt.target = this.target;
     }
 
 }

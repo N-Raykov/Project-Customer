@@ -193,7 +193,6 @@ public class EnemyMove : MonoBehaviourWithPause
         {
             agent.enabled = true;
             rb.useGravity = true;
-            rb.constraints = RigidbodyConstraints.None;
             GetStunned(stunAfterFall);
             isActive = true;
             animator.SetTrigger("Land");
