@@ -38,8 +38,17 @@ public class ShopManager : MonoBehaviourWithPause{
 
     GameObject activePage;
     Button lastDisabledButton;
-    
+    CollisionCheckForDropboxes[] spawnPointsTemp;
+    List<Vector3> spawnPoints;//when spawning use player.transform.position+spawnpoint[1];
+    List<Vector3> placesToSpawn = new List<Vector3>();//the ones where drop pods will actually spawn
+        
     void Start(){
+        spawnPoints = new List<Vector3>();
+        spawnPointsTemp = GameObject.FindObjectsOfType<CollisionCheckForDropboxes>();
+        //foreach (CollisionCheckForDropboxes c in spawnPointsTemp) {
+        //    spawnPoints.Add(c.transform.localPosition);
+        //}
+
         activePage = null;
         lastDisabledButton = null;
         money = 110;
@@ -47,9 +56,13 @@ public class ShopManager : MonoBehaviourWithPause{
         rb = GetComponent<Rigidbody>();
         ignorePausedState = true;
         input = GetComponent<PlayerInput>();
+        //ChangeInterfaceState(false);
     }
 
     protected override void UpdateWithPause(){
+
+        //Debug.Log(spawnPoints.Count);
+
         if (input.shopInput) {
             ChangeInterfaceState(!shopIsActive);
         }
@@ -76,44 +89,74 @@ public class ShopManager : MonoBehaviourWithPause{
             lastDisabledButton = null;
         }
 
+        spawnPoints = new List<Vector3>();
+        foreach (CollisionCheckForDropboxes c in spawnPointsTemp){
+            if (c.canBeSpawnedOn)
+                spawnPoints.Add(c.transform.localPosition);
+        }
+        Debug.Log(spawnPoints.Count);
+
+        if (placesToSpawn.Count!=0){
+            foreach (Vector3 v in placesToSpawn)
+                spawnPoints.Add(v);
+            placesToSpawn = new List<Vector3>();
+        }
+
+    }
+    public void SpawnDropPod(ShopButtonData pData){
+
+        int spawnPointListLocation = UnityEngine.Random.Range(0, spawnPoints.Count);
+        Vector3 spawnPoint = transform.position + spawnPoints[spawnPointListLocation]+new Vector3(0,110,0);
+        placesToSpawn.Add(spawnPoint);
+        spawnPoints.RemoveAt(spawnPointListLocation);
+        Debug.Log(spawnPoints.Count);
+
+        DropPod dp = (Instantiate(dropPod, spawnPoint, Quaternion.identity)).GetComponent<DropPod>();
+        dp.data = pData;
+        RaycastHit groundCheck;
+        Physics.Raycast(spawnPoint, Vector3.down, out groundCheck, 10000, ground);
+        dp.distanceToGround = groundCheck.distance;
+        purchases++;
+        UpdatePurchasePanel();
+
     }
 
-    public void SpawnDropPod(ShopButtonData pData) {
+    //public void SpawnDropPod(ShopButtonData pData) {
 
-        Vector3 spawnPoint = new Vector3(0,110,0);
+    //    Vector3 spawnPoint = new Vector3(0,110,0);
 
-        int randomXOrientation = UnityEngine.Random.Range(0, 2);
-        int randomZOrientation = UnityEngine.Random.Range(0, 2);
+    //    int randomXOrientation = UnityEngine.Random.Range(0, 2);
+    //    int randomZOrientation = UnityEngine.Random.Range(0, 2);
 
-        spawnPoint.x = rb.position.x + UnityEngine.Random.Range(dropPodRangeMin, dropPodRangeMax) * ((randomXOrientation == 0) ? -1 : 1);
-        spawnPoint.z = rb.position.z + UnityEngine.Random.Range(dropPodRangeMin, dropPodRangeMax) * ((randomZOrientation == 0) ? -1 : 1);
+    //    spawnPoint.x = rb.position.x + UnityEngine.Random.Range(dropPodRangeMin, dropPodRangeMax) * ((randomXOrientation == 0) ? -1 : 1);
+    //    spawnPoint.z = rb.position.z + UnityEngine.Random.Range(dropPodRangeMin, dropPodRangeMax) * ((randomZOrientation == 0) ? -1 : 1);
 
-        RaycastHit hit;
-        Physics.SphereCast(spawnPoint+new Vector3(0,10,0),dropPodSize, Vector3.down, out hit,200,mask,QueryTriggerInteraction.UseGlobal);
-        if (hit.collider == null){
-            DropPod dp=(Instantiate(dropPod, spawnPoint, Quaternion.identity)).GetComponent<DropPod>();
-            dp.data = pData;
-            RaycastHit groundCheck;
-            Physics.Raycast(spawnPoint,Vector3.down,out groundCheck, 10000, ground);
-            dp.distanceToGround = groundCheck.distance;
-            purchases++;
-            UpdatePurchasePanel();
-        }
-        else {//could use method instead
-            Debug.Log("help");
-            if (hit.collider.gameObject.tag == "DropPod") {
-                DropPod dp = (Instantiate(dropPod, spawnPoint+new Vector3(0,5,0), Quaternion.identity)).GetComponent<DropPod>();
-                dp.data = pData;
-                RaycastHit groundCheck;
-                Physics.Raycast(spawnPoint + new Vector3(0, 5, 0), Vector3.down, out groundCheck, 10000, ground);
-                dp.distanceToGround = groundCheck.distance;
-                purchases++;
-                UpdatePurchasePanel();
-            }
-            else
-                SpawnDropPod(pData);
-        }
-    }
+    //    RaycastHit hit;
+    //    Physics.SphereCast(spawnPoint+new Vector3(0,10,0),dropPodSize, Vector3.down, out hit,200,mask,QueryTriggerInteraction.UseGlobal);
+    //    if (hit.collider == null){
+    //        DropPod dp=(Instantiate(dropPod, spawnPoint, Quaternion.identity)).GetComponent<DropPod>();
+    //        dp.data = pData;
+    //        RaycastHit groundCheck;
+    //        Physics.Raycast(spawnPoint,Vector3.down,out groundCheck, 10000, ground);
+    //        dp.distanceToGround = groundCheck.distance;
+    //        purchases++;
+    //        UpdatePurchasePanel();
+    //    }
+    //    else {//could use method instead
+    //        Debug.Log("help");
+    //        if (hit.collider.gameObject.tag == "DropPod") {
+    //            DropPod dp = (Instantiate(dropPod, spawnPoint+new Vector3(0,5,0), Quaternion.identity)).GetComponent<DropPod>();
+    //            dp.data = pData;
+    //            RaycastHit groundCheck;
+    //            Physics.Raycast(spawnPoint + new Vector3(0, 5, 0), Vector3.down, out groundCheck, 10000, ground);
+    //            dp.distanceToGround = groundCheck.distance;
+    //            purchases++;
+    //            UpdatePurchasePanel();
+    //        }
+    //        else
+    //            SpawnDropPod(pData);
+    //    }
+    //}
 
     void UpdatePurchasePanel() {
         purchasePanel.text = String.Format("{0} / {1} max purchases", purchases, maxPurchases);
@@ -177,5 +220,25 @@ public class ShopManager : MonoBehaviourWithPause{
     public void AddMoney(int pMoney) {
         money += pMoney;
         UI.DisplayCash(money);
+    }
+
+    public void RemoveFromSpawnpoints(Vector3 vector3) {
+
+        for (int i = 0; i < spawnPoints.Count;i++) {
+            if (spawnPoints[i] == vector3) {
+                Debug.Log("working");
+                spawnPoints.RemoveAt(i);
+                i--;
+            }
+        }
+        //Debug.Log(spawnPoints.Remove(vector3));
+        //Debug.Log(vector3 + " " + spawnPoints.Count);
+    }
+    public void AddtoSpawnpoints(Vector3 vector3){
+
+        spawnPoints.Add(vector3);
+        Debug.Log(1);
+        //Debug.Log(vector3 + " " + spawnPoints.Count);
+
     }
 }

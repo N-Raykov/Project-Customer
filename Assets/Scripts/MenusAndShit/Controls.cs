@@ -10,6 +10,7 @@ public class Controls : MonoBehaviourWithPause {
         keyList = new Dictionary<string, KeyCode>();
         //movement
         keyList.Add("jump",KeyCode.Space);
+        keyList.Add("sprint", KeyCode.LeftShift);
         //interaction
         keyList.Add("interact", KeyCode.E);
         keyList.Add("shop", KeyCode.H);

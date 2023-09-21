@@ -31,7 +31,7 @@ public abstract class Gun : MonoBehaviourWithPause{
     [SerializeField] protected Camera weaponCamera;
     [SerializeField] protected LayerMask mask;
     public int currentAmmo { get; set; }
-    protected Vector3 recoilTargetRotation = Vector3.zero;
+    public Vector3 recoilTargetRotation { get; set; }
     protected Vector3 pistolRotationPivotStartPosition;
     public bool isAiming { get; protected set; }
     protected float originalFOV;
@@ -48,6 +48,7 @@ public abstract class Gun : MonoBehaviourWithPause{
     public bool canBeAccessed { get; set; }//must be set for each weapon
 
     protected virtual void Start() {
+        recoilTargetRotation = Vector3.zero;
         state = States.Idle;
         currentAmmo = gunData.ammoCapacity;
         animator = transform.GetComponent<Animator>();

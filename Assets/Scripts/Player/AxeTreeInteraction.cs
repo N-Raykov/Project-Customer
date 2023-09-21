@@ -45,10 +45,11 @@ public class AxeTreeInteraction : MonoBehaviourWithPause{
         Debug.Log(other.tag);
 
         if (other.CompareTag("Log") && !isIdle) {
+            Debug.Log(1);
             other.GetComponent<Tree>().TakeDamage(transform.right);
-            animator.SetFloat("speed", -1);
-            timePassed = (Time.time - timeBecameNonIdle);
-            timeReverseTime = Time.time;
+            //animator.SetFloat("speed", -1);
+            //timePassed = (Time.time - timeBecameNonIdle);
+            //timeReverseTime = Time.time;
         }
 
         if ((other.CompareTag("BigTree")|| (other.CompareTag("Stump")) && !isIdle)){

@@ -26,6 +26,8 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     ShopManager shop;
     DropPod lastDropPodSeen;
 
+    Vector3 recoilTargetRotation;
+
     string[] controlsStrings;
 
     enum Weapons{
@@ -73,6 +75,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
             if (gunList[(int)activeWeapon].state != Gun.States.Idle)
                 return;
 
+            recoilTargetRotation = gunList[(int)activeWeapon].recoilTargetRotation;
             if (gunList[(int)activeWeapon].gameObject != null)
                 gunList[(int)activeWeapon].gameObject.SetActive(false);
 
@@ -82,10 +85,13 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
             gunList[(int)activeWeapon].OnZoomChange -= ChangeCrosshairActivationState;
         }
 
+
         activeWeapon = pWeapon;
         Debug.Log(activeWeapon);
 
         if (activeWeapon != Weapons.None) {
+
+            gunList[(int)activeWeapon].recoilTargetRotation = recoilTargetRotation;
 
             if (gunList[(int)activeWeapon].gameObject != null)
                 gunList[(int)activeWeapon].gameObject.SetActive(true);
@@ -113,6 +119,34 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
             ammoPanel.SetActive(false);
         else
             ammoPanel.SetActive(true);
+
+        foreach (string s in controlsStrings)
+        {
+            if (Input.GetKeyDown(GameSettings.gameSettings.controls.keyList[s]))
+            {
+                switch (s)
+                {
+                    case "axe":
+                        if (gunList[(int)Weapons.Axe].canBeAccessed)
+                            ChangeActiveWeapon(Weapons.Axe);
+                        break;
+                    case "revolver":
+                        if (gunList[(int)Weapons.Pistol].canBeAccessed)
+                            ChangeActiveWeapon(Weapons.Pistol);
+                        break;
+                    case "shotgun":
+                        if (gunList[(int)Weapons.Shotgun].canBeAccessed)
+                            ChangeActiveWeapon(Weapons.Shotgun);
+                        break;
+                    case "rifle":
+                        if (gunList[(int)Weapons.AssaultRifle].canBeAccessed)
+                            ChangeActiveWeapon(Weapons.AssaultRifle);
+                        break;
+
+                }
+                break;
+            }
+        }
 
         foreach (Weapons weapon in Enum.GetValues(typeof(Weapons))) {
 
@@ -149,12 +183,12 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
             //    }
             //}
 
-            int number = 49 + (int)weapon;
+            //int number = 49 + (int)weapon;
 
-            if (Input.GetKeyDown((KeyCode)number))
-            {
-                ChangeActiveWeapon((Weapons)(number - 49));
-            }
+            //if (Input.GetKeyDown((KeyCode)number))
+            //{
+            //    ChangeActiveWeapon((Weapons)(number - 49));
+            //}
 
         }
 

@@ -26,8 +26,8 @@ MonoBehaviour:
   spreadPercentageMultiplier: 5
   spreadPercentageMultiplierAim: 2.5
   spreadDecreaseRate: 20
-  recoilHipFire: {x: -3, y: 1.5, z: 0}
-  recoilAim: {x: -2, y: 1, z: 0}
+  recoilHipFire: {x: -2.5, y: 1.5, z: 0}
+  recoilAim: {x: -1.75, y: 1, z: 0}
   returnSpeed: 1.5
   targetPosition: {x: 0.002, y: -0.3175, z: 0.6820004}
   zoomInDuration: 0.4
