@@ -9,8 +9,9 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
     public enum State { 
         Walk,
         Jump,
+        Sprint
     }
-    State state;
+    public State state { get; private set; }
     State lastState;
     public int zone { get; set; }
 
@@ -18,6 +19,7 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
     [SerializeField] float moveSpeed;
     [SerializeField] float maxSpeed;
     [SerializeField] float groundDrag;
+    [SerializeField] float sprintSpeedMultiplier;
 
     public float speedMultiplier { get; set; }
     public float maxSpeedMultiplier { get; set; }
@@ -93,21 +95,27 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
                 MovePlayer();
                 Jump();
                 ChangeStateToJump();
+                //ChangeStateToSprint();
                 break;
             case State.Jump:
-                speedMultiplier = airSpeedMultiplier;
                 MovePlayer();
                 ChangeStateToWalk();
+                break;
+            case State.Sprint:
+                MovePlayer();
+                StopSprint();
+                ChangeStateToJump();
                 break;
         }
     
     }
 
     void ChangeStateToWalk() {
-        if (isGrounded){
+        if (isGrounded&&state!=State.Sprint){
             lastState = state;
             state = State.Walk;
             speedMultiplier = normalSpeedMultiplier;
+            maxSpeedMultiplier = normalMaxSpeedMultiplier;
         }
     }
 
@@ -116,7 +124,29 @@ public class GoodPlayerControls : MonoBehaviourWithPause{
             lastState = state;
             state = State.Jump;
             speedMultiplier = airSpeedMultiplier;
+            maxSpeedMultiplier = airSpeedMultiplier;
+
         }
+    }
+
+    void ChangeStateToSprint() {
+        if (isGrounded&&input.sprintInput) {
+            Debug.Log(1);
+            lastState = state;
+            state = State.Sprint;
+            speedMultiplier = sprintSpeedMultiplier;
+            maxSpeedMultiplier = sprintSpeedMultiplier;
+        }
+    }
+
+    void StopSprint() { 
+        if (!input.sprintInput){
+            lastState = state;
+            state = State.Walk;
+            speedMultiplier = normalSpeedMultiplier;
+            maxSpeedMultiplier = normalMaxSpeedMultiplier;
+        }
+    
     }
 
 

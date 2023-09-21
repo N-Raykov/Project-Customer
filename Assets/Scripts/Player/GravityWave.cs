@@ -14,6 +14,7 @@ public class GravityWave : PlayerAbility
     protected override void UseAbility()
     {
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        sphere.layer = LayerMask.NameToLayer("Visual Shit");
         sphere.GetComponent<Renderer>().enabled = false; 
         sphere.transform.position = transform.position;
 

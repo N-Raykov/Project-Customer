@@ -13,6 +13,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     [SerializeField] List<Gun> gunList;//0 axe, 1 pistol,2 shotgun
     [SerializeField] PlayerUI UI;
     [SerializeField] GameObject ammoPanel;
+    [SerializeField] GameObject sellDust;
 
     [Header("TreeHp")]
     [SerializeField] GameObject treeHpHolder;
@@ -27,6 +28,10 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     ShopManager shop;
     DropPod lastDropPodSeen;
 
+    Vector3 recoilTargetRotation;
+
+    string[] controlsStrings;
+
     enum Weapons{
         Axe,
         Pistol,
@@ -37,8 +42,9 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
     Weapons activeWeapon=Weapons.None;
 
-    void Start(){
-        shop=GetComponent<ShopManager>();
+    void Start() {
+        controlsStrings = new string[]{ "axe", "revolver", "shotgun", "rifle"};
+        shop =GetComponent<ShopManager>();
         input=GetComponent<PlayerInput>();
         ChangeActiveWeapon(Weapons.Pistol);
     }
@@ -71,6 +77,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
             if (gunList[(int)activeWeapon].state != Gun.States.Idle)
                 return;
 
+            recoilTargetRotation = gunList[(int)activeWeapon].recoilTargetRotation;
             if (gunList[(int)activeWeapon].gameObject != null)
                 gunList[(int)activeWeapon].gameObject.SetActive(false);
 
@@ -80,10 +87,13 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
             gunList[(int)activeWeapon].OnZoomChange -= ChangeCrosshairActivationState;
         }
 
+
         activeWeapon = pWeapon;
         Debug.Log(activeWeapon);
 
         if (activeWeapon != Weapons.None) {
+
+            gunList[(int)activeWeapon].recoilTargetRotation = recoilTargetRotation;
 
             if (gunList[(int)activeWeapon].gameObject != null)
                 gunList[(int)activeWeapon].gameObject.SetActive(true);
@@ -112,6 +122,34 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         else
             ammoPanel.SetActive(true);
 
+        foreach (string s in controlsStrings)
+        {
+            if (Input.GetKeyDown(GameSettings.gameSettings.controls.keyList[s]))
+            {
+                switch (s)
+                {
+                    case "axe":
+                        if (gunList[(int)Weapons.Axe].canBeAccessed)
+                            ChangeActiveWeapon(Weapons.Axe);
+                        break;
+                    case "revolver":
+                        if (gunList[(int)Weapons.Pistol].canBeAccessed)
+                            ChangeActiveWeapon(Weapons.Pistol);
+                        break;
+                    case "shotgun":
+                        if (gunList[(int)Weapons.Shotgun].canBeAccessed)
+                            ChangeActiveWeapon(Weapons.Shotgun);
+                        break;
+                    case "rifle":
+                        if (gunList[(int)Weapons.AssaultRifle].canBeAccessed)
+                            ChangeActiveWeapon(Weapons.AssaultRifle);
+                        break;
+
+                }
+                break;
+            }
+        }
+
         foreach (Weapons weapon in Enum.GetValues(typeof(Weapons))) {
 
             if ((int)weapon >= gunList.Count)
@@ -123,11 +161,6 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
             if (!gunList[(int)weapon].canBeAccessed)
                 continue;
 
-            int number = 49 + (int)weapon;
-
-            if (Input.GetKeyDown((KeyCode)number)){
-                ChangeActiveWeapon((Weapons)(number-49));
-            }
         }
 
         CheckForInteractions();
@@ -204,9 +237,11 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
                 break;
             case "Shotgun":
                 gunList[(int)Weapons.Shotgun].canBeAccessed = true;
+                ChangeActiveWeapon(Weapons.Shotgun);
                 break;
             case "AssaultRifle":
                 gunList[(int)Weapons.AssaultRifle].canBeAccessed = true;
+                ChangeActiveWeapon(Weapons.AssaultRifle);
                 break;
             case "GravityWave":
                 GetComponent<PlayerAbility>().MakeAbilityAvailable();
@@ -218,6 +253,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     void PickUpLog(RaycastHit pHitInfo) {
         Tree tree= pHitInfo.collider.gameObject.GetComponent<Tree>();
         if (tree.hasFallen) {
+            Instantiate(sellDust, pHitInfo.point, Quaternion.identity);
             shop.AddMoney(tree._value);
             Destroy(pHitInfo.collider.gameObject);
         }

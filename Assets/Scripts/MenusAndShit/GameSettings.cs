@@ -21,6 +21,10 @@ public class GameSettings : MonoBehaviourWithPause {
     [SerializeField] TextMeshProUGUI aim;
     [SerializeField] TextMeshProUGUI reload;
     [SerializeField] TextMeshProUGUI ability;
+    [SerializeField] TextMeshProUGUI axe;
+    [SerializeField] TextMeshProUGUI revolver;
+    [SerializeField] TextMeshProUGUI shotgun;
+    [SerializeField] TextMeshProUGUI assaultRifle;
 
     Dictionary<string,TextMeshProUGUI> textLinks=new Dictionary<string, TextMeshProUGUI>();
 
@@ -57,6 +61,10 @@ public class GameSettings : MonoBehaviourWithPause {
         textLinks.Add("aim", aim);
         textLinks.Add("reload", reload);
         textLinks.Add("ability1", ability);
+        textLinks.Add("axe", axe);
+        textLinks.Add("revolver", revolver);
+        textLinks.Add("shotgun", shotgun);
+        textLinks.Add("rifle", assaultRifle);
 
         textLinks["jump"].text = "" + controls.keyList["jump"];
         textLinks["interact"].text = "" + controls.keyList["interact"];
@@ -66,6 +74,10 @@ public class GameSettings : MonoBehaviourWithPause {
         textLinks["aim"].text = "" + controls.keyList["aim"];
         textLinks["reload"].text = "" + controls.keyList["reload"];
         textLinks["ability1"].text = "" + controls.keyList["ability1"];
+        textLinks["axe"].text = "" + controls.keyList["axe"];
+        textLinks["revolver"].text = "" + controls.keyList["revolver"];
+        textLinks["shotgun"].text = "" + controls.keyList["shotgun"];
+        textLinks["rifle"].text = "" + controls.keyList["rifle"];
 
     }
     public void SetVolume(float pVolume) {

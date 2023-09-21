@@ -31,7 +31,7 @@ public abstract class Gun : MonoBehaviourWithPause{
     [SerializeField] protected Camera weaponCamera;
     [SerializeField] protected LayerMask mask;
     public int currentAmmo { get; set; }
-    protected Vector3 recoilTargetRotation = Vector3.zero;
+    public Vector3 recoilTargetRotation { get; set; }
     protected Vector3 pistolRotationPivotStartPosition;
     public bool isAiming { get; protected set; }
     protected float originalFOV;
@@ -48,6 +48,7 @@ public abstract class Gun : MonoBehaviourWithPause{
     public bool canBeAccessed { get; set; }//must be set for each weapon
 
     protected virtual void Start() {
+        recoilTargetRotation = Vector3.zero;
         state = States.Idle;
         currentAmmo = gunData.ammoCapacity;
         animator = transform.GetComponent<Animator>();
@@ -65,14 +66,29 @@ public abstract class Gun : MonoBehaviourWithPause{
 
 
     protected virtual void CheckForActions() {
-        CheckForShots();
         CheckForReload();
+        CheckForShots();
         CheckForAim();
     }
 
+    protected virtual bool ReturnShootInput() {
+        return input.shootInputClick;
+    }
+
     protected void CheckForShots() {
-        if (input.shootInput && state == States.Idle && currentAmmo > 0)
-            Shoot();
+        if (ReturnShootInput() && state == States.Idle) {
+            if (currentAmmo > 0)
+                Shoot();
+            else if (input.shootInputClick && extraAmmo>0){
+                if (!isAiming)
+                    Reload();
+                else
+                    StartCoroutine(MoveBackAndReload());
+            }
+
+                
+        }
+            
     }
 
     protected void CheckForReload() {
@@ -165,6 +181,7 @@ public abstract class Gun : MonoBehaviourWithPause{
         StartReloadAnimation();
         state = States.Reload;
         extraAmmo += currentAmmo;
+        Debug.Log(gunData.reloadTime);
         OnReload?.Invoke(gunData.reloadTime);
         currentAmmo = Mathf.Min(gunData.ammoCapacity, extraAmmo);
         extraAmmo -= Mathf.Min(gunData.ammoCapacity, extraAmmo);
@@ -173,13 +190,13 @@ public abstract class Gun : MonoBehaviourWithPause{
     }
 
     IEnumerator MoveBackAndReload() {
-
+        state = States.Reload;
         isAimingAllowed = false;
         pistolRotationPivot.DOLocalMove(pistolRotationPivotStartPosition, gunData.zoomInDuration / 1.5f);//3
         mainCamera.DOPause();
         isAiming = false;
         transform.localEulerAngles -= new Vector3(0, 0, gunData.zChangeForAiming);//here
-        pistolRotationPivot.localEulerAngles = new Vector3(0, -5, 0);
+        pistolRotationPivot.localEulerAngles = new Vector3(0, -5, 0);//this to
         StartCoroutine(DecreaseFOVAndAddUI(gunData.zoomInDuration / 1.5f));
         yield return new WaitForSeconds(gunData.zoomInDuration / 1.5f);
         Reload();
@@ -197,23 +214,6 @@ public abstract class Gun : MonoBehaviourWithPause{
         OnStateChange?.Invoke();
         OnStateChange = null;
     }
-
-    //protected Vector3 AimAtTarget(){
-    //    RaycastHit info;
-    //    Vector3 targetPosition;
-
-    //    if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out info, gunData.range))
-    //        targetPosition = info.point;
-    //    else
-    //        targetPosition = mainCamera.transform.position + mainCamera.transform.forward * gunData.range;
-
-
-    //    float spreadPercentage = 1 + spreadMultiplier / 100.0f;
-    //    var spread = mainCamera.transform.rotation * new Vector3(UnityEngine.Random.Range(-gunData.spreadFactorX * spreadPercentage, gunData.spreadFactorX * spreadPercentage), UnityEngine.Random.Range(-gunData.spreadFactorY * spreadPercentage, gunData.spreadFactorY * spreadPercentage), 0);
-    //    targetPosition += spread;
-
-    //    return (targetPosition - muzzle.position).normalized;
-    //}
 
     protected Vector3 AimAtTarget(){
         RaycastHit info;
@@ -234,7 +234,6 @@ public abstract class Gun : MonoBehaviourWithPause{
 
         var spread = mainCamera.transform.rotation*new Vector3(newX,newY,0);
 
-        //var spread = mainCamera.transform.rotation * (new Vector3(UnityEngine.Random.Range(-gunData.spreadFactorX * spreadPercentage, gunData.spreadFactorX * spreadPercentage), UnityEngine.Random.Range(-gunData.spreadFactorY * spreadPercentage, gunData.spreadFactorY * spreadPercentage), 0));
         targetPosition += spread;
 
         return (targetPosition - muzzle.position).normalized;
@@ -255,7 +254,6 @@ public abstract class Gun : MonoBehaviourWithPause{
     }
 
     protected void AddRecoil(){
-        // need to randomize y recoil and maybe z recoil
         float randomY = UnityEngine.Random.Range(0, 2);
         float randomZ = UnityEngine.Random.Range(0, 2);
         randomY = ((randomY == 0) ? -1 : 1);
@@ -272,7 +270,4 @@ public abstract class Gun : MonoBehaviourWithPause{
         recoilPivot.localEulerAngles = recoilTargetRotation;
     }
 
-    //shooting to fast makes bullets fire in the wrong diretion when zoomed in
-    //probably bcz the raycast hits the gun
-    //replace everything weird with the tweens
 }

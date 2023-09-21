@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   gunName: Shotgun
-  damage: 55
+  damage: 10
   range: 20
   bulletSpeed: 70
   ammoCapacity: 6
@@ -30,6 +30,6 @@ MonoBehaviour:
   recoilAim: {x: -6, y: 3, z: 0}
   returnSpeed: 4
   targetPosition: {x: 0, y: -0.19, z: 0.6820004}
-  zoomInDuration: 0.5
+  zoomInDuration: 0.6
   zoomInFactor: 1.25
   zChangeForAiming: 0

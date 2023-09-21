@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shotgun : Gun{
 
     private void Awake(){
-        canBeAccessed = true;
+        canBeAccessed = false;
         gameObject.SetActive(false);
     }
 
