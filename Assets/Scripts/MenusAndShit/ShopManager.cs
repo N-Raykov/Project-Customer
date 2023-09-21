@@ -93,6 +93,7 @@ public class ShopManager : MonoBehaviourWithPause{
 
         if (lastImageChanged != null)
         {
+            Debug.Log(1);
             lastImageChanged.color = new Color(255, 255, 255);
             lastImageChanged = null;
         }

@@ -116,10 +116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a899e48a036f53d409ccf1007f0fc988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 2
   value: 50
   healValue: 50
-  playerHp: {fileID: 0}
   pushForce: 80
   duration: 25
   timeDelay: 0.1
