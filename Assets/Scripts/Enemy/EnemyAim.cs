@@ -137,7 +137,6 @@ public class EnemyAim : MonoBehaviourWithPause
                 if (weapon == bazooka)
                 {
                     animator.SetTrigger("ShootRocket");
-                    weapon.timeSinceLastShot = weapon.shotCD;
                 }
                 else
                 {
@@ -150,7 +149,8 @@ public class EnemyAim : MonoBehaviourWithPause
 
     public void FireRocket()
     {
-        Debug.Log("pog");
+        bazooka.Shoot();
+        bazooka.timeSinceLastShot = bazooka.shotCD;
     }
 
     private float Compare(Quaternion quatA, Quaternion quatB)
