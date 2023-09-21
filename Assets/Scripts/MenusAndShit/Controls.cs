@@ -19,6 +19,11 @@ public class Controls : MonoBehaviourWithPause {
         keyList.Add("aim", KeyCode.Mouse1);
         keyList.Add("reload", KeyCode.R);
         keyList.Add("ability1", KeyCode.Q);
+        keyList.Add("axe", KeyCode.Alpha1);
+        keyList.Add("revolver", KeyCode.Alpha2);
+        keyList.Add("shotgun", KeyCode.Alpha3);
+        keyList.Add("rifle", KeyCode.Alpha4);
+
 
     }
 

@@ -8,7 +8,8 @@ public class PlayerInput : MonoBehaviourWithPause
     Controls controls;
     public Vector3 moveDirection { get; private set; }
     public bool jumpInput { get; private set; }
-    public bool shootInput { get; private set; }
+    public bool shootInputHold { get; private set; }
+    public bool shootInputClick { get; private set; }
     public bool reloadInput { get; private set; }
     public bool aimInput { get; private set; }
     public bool shopInput { get; private set; }
@@ -31,7 +32,8 @@ public class PlayerInput : MonoBehaviourWithPause
         moveDirection.Normalize();
         moveDirection = Quaternion.Euler(new Vector3(0, rotationPivot.transform.localEulerAngles.y, 0)) * moveDirection;
         jumpInput = Input.GetKey(controls.keyList["jump"]);
-        shootInput = Input.GetKey(controls.keyList["shoot"]);
+        shootInputHold = Input.GetKey(controls.keyList["shoot"]);
+        shootInputClick = Input.GetKeyDown(controls.keyList["shoot"]);
         reloadInput = Input.GetKeyDown(controls.keyList["reload"]);
         aimInput = Input.GetKey(controls.keyList["aim"]);
         shopInput = Input.GetKeyUp(controls.keyList["shop"]);

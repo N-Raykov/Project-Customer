@@ -8,6 +8,11 @@ public class AssaultRifle : Gun{
         canBeAccessed = true;
         gameObject.SetActive(false);
     }
+
+    protected override bool ReturnShootInput(){
+        return input.shootInputHold;
+    }
+
     protected override void CreateBullet(){
         Vector3 targetRotation = mainCamera.transform.eulerAngles - new Vector3(0, 90, 0);
         GameObject b = Instantiate(bullet, muzzle.position, Quaternion.Euler(targetRotation));

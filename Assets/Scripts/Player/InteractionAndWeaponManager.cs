@@ -26,6 +26,8 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
     ShopManager shop;
     DropPod lastDropPodSeen;
 
+    string[] controlsStrings;
+
     enum Weapons{
         Axe,
         Pistol,
@@ -36,8 +38,9 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
     Weapons activeWeapon=Weapons.None;
 
-    void Start(){
-        shop=GetComponent<ShopManager>();
+    void Start() {
+        controlsStrings = new string[]{ "axe", "revolver", "shotgun", "rifle"};
+        shop =GetComponent<ShopManager>();
         input=GetComponent<PlayerInput>();
         ChangeActiveWeapon(Weapons.Pistol);
     }
@@ -122,11 +125,37 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
             if (!gunList[(int)weapon].canBeAccessed)
                 continue;
 
+            //foreach (string s in controlsStrings)
+            //{
+            //    if (Input.GetKeyDown(GameSettings.gameSettings.controls.keyList[s]))
+            //    {
+            //        switch (s)
+            //        {
+            //            case "axe":
+            //                ChangeActiveWeapon(Weapons.Axe);
+            //                break;
+            //            case "revolver":
+            //                ChangeActiveWeapon(Weapons.Pistol);
+            //                break;
+            //            case "shotgun":
+            //                ChangeActiveWeapon(Weapons.Shotgun);
+            //                break;
+            //            case "rifle":
+            //                ChangeActiveWeapon(Weapons.AssaultRifle);
+            //                break;
+
+            //        }
+            //        break;
+            //    }
+            //}
+
             int number = 49 + (int)weapon;
 
-            if (Input.GetKeyDown((KeyCode)number)){
-                ChangeActiveWeapon((Weapons)(number-49));
+            if (Input.GetKeyDown((KeyCode)number))
+            {
+                ChangeActiveWeapon((Weapons)(number - 49));
             }
+
         }
 
         CheckForInteractions();
@@ -145,7 +174,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         if (hitInfo.collider == null)
             return;
 
-        Debug.Log(hitInfo.collider.gameObject.name);
+        //Debug.Log(hitInfo.collider.gameObject.name);
 
         switch (hitInfo.collider.gameObject.tag){
             case "Interactable":
