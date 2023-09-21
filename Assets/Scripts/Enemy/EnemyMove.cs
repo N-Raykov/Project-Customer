@@ -122,6 +122,7 @@ public class EnemyMove : MonoBehaviourWithPause
                 if (Vector3.Distance(target.transform.position, transform.position) < preferredRange && Vector3.Distance(target.transform.position, transform.position) > minRange)
                 {
                     agent.speed = strafeSpeed;
+                    animator.SetBool("isStrafing", true);
                     if (Time.time >= strafeTimer)
                     {
                         RandomlySwitchDirection();
@@ -130,6 +131,8 @@ public class EnemyMove : MonoBehaviourWithPause
                 }
                 else
                 {
+                    animator.SetBool("isStrafing", false);
+                    ResetStrafeTimer();
                     currentState = EnemyState.MinRange;
                 }
                 break;
