@@ -24,7 +24,7 @@ public class Zone : MonoBehaviourWithPause {
         }
     }
 
-    private void OnTriggerEnter(Collider other){
+    private void OnTriggerStay(Collider other){
         if (other.gameObject.GetComponent<GoodPlayerControls>()) {
             other.gameObject.GetComponent<GoodPlayerControls>().zone = zoneNumber;
         }

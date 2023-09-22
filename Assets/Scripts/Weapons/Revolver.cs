@@ -73,4 +73,8 @@ public class Revolver : Gun{
         gunshot.PlayOneShot(cylinderSoundEnd);
     }
 
+    public int GetExtraAmmo() {
+        return extraAmmo;
+    }
+
 }

@@ -46,7 +46,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
         controlsStrings = new string[]{ "axe", "revolver", "shotgun", "rifle"};
         shop =GetComponent<ShopManager>();
         input=GetComponent<PlayerInput>();
-        ChangeActiveWeapon(Weapons.Pistol);
+        ChangeActiveWeapon(Weapons.Axe);
     }
 
      void DisplayAmmo(int magAmmo, int ammoInReserve){

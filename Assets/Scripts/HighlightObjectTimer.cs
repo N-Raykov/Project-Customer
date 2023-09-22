@@ -37,14 +37,15 @@ public class HighlightObjectTimer : MonoBehaviour
         {
             foreach (var meshrenderer in meshes)
             {
-                for (int i = 0; i < meshrenderer.materials.Length; i++)
-                {
-                    Material material = meshrenderer.materials[i];
-                    //material.EnableKeyword("")
-                    material.EnableKeyword("_EMISSION");
-                    material.SetColor("_EmissionColor", Color.Lerp(Color.black, targetColor, (Mathf.Sin(Time.time * Speed) /2) + 0.5f ));
-                    //meshrenderer.materials[i] = material;
-                }
+                if (meshrenderer!=null)
+                    for (int i = 0; i < meshrenderer.materials.Length; i++)
+                    {
+                        Material material = meshrenderer.materials[i];
+                        //material.EnableKeyword("")
+                        material.EnableKeyword("_EMISSION");
+                        material.SetColor("_EmissionColor", Color.Lerp(Color.black, targetColor, (Mathf.Sin(Time.time * Speed) /2) + 0.5f ));
+                        //meshrenderer.materials[i] = material;
+                    }
             }
         }
     }
