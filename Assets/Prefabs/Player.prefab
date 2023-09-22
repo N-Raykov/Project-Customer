@@ -9290,7 +9290,11 @@ PrefabInstance:
     - target: {fileID: 2145365322, guid: 4b124a70c76d00349bf8bfa3a8736498, type: 3}
       propertyPath: playerAbility
       value: 
-      objectReference: {fileID: 233961048}
+      objectReference: {fileID: 8852772988171748887}
+    - target: {fileID: 2145365322, guid: 4b124a70c76d00349bf8bfa3a8736498, type: 3}
+      propertyPath: robotSummonIcon
+      value: 
+      objectReference: {fileID: 1970257530750851125}
     - target: {fileID: 1617627969294735966, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
       propertyPath: m_IsActive
@@ -9341,11 +9345,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2333771773611666572, guid: 4b124a70c76d00349bf8bfa3a8736498,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1970257530750851125}
     - target: {fileID: 2333771773611666572, guid: 4b124a70c76d00349bf8bfa3a8736498,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
