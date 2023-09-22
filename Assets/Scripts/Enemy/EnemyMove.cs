@@ -25,6 +25,9 @@ public class EnemyMove : MonoBehaviourWithPause
     [SerializeField] float heightOfFall;
     [SerializeField] float startingVelocity;
 
+    [Header("Sound")]
+    [SerializeField] AudioSource audioSourceThruster;
+
     [SerializeField] GameObject landingParticles;
 
     float startPosition;
@@ -80,6 +83,8 @@ public class EnemyMove : MonoBehaviourWithPause
         transform.position = new Vector3(transform.position.x, transform.position.y + heightOfFall - 2f, transform.position.z);
         thruster = Instantiate(thrusterPrefab, spawnPoint.position, spawnPoint.rotation, transform);
         thruster2 = Instantiate(thrusterPrefab, spawnPoint2.position, spawnPoint2.rotation, transform);
+
+        audioSourceThruster.Play();
     }
 
     void Fall()
@@ -218,6 +223,7 @@ public class EnemyMove : MonoBehaviourWithPause
             animator.SetTrigger("Land");
             Destroy(thruster);
             Destroy(thruster2);
+            audioSourceThruster.Stop();
             Instantiate(landingParticles, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
         }
     }
