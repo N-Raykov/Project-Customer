@@ -11,6 +11,7 @@ public class DropPod : MonoBehaviourWithPause{
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] Transform spawnPoint;
     [SerializeField] GameObject thrusterPrefab;
+    [SerializeField] AudioSource audioSource;
 
     public ShopButtonData data { get; set; }
     public float distanceToGround { get; set; }
@@ -29,6 +30,7 @@ public class DropPod : MonoBehaviourWithPause{
         timeToWaitUntilStart = UnityEngine.Random.Range(1,5);
         StartCoroutine(WaitToStart(timeToWaitUntilStart, velocity));
         thruster = Instantiate(thrusterPrefab,spawnPoint.position,Quaternion.identity,transform);
+        audioSource.Play();
 
         text.text=string.Format("[{0}] Pick Up \n {1}", Controls.controls.keyList["interact"],data.dropMessage);
     }
@@ -39,6 +41,11 @@ public class DropPod : MonoBehaviourWithPause{
         float t = Mathf.Abs(currentPosition-startPosition) / distanceToGround;
         rb.velocity = new Vector3(0,-Mathf.Lerp(startingVelocity,0f,t),0);
         thruster.transform.localScale= new Vector3(Mathf.Lerp(2, 1f, t), Mathf.Lerp(2, 0.8f, t), Mathf.Lerp(2, 1f, t));
+
+        if (t >= 0.995f)
+        {
+            audioSource.Stop();
+        }
     }
 
     IEnumerator WaitToStart(float pTime,float pVelocity) {

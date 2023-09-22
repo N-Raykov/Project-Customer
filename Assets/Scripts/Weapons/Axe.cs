@@ -5,10 +5,17 @@ using UnityEngine;
 public class Axe : Gun {
 
     [SerializeField] Rigidbody rb;
+    [SerializeField] AudioSource axeAudioSource;
+    [SerializeField] AudioClip axeSwing;
 
     private void Awake(){
         canBeAccessed = true;
         gameObject.SetActive(false);
+    }
+
+    private void SwingSound()
+    {
+        axeAudioSource.PlayOneShot(axeSwing);
     }
 
     protected override void CheckForActions() {
