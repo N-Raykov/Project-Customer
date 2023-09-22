@@ -53,7 +53,7 @@ public class ShopManager : MonoBehaviourWithPause{
 
         activePage = null;
         lastDisabledButton = null;
-        money = 110;
+        money = 1100;
         UI.DisplayCash(money);
         rb = GetComponent<Rigidbody>();
         ignorePausedState = true;

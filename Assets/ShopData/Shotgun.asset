@@ -15,6 +15,6 @@ MonoBehaviour:
   item: Shotgun
   type: weapons
   cost: 550
-  stock: 0
+  stock: -6
   amount: -1
   dropMessage: Shotgun

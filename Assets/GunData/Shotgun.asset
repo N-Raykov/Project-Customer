@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   gunName: Shotgun
-  damage: 10
+  damage: 100
   range: 20
   bulletSpeed: 70
   ammoCapacity: 6
