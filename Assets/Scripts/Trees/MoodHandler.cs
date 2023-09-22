@@ -11,7 +11,8 @@ public class MoodHandler : MonoBehaviourWithPause
 
     //[SerializeField] List<Material> leafMaterialList;
 
-    [SerializeField] [Range(0.0f,1.0f)] float globalDegradation = 0.0f;
+    //Is accessed by external scripts now
+    [Range(0.0f,1.0f)] public float globalDegradation = 0.0f;
     [SerializeField] MusicHandler musicHandler;
     [SerializeField] Volume pp_volume;
 
@@ -28,12 +29,19 @@ public class MoodHandler : MonoBehaviourWithPause
     [SerializeField] private Color end_SkyColor;
     [SerializeField] private Color end_GroundColor;
 
-    [Header("Leaf Colors")]
-    [SerializeField] private Color start_MainColor;
-    [SerializeField] private Color start_SecColor;
+    [Header("Environment Colors")]
+    //Public now because terrain grass color gets changed from external script
+    public Color start_MainColor;
+    public Color start_SecColor;
 
     [SerializeField] private Color end_MainColor;
     [SerializeField] private Color end_SecColor;
+
+    //Post Process things to change
+    ColorAdjustments col_Adj;
+    Vignette vignette;
+    ChromaticAberration chromaticAberration;
+    FilmGrain filmGrain;
 
     // Update is called once per frame
     void Update()
@@ -59,13 +67,17 @@ public class MoodHandler : MonoBehaviourWithPause
         Shader.SetGlobalColor("_Light_Color", Color.Lerp(start_MainColor, end_MainColor, ColorLerp));
         Shader.SetGlobalColor("_Dark_Color", Color.Lerp(start_SecColor, end_SecColor, ColorLerp));
 
-        ColorAdjustments col_Adj;
-        Vignette vignette;
+
         pp_volume.profile.TryGet(out col_Adj);
         pp_volume.profile.TryGet(out vignette);
+        pp_volume.profile.TryGet(out chromaticAberration);
+        pp_volume.profile.TryGet(out filmGrain);
+
 
         col_Adj.saturation.value = Mathf.Lerp(15, -85, globalDegradation);
-        vignette.intensity.value = Mathf.Lerp(0.0f, 0.4f, globalDegradation);
+        vignette.intensity.value = Mathf.Lerp(0.3f, 0.5f, globalDegradation);
+        chromaticAberration.intensity.value = Mathf.Lerp(0.0f, 1f, globalDegradation);
+        filmGrain.intensity.value = Mathf.Lerp(0.0f, 1f, globalDegradation);
 
         //Debug.Log(globalDegradation);
     }
