@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Shotgun : Gun{
 
+    [Header("Sounds")]
+    [SerializeField] AudioSource gunshot;
+    [SerializeField] AudioClip gunshotSound;
+    [SerializeField] AudioClip bulletInsert;
+    [SerializeField] AudioClip rack;
+
     private void Awake(){
-        canBeAccessed = false;
+        canBeAccessed = true;
         gameObject.SetActive(false);
     }
 
@@ -30,6 +36,18 @@ public class Shotgun : Gun{
     protected override void StartShotAnimation()
     {
         animator.SetTrigger("Shoot");
+        gunshot.PlayOneShot(gunshotSound);
         //throw new System.NotImplementedException();
     }
+
+    void PlayBulletInsert()
+    {
+        gunshot.PlayOneShot(bulletInsert);
+    }
+
+    void PlayRack()
+    {
+        gunshot.PlayOneShot(rack);
+    }
+
 }

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class AssaultRifle : Gun{
 
+    [Header("Sounds")]
+    [SerializeField] AudioSource gunshot;
+    [SerializeField] AudioClip gunshotSound;
+    [SerializeField] AudioClip mag;
+    [SerializeField] AudioClip rack;
+
     private void Awake(){
         canBeAccessed = true;
         gameObject.SetActive(false);
@@ -43,7 +49,17 @@ public class AssaultRifle : Gun{
             case 3:
                 animator.SetTrigger("Shoot4");
                 break;
-        
         }
+        gunshot.PlayOneShot(gunshotSound);
+    }
+
+    void PlayMag()
+    {
+        gunshot.PlayOneShot(mag);
+    }
+
+    void PlayRack()
+    {
+        gunshot.PlayOneShot(rack);
     }
 }
