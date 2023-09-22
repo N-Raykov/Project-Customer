@@ -50,12 +50,17 @@ public abstract class Gun : MonoBehaviourWithPause{
     protected virtual void Start() {
         recoilTargetRotation = Vector3.zero;
         state = States.Idle;
-        currentAmmo = gunData.ammoCapacity;
         animator = transform.GetComponent<Animator>();
-        OnAmmoChange?.Invoke(currentAmmo, extraAmmo);
+        currentAmmo = gunData.ammoCapacity;
+        InvokeOnAmmoChange();
         pistolRotationPivotStartPosition = pistolRotationPivot.localPosition;
         originalFOV = mainCamera.fieldOfView;
         originalFOVWeaponCamera = weaponCamera.fieldOfView;
+    }
+
+    protected virtual void InvokeOnAmmoChange() {
+
+        OnAmmoChange?.Invoke(currentAmmo, extraAmmo);
     }
 
     protected override void UpdateWithPause() {
@@ -181,7 +186,6 @@ public abstract class Gun : MonoBehaviourWithPause{
         StartReloadAnimation();
         state = States.Reload;
         extraAmmo += currentAmmo;
-        Debug.Log(gunData.reloadTime);
         OnReload?.Invoke(gunData.reloadTime);
         currentAmmo = Mathf.Min(gunData.ammoCapacity, extraAmmo);
         extraAmmo -= Mathf.Min(gunData.ammoCapacity, extraAmmo);

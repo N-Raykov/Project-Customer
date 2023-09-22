@@ -344,8 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a899e48a036f53d409ccf1007f0fc988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
-  value: 50
+  hp: 2
+  value: 60
   healValue: 60
   pushForce: 150
   duration: 25

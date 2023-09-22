@@ -124,7 +124,7 @@ public class InteractionAndWeaponManager : MonoBehaviourWithPause{
 
         foreach (string s in controlsStrings)
         {
-            if (Input.GetKeyDown(GameSettings.gameSettings.controls.keyList[s]))
+            if (Input.GetKeyDown(Controls.controls.keyList[s]))
             {
                 switch (s)
                 {

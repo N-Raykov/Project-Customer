@@ -47,12 +47,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 7396313343910974370, guid: f20f52d13aa263e4fb6567df19145f6a, type: 3}
   player: {fileID: 0}
-  minSpawnTimeRandom: 10
-  maxSpawnTimeRandom: 15
+  minSpawnTimeRandom: 20
+  maxSpawnTimeRandom: 30
   percentChanceForASecondEnemy: 10
   delayForRandomEnemy: 5
-  delayForWaves: 100
-  waveSize: 5
+  delayForWaves: 10
+  waveSize: 3
   waveSizeIncreasePerCutTree: 2
 --- !u!114 &6687553030224075689
 MonoBehaviour:

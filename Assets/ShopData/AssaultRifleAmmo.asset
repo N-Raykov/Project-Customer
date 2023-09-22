@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: AssaultRifleAmmo
   type: supplies
-  cost: 30
-  stock: -1
-  amount: 60
-  dropMessage: Assault Rifle Ammo x60
+  cost: 60
+  stock: -4
+  amount: 90
+  dropMessage: Assault Rifle Ammo x90

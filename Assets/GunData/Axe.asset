@@ -17,7 +17,7 @@ MonoBehaviour:
   range: 0
   bulletSpeed: 0
   ammoCapacity: 1
-  shotCooldown: 1
+  shotCooldown: 1.75
   reloadTime: 0
   spreadFactorXMin: 0
   spreadFactorYMin: 0
