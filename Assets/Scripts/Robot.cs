@@ -42,7 +42,11 @@ public class Robot : MonoBehaviourWithPause
     [SerializeField] Enemy health;
     [SerializeField] GameObject landingParticles;
 
-    [SerializeField] GameObject laser;
+    [SerializeField] Transform laserSpawnPoint;
+    [SerializeField] GameObject laserParticlesPrefab;
+
+    GameObject laserParticles;
+
     public float distanceToGround { get; set; }
 
     public enum RobotState
@@ -215,7 +219,7 @@ public class Robot : MonoBehaviourWithPause
 
     public void StartLaser()
     {
-        laser.SetActive(true);
+        laserParticles = Instantiate(laserParticlesPrefab, laserSpawnPoint.position, laserSpawnPoint.rotation, transform);
     }
 
     void ExtraStuff()
