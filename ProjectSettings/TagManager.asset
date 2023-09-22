@@ -12,6 +12,7 @@ TagManager:
   - Stump
   - Enemy
   - SpawnArea
+  - Robot
   layers:
   - Default
   - TransparentFX

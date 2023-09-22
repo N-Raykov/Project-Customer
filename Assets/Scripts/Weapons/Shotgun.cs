@@ -11,7 +11,7 @@ public class Shotgun : Gun{
     [SerializeField] AudioClip rack;
 
     private void Awake(){
-        canBeAccessed = true;
+        canBeAccessed = false;
         gameObject.SetActive(false);
     }
 

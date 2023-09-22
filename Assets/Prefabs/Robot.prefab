@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 2752344671248881271}
   m_Layer: 0
   m_Name: Robot
-  m_TagString: Untagged
+  m_TagString: Robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c91b6702efd374aa33e14ffad22c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHp: 250
+  enemyMaxHp: 400
   deathEffect: {fileID: 6952311445211100482, guid: 27bb6b7b65edb354abb4ac7e659602f5,
     type: 3}
   hpBar: {fileID: 2752344669976792987}
@@ -364,7 +364,7 @@ MonoBehaviour:
   speed: 3
   stunAfterFall: 1
   heightOfFall: 110
-  timeToCut: 30
+  timeToCut: 20
   startingVelocity: 100
   animator: {fileID: 9090940521634035480}
   spawnPoint: {fileID: 6423381228578246678}
@@ -547,6 +547,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4340810486797017472, guid: 1daf6a9724984744d8ac5d695c77e23a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Robot
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1daf6a9724984744d8ac5d695c77e23a,
         type: 3}
       propertyPath: m_Name
@@ -556,6 +561,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1daf6a9724984744d8ac5d695c77e23a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Robot
       objectReference: {fileID: 0}
     - target: {fileID: 1960064544252378459, guid: 1daf6a9724984744d8ac5d695c77e23a,
         type: 3}
@@ -577,6 +587,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[3]
       value: 
       objectReference: {fileID: 2100000, guid: 660459c2721e4034d949f92dd2d271f8, type: 2}
+    - target: {fileID: 7036213049465896255, guid: 1daf6a9724984744d8ac5d695c77e23a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Robot
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1daf6a9724984744d8ac5d695c77e23a, type: 3}
 --- !u!4 &4830404841942447688 stripped

@@ -6712,6 +6712,7 @@ RectTransform:
   - {fileID: 8522281688563415795}
   - {fileID: 1372718701974240185}
   - {fileID: 9115371382075130655}
+  - {fileID: 8148556664393639250}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6840,7 +6841,6 @@ MonoBehaviour:
   abilityIcon: {fileID: 6041711075633301020}
   playerAbility: {fileID: 0}
   robotSummonIcon: {fileID: 0}
-  spawnRobot: {fileID: 0}
 --- !u!1 &8315553383716727286
 GameObject:
   m_ObjectHideFlags: 0

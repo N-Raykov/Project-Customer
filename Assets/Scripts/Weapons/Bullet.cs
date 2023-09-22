@@ -26,7 +26,8 @@ public class Bullet : MonoBehaviourWithPause{
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
         if (enemy != null) {
-            HitMarkerBehavior.hitEnemy = true;
+            if (enemy.tag!="Robot")
+                HitMarkerBehavior.hitEnemy = true;
             enemy.TakeDamage(damage);
         }
         //if (tree != null) {

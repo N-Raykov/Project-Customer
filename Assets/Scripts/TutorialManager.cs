@@ -9,6 +9,7 @@ public class TutorialManager : MonoBehaviourWithPause {
     [SerializeField] TextMeshProUGUI objective;
     [SerializeField] PlayerInput input;
     [SerializeField] Revolver revolver;
+    [SerializeField] GameObject objectiveObject;
     ShopManager shopManager;
     Controls controls;
 
@@ -71,10 +72,16 @@ public class TutorialManager : MonoBehaviourWithPause {
                 break;
             case 8:
                 objective.text = "From now on you are on your own! Cut down all the big trees and return home!";
+                StartCoroutine(DisableObjectiveUI());
                 break;
         
         }
         
+    }
+
+    IEnumerator DisableObjectiveUI() {
+        yield return new WaitForSeconds(10f);
+        objectiveObject.SetActive(false);
     }
 
     void EnableSpawner() {

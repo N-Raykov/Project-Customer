@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionSpeed: 25
   explosionMaxSize: 7
-  explosionDamage: 50
+  explosionDamage: 40
   explosionParticles: {fileID: 6952311445211100482, guid: 27bb6b7b65edb354abb4ac7e659602f5,
     type: 3}
 --- !u!23 &2969610861692021057

@@ -28,10 +28,11 @@ public class AbilityUI : MonoBehaviour
 
         robotSummonIcon.fillAmount += 1.0f / spawnRobot.spawnCooldown * Time.deltaTime;
 
-        if (spawnRobot.cooldownTimer == 0)
+        if (spawnRobot.cooldownTimer <= 0)
         {
-            robotSummonIcon.fillAmount = 1f;
+            robotSummonIcon.fillAmount = 1;
         }
+
     }
 
     public void CastAbility()

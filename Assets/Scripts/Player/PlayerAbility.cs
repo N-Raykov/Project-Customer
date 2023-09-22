@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAbility : MonoBehaviourWithPause
 {
     public float abilityCD;
-    bool isAvailable = true;
+    bool isAvailable = false;
     PlayerInput input;
 
     private void Start()
