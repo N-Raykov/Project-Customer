@@ -18,8 +18,9 @@ public class PlayerHealth : MonoBehaviourWithPause{
     public float currentHP { get; private set; }
 
     void Start(){
-        currentHP = maxHp;
+        currentHP = maxHp/2 ;
         text.text = string.Format("{0}/{1} HP", currentHP, maxHp);
+        hpImageBar.fillAmount = currentHP / maxHp;
     }
 
     public void TakeDamage(float pDamage){

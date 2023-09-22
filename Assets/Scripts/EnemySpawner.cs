@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviourWithPause{
     [SerializeField] float delayForWaves;
     [SerializeField] int waveSize;
     [SerializeField] int waveSizeIncreasePerCutTree;
-    int treesCut = 0;
+    public int treesCut { get; private set; }
     int lastTreesCut = -1;
     int totalTreesStart;
 
@@ -38,6 +38,8 @@ public class EnemySpawner : MonoBehaviourWithPause{
     public static event Action onWaveEvent;
 
     private void Start() {
+        treesCut = 0;
+
         moodHandler = GameObject.FindObjectOfType<MoodHandler>();
         bigTrees = new List<Tree>();
         zones = new List<Zone>();

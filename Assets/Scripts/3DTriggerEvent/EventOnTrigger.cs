@@ -10,7 +10,7 @@ public class EventOnTrigger : MonoBehaviour
     [SerializeReference] bool doOnce;
     bool alreadyTriggered;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer != 6) { return; }
         if (doOnce && alreadyTriggered == false)

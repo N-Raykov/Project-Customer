@@ -34,7 +34,7 @@ public class ShopManager : MonoBehaviourWithPause{
     [SerializeField] GameObject abilitiesPage;
 
     public int money { get; private set; }
-    bool shopIsActive = false;
+    public bool shopIsActive { get; private set; }
     Rigidbody rb;
 
     Image lastImageChanged = null;
@@ -45,6 +45,7 @@ public class ShopManager : MonoBehaviourWithPause{
     List<Vector3> placesToSpawn = new List<Vector3>();//the ones where drop pods will actually spawn
         
     void Start(){
+        shopIsActive = false;
         spawnPoints = new List<Vector3>();
         spawnPointsTemp = GameObject.FindObjectsOfType<CollisionCheckForDropboxes>();
         //foreach (CollisionCheckForDropboxes c in spawnPointsTemp) {
@@ -53,7 +54,7 @@ public class ShopManager : MonoBehaviourWithPause{
 
         activePage = null;
         lastDisabledButton = null;
-        money = 110;
+        money = 0;
         UI.DisplayCash(money);
         rb = GetComponent<Rigidbody>();
         ignorePausedState = true;
