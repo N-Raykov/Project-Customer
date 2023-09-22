@@ -126,8 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6a3c5547aa49a45981e8e2b1f1b1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  homingRange: 4
-  homingStrength: 0.6
+  homingRange: 3
+  homingStrength: 15
+  rocketSpeed: 10
   explosionTimer: 3
   explosion: {fileID: 5977462431445457715, guid: 477a62a4e86c9e24c9cde4953d3825ad,
     type: 3}

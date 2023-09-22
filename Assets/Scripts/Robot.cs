@@ -42,6 +42,7 @@ public class Robot : MonoBehaviourWithPause
     [SerializeField] Enemy health;
     [SerializeField] GameObject landingParticles;
 
+    [SerializeField] GameObject laser;
     public float distanceToGround { get; set; }
 
     public enum RobotState
@@ -173,7 +174,12 @@ public class Robot : MonoBehaviourWithPause
                     agent.enabled = false;
                     GameManager.robot = null;
                     animator.SetTrigger(stopsCutting);
-                    health.TakeDamage(9999);
+                    SpawnRobot spawner = FindObjectOfType<SpawnRobot>();
+                    if (spawner != null)
+                    {
+                        spawner.isCooldownActive = false;
+                        spawner.cooldownTimer = 0f;
+                    }
                 }
                 break;
 
@@ -200,6 +206,16 @@ public class Robot : MonoBehaviourWithPause
                 }
                 return;
         }
+    }
+
+    public void Die()
+    {
+        health.TakeDamage(9999);
+    }
+
+    public void StartLaser()
+    {
+        laser.SetActive(true);
     }
 
     void ExtraStuff()

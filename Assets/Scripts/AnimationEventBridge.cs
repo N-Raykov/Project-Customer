@@ -11,14 +11,13 @@ public class AnimationEventBridge : MonoBehaviour
     [SerializeField]
     private string selectedMethodName;
 
-    public void ForwardEvent()
+    public void ForwardEvent(string methodName = null)
     {
         if (targetObject != null && targetComponent != null && !string.IsNullOrEmpty(selectedMethodName))
         {
-            // Get the method info using the selected method name.
             System.Reflection.MethodInfo method = targetComponent.GetType().GetMethod(selectedMethodName);
 
-            if (method != null)
+            if (method != null && selectedMethodName == methodName)
             {
                 method.Invoke(targetComponent, null);
             }

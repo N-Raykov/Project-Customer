@@ -14,13 +14,29 @@ public class SpawnRobot : MonoBehaviourWithPause
     [SerializeField] LayerMask mask;
     [SerializeField] LayerMask ground;
 
+    [SerializeField] float spawnCooldown; 
+    public float cooldownTimer { get; set; }     
+    public bool isCooldownActive { get; set; }
+
     private void Start(){
         rb = input.GetComponent<Rigidbody>();
     }
 
     protected override void UpdateWithPause()
     {
-        if (input.spawnBot && GameManager.robot == null)
+        Debug.Log(cooldownTimer);
+        if (isCooldownActive)
+        {
+            cooldownTimer -= Time.deltaTime;
+
+            // Check if the cooldown timer has reached zero or less
+            if (cooldownTimer <= 0f)
+            {
+                isCooldownActive = false;
+            }
+        }
+
+        if (input.spawnBot && GameManager.robot == null && isCooldownActive == false)
         {
             Spawn();
         }
@@ -47,6 +63,9 @@ public class SpawnRobot : MonoBehaviourWithPause
             RaycastHit groundCheck;
             Physics.Raycast(spawnPoint, Vector3.down, out groundCheck, 10000, ground);
             robotScript.distanceToGround = groundCheck.distance;
+
+            cooldownTimer = spawnCooldown;
+            isCooldownActive = true;
         }
         else
         {
