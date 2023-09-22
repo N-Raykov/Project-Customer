@@ -14,7 +14,7 @@ public class SpawnRobot : MonoBehaviourWithPause
     [SerializeField] LayerMask mask;
     [SerializeField] LayerMask ground;
 
-    [SerializeField] float spawnCooldown; 
+    public float spawnCooldown; 
     public float cooldownTimer { get; set; }     
     public bool isCooldownActive { get; set; }
 
@@ -65,6 +65,7 @@ public class SpawnRobot : MonoBehaviourWithPause
 
             cooldownTimer = spawnCooldown;
             isCooldownActive = true;
+            FindObjectOfType<AbilityUI>().SpawnRobotUI();
         }
         else
         {

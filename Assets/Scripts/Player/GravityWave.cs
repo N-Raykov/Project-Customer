@@ -10,6 +10,7 @@ public class GravityWave : PlayerAbility
     [SerializeField] float floatingHeight;
     [SerializeField] float floatSpeed;
     [SerializeField] ParticleSystem abilityAnimation;
+    [SerializeField] AbilityUI abilityUI;
 
     protected override void UseAbility()
     {
@@ -31,6 +32,8 @@ public class GravityWave : PlayerAbility
         sphere.GetComponent<GravityWaveEffect>().floatSpeed = floatSpeed;
 
         StartCoroutine(ExpandAndDestroy(sphere));
+
+        abilityUI.CastAbility();
     }
 
     private IEnumerator ExpandAndDestroy(GameObject sphere)

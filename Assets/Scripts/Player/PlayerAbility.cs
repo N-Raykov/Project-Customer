@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAbility : MonoBehaviourWithPause
 {
-    [SerializeField] float abilityCD;
+    public float abilityCD;
     bool isAvailable = true;
     PlayerInput input;
 
