@@ -56,9 +56,11 @@ public class Sway : MonoBehaviourWithPause{
         Quaternion rotationZ = Quaternion.AngleAxis(-intensityZ * mouseX * multiplier, Vector3.forward) * Quaternion.AngleAxis(-intensityZ * moveDirection.x, Vector3.forward);
         targetRotation = startRotation * rotationX * rotationY * rotationZ;
         targetPosition = startPosition + new Vector3(-moveDirection.x, 0, -moveDirection.z) * moveIntensity * multiplier / fpsMultiplier;
+        if (Time.deltaTime != 0) {
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * returnTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * returnTime);
+        }
 
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * returnTime);
-        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * returnTime);
     }
 
 
