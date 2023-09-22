@@ -12,6 +12,7 @@ public class Rocket : MonoBehaviourWithPause
 
     [SerializeField] float homingRange;
     [SerializeField] float homingStrength;
+    [SerializeField] float rocketSpeed;
     [SerializeField] float explosionTimer;
 
     [SerializeField] GameObject explosion;
@@ -53,9 +54,10 @@ public class Rocket : MonoBehaviourWithPause
     {
         Vector3 direction = target.transform.position - transform.position;
 
-        transform.rotation = Quaternion.LookRotation(direction);
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, homingStrength * Time.deltaTime);
 
-        rb.AddForce(direction * homingStrength, ForceMode.Force);
+        rb.AddForce(transform.forward.normalized * rocketSpeed, ForceMode.Force);
     }
 
     private void OnCollisionEnter(Collision collision)

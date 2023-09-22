@@ -122,6 +122,7 @@ public class EnemyMove : MonoBehaviourWithPause
                 if (Vector3.Distance(target.transform.position, transform.position) < preferredRange && Vector3.Distance(target.transform.position, transform.position) > minRange)
                 {
                     agent.speed = strafeSpeed;
+                    animator.SetBool("isStrafing", true);
                     if (Time.time >= strafeTimer)
                     {
                         RandomlySwitchDirection();
@@ -130,6 +131,8 @@ public class EnemyMove : MonoBehaviourWithPause
                 }
                 else
                 {
+                    animator.SetBool("isStrafing", false);
+                    ResetStrafeTimer();
                     currentState = EnemyState.MinRange;
                 }
                 break;
@@ -215,7 +218,7 @@ public class EnemyMove : MonoBehaviourWithPause
             animator.SetTrigger("Land");
             Destroy(thruster);
             Destroy(thruster2);
-            Instantiate(landingParticles, new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z), Quaternion.identity);
+            Instantiate(landingParticles, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
         }
     }
 
@@ -231,13 +234,13 @@ public class EnemyMove : MonoBehaviourWithPause
         float randomValue = Random.value;
         if (randomValue < 0.5f)
         {
-            // Move left
             agent.destination = transform.position - transform.right * 5f;
+            animator.SetBool("isStrafingLeft", false);
         }
         else
         {
-            // Move right
             agent.destination = transform.position + transform.right * 5f;
+            animator.SetBool("isStrafingLeft", true);
         }
     }
 

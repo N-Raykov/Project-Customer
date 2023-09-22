@@ -134,14 +134,23 @@ public class EnemyAim : MonoBehaviourWithPause
 
             if (distanceToTarget < range && weapon.timeSinceLastShot < 0.0f)
             {
-                weapon.Shoot();
-                weapon.timeSinceLastShot = weapon.shotCD;
                 if (weapon == bazooka)
                 {
-                    animator.SetTrigger("ShootRocket"); 
+                    animator.SetTrigger("ShootRocket");
+                }
+                else
+                {
+                    weapon.Shoot();
+                    weapon.timeSinceLastShot = weapon.shotCD;
                 }
             }
         }
+    }
+
+    public void FireRocket()
+    {
+        bazooka.Shoot();
+        bazooka.timeSinceLastShot = bazooka.shotCD;
     }
 
     private float Compare(Quaternion quatA, Quaternion quatB)
