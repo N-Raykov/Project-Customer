@@ -24,7 +24,6 @@ public class SpawnRobot : MonoBehaviourWithPause
 
     protected override void UpdateWithPause()
     {
-        Debug.Log(cooldownTimer);
         if (isCooldownActive)
         {
             cooldownTimer -= Time.deltaTime;
