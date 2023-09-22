@@ -1874,7 +1874,7 @@ MonoBehaviour:
   weaponCamera: {fileID: 1910560408}
   mask:
     serializedVersion: 2
-    m_Bits: 1921
+    m_Bits: 69761
   bullet: {fileID: 3354344775506969188, guid: d4251bd2b76dd944199467a2fb3e1425, type: 3}
   muzzle: {fileID: 3310157922012438997}
   pistolRotationPivot: {fileID: 1001639994203087779}
@@ -3920,7 +3920,7 @@ MonoBehaviour:
   weaponCamera: {fileID: 1910560408}
   mask:
     serializedVersion: 2
-    m_Bits: 1921
+    m_Bits: 69761
   bullet: {fileID: 3354344775506969188, guid: d4251bd2b76dd944199467a2fb3e1425, type: 3}
   muzzle: {fileID: 8755622199806482851}
   pistolRotationPivot: {fileID: 1001639994203087779}
@@ -5895,7 +5895,7 @@ MonoBehaviour:
   weaponCamera: {fileID: 1910560408}
   mask:
     serializedVersion: 2
-    m_Bits: 1921
+    m_Bits: 69761
   bullet: {fileID: 3354344775506969188, guid: d4251bd2b76dd944199467a2fb3e1425, type: 3}
   muzzle: {fileID: 6115048690134539098}
   pistolRotationPivot: {fileID: 1001639994203087779}
